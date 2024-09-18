@@ -24,7 +24,7 @@
   @media screen and (min-width: 576px) {
     .trending .carousel-inner, .collections .carousel-inner{
       display: flex;
-      width: 90%;
+      /* width: 90%; */
       /* margin-inline: auto; */
       padding: 1em 0;
       overflow: hidden;
