@@ -29,7 +29,8 @@ $(document).ready(function () {
                 );
             }
         });
-    } else {
+    } 
+    else {
         $(multipleCardCarousel).addClass("slide");
     }
 
