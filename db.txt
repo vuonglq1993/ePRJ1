@@ -13,8 +13,7 @@ CREATE TABLE Users (
 -- Create categories table
 CREATE TABLE categories (
     category_id INTEGER PRIMARY KEY AUTO_INCREMENT,
-    category_name VARCHAR(255) NOT NULL,
-    description TEXT
+    category_name VARCHAR(255) NOT NULL
 );
 
 -- Create subcategories table
@@ -37,8 +36,8 @@ CREATE TABLE Products (
     image_url VARCHAR(255),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE,
-    FOREIGN KEY (category_id) REFERENCES categories(category_id) ON DELETE CASADE,
-FOREIGN KEY (category_id) REFERENCES categories(category_id) ON DELETE CASADE
+    FOREIGN KEY (category_id) REFERENCES categories(category_id) ON DELETE CASCADE,
+    FOREIGN KEY (category_id) REFERENCES categories(category_id) ON DELETE CASCADE
 );
 
 CREATE TABLE Auctions (
@@ -83,3 +82,23 @@ CREATE TABLE Reviews (
     FOREIGN KEY (product_id) REFERENCES Products(product_id) ON DELETE CASCADE,
     FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE
 );
+
+dữ liệu cho bảng categories:
+INSERT INTO categories (category_name)
+VALUES
+    ('Art'),
+    ('Interiors'),
+    ('Jewellery'),
+    ('Watches'),
+    ('Fashion'),
+    ('Coins & Stamps'),
+    ('Comics'),
+    ('Cars & Bikes'),
+    ('Wine & Whisky'),
+    ('Asia & Tribal'),
+    ('Trading cards'),
+    ('Toys & Models'),
+    ('Archaeology'),
+    ('Sports'),
+    ('Music, Movie & Cameras'),
+    ('Books & History');
