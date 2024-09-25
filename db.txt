@@ -84,6 +84,7 @@ CREATE TABLE Reviews (
 );
 
 dữ liệu cho bảng categories:
+
 INSERT INTO categories (category_name)
 VALUES
     ('Art'),

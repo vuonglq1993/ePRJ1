@@ -2,6 +2,12 @@
 <html lang="en">
 
 <head>
+<?php
+include 'functions/db.php';
+$sql = "SELECT category_name FROM categories";
+$result = $conn->query($sql);
+?>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -809,58 +815,18 @@
                 </div>
                 <div class="row  justify-content-center">
                     <div class="col-2">
-                        <p class="ms-2 mb-3"><a href="#"
-                                class="link-body-emphasis link-offset-2 link-underline-opacity-0 link-opacity-25 link-underline-opacity-0-hover">
-                                Lorem
-                            </a></p>
-                        <p class="ms-2  mb-3"><a href="#"
-                                class="link-body-emphasis link-offset-2 link-underline-opacity-0 link-opacity-25 link-underline-opacity-0-hover">
-                                Lorem
-                            </a></p>
-                        <p class="ms-2 mb-3"><a href="#"
-                                class="link-body-emphasis link-offset-2 link-underline-opacity-0 link-opacity-25 link-underline-opacity-0-hover">
-                                Lorem
-                            </a></p>
-                        <p class="ms-2 mb-3"><a href="#"
-                                class="link-body-emphasis link-offset-2 link-underline-opacity-0 link-opacity-25 link-underline-opacity-0-hover">
-                                Lorem
-                            </a></p>
-                        <p class="ms-2 mb-3"><a href="#"
-                                class="link-body-emphasis link-offset-2 link-underline-opacity-0 link-opacity-25 link-underline-opacity-0-hover">
-                                Lorem
-                            </a></p>
-                        <p class="ms-2 mb-3"><a href="#"
-                                class="link-body-emphasis link-offset-2 link-underline-opacity-0 link-opacity-25 link-underline-opacity-0-hover">
-                                Lorem
-                            </a></p>
-                        <p class="ms-2 mb-3"><a href="#"
-                                class="link-body-emphasis link-offset-2 link-underline-opacity-0 link-opacity-25 link-underline-opacity-0-hover">
-                                Lorem
-                            </a></p>
-                        <p class="ms-2 mb-3"><a href="#"
-                                class="link-body-emphasis link-offset-2 link-underline-opacity-0 link-opacity-25 link-underline-opacity-0-hover">
-                                Lorem
-                            </a></p>
-                        <p class="ms-2 mb-3"><a href="#"
-                                class="link-body-emphasis link-offset-2 link-underline-opacity-0 link-opacity-25 link-underline-opacity-0-hover">
-                                Lorem
-                            </a></p>
-                        <p class="ms-2 mb-3"><a href="#"
-                                class="link-body-emphasis link-offset-2 link-underline-opacity-0 link-opacity-25 link-underline-opacity-0-hover">
-                                Lorem
-                            </a></p>
-                        <p class="ms-2 mb-3"><a href="#"
-                                class="link-body-emphasis link-offset-2 link-underline-opacity-0 link-opacity-25 link-underline-opacity-0-hover">
-                                Lorem
-                            </a></p>
-                        <p class="ms-2 mb-3"><a href="#"
-                                class="link-body-emphasis link-offset-2 link-underline-opacity-0 link-opacity-25 link-underline-opacity-0-hover">
-                                Lorem
-                            </a></p>
-                        <p class="ms-2 mb-3"><a href="#"
-                                class="link-body-emphasis link-offset-2 link-underline-opacity-0 link-opacity-25 link-underline-opacity-0-hover">
-                                Lorem
-                            </a></p>
+                        <?php 
+                            if ($row = $result -> num_rows >0){
+                                while ($row = $result -> fetch_assoc()) {
+                                    echo '<p class="ms-2 mb-3"><a href="#"
+                                    class="link-body-emphasis link-offset-2 link-underline-opacity-0 link-opacity-25 link-underline-opacity-0-hover">'
+                                    . $row["category_name"] .
+                                '</a></p>';
+                                }
+                            } else {
+                                echo '<p>No categories available</p>';
+                            }
+                        ?>
                     </div>
 
                     <div class="col-9">
