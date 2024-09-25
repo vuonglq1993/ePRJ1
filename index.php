@@ -65,7 +65,7 @@
                         <div class="p-2">
                             <p class="fs-3">Our trending for sale</p>
                         </div>
-                        <div class="p-2 mt-4">
+                        <div class="p-2 mt-3">
                             <p><a href="#"
                                     class="link-body-emphasis link-offset-2 link-underline-opacity-25 link-opacity-25 link-underline-opacity-75-hover">See
                                     all trending</a></p>
@@ -601,7 +601,7 @@
                             <div class="p-2">
                                 <p class="fs-3">Buy anything that matches your style</p>
                             </div>
-                            <div class="p-2 mt-4">
+                            <div class="p-2 mt-3">
                                 <p><a href="#"
                                         class="link-body-emphasis link-offset-2 link-underline-opacity-25 link-opacity-25 link-underline-opacity-75-hover">See
                                         all collections</a></p>
@@ -1041,7 +1041,7 @@
                             <div class="p-2">
                                 <p class="fs-3 text-start">Get inspired</p>
                             </div>
-                            <div class="p-2 mt-4">
+                            <div class="p-2 mt-3">
                                 <p><a href="#"
                                         class="link-body-emphasis link-offset-2 link-underline-opacity-25 link-opacity-25 link-underline-opacity-75-hover">Explore
                                         all</a></p>
