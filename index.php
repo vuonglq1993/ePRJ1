@@ -2,11 +2,10 @@
 <html lang="en">
 
 <head>
-<?php
-include 'functions/db.php';
-$sql = "SELECT category_name FROM categories";
-$result = $conn->query($sql);
-?>
+    <?php
+    include 'functions/db.php';
+    $categories = select("SELECT * FROM categories");
+    ?>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -815,20 +814,13 @@ $result = $conn->query($sql);
                 </div>
                 <div class="row  justify-content-center">
                     <div class="col-2">
-                        <?php 
-                            if ($row = $result -> num_rows >0){
-                                while ($row = $result -> fetch_assoc()) {
-                                    echo '<p class="ms-2 mb-3"><a href="#"
-                                    class="link-body-emphasis link-offset-2 link-underline-opacity-0 link-opacity-25 link-underline-opacity-0-hover">'
-                                    . $row["category_name"] .
-                                '</a></p>';
-                                }
-                            } else {
-                                echo '<p>No categories available</p>';
-                            }
-                        ?>
+                        <?php foreach ($categories as $category): ?>
+                            <p class="ms-2 mb-3"><a href="product(test).php?cat_id=<?php echo $category['category_id'] ?>"
+                                    class="link-body-emphasis link-offset-2 link-underline-opacity-0 link-opacity-25 link-underline-opacity-0-hover">
+                                    <?php echo htmlspecialchars($category['category_name']) ?>
+                                </a></p>
+                        <?php endforeach; ?>
                     </div>
-
                     <div class="col-9">
                         <div class="row">
                             <div class="col-sm-12 col-md-6 col-lg-4">
