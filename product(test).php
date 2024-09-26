@@ -27,7 +27,7 @@
         <?php foreach ($products as $product): ?>
             <div class="product-item">
                 <h2><?php echo htmlspecialchars($product['product_name']); ?></h2>
-                <p>Price: <?php echo number_format($product['starting_price'], 2); ?></p>
+                <p>Price: $<?php echo number_format($product['starting_price'], 2); ?></p>
                 <p>Description: <?php echo htmlspecialchars($product['description']); ?></p>
                 <p>
                     <img src="<?php echo htmlspecialchars($product['image_url']); ?>" alt="Product Image" style="max-width: 200px;">
