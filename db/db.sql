@@ -83,7 +83,7 @@ CREATE TABLE Reviews (
     FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE
 );
 
-dữ liệu cho bảng categories:
+-- dữ liệu cho bảng categories:
 INSERT INTO categories (category_name)
 VALUES
     ('Art'),
