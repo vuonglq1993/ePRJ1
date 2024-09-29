@@ -1,5 +1,5 @@
 db.php
 test.js
 test.php
-db.sql
+db/db.sql
 functions/db.php

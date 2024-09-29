@@ -1,0 +1,100 @@
+.headerr {
+    background-color: #000022;
+}
+
+.logo-img {
+    max-width: 100%;
+    height: auto;
+}
+
+.header-links-list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    list-style-type: none;
+    margin: 0;
+    width: 100%;
+    padding: 0;
+}
+
+.header-links-list li {
+    flex-grow: 1;
+    /* Chiếm hết không gian có sẵn */
+    text-align: center;
+    /* Căn giữa nội dung */
+}
+
+.header-links-list li a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.header-links-list li a:hover {
+    text-decoration: underline;
+}
+
+.input-group
+{
+    border-radius: 50%;
+    /* Thay đổi giá trị này để điều chỉnh độ bo tròn */
+}
+
+.input-group {
+    height: 50px;
+    /* Thay đổi giá trị này để điều chỉnh chiều cao */
+}
+
+.input-group .form-control {
+    height: 100%;
+    /* Đảm bảo input chiếm toàn bộ chiều cao của group */
+    padding: 10px;
+    /* Điều chỉnh padding bên trong nếu cần */
+    border-radius: 50px;
+    /* Giữ độ bo tròn */
+}
+
+.input-group .input-group-text {
+    height: 100%;
+    /* Đảm bảo icon cũng chiếm toàn bộ chiều cao */
+    border-radius: 50px;
+    /* Giữ độ bo tròn */
+}
+
+.header-btn {
+    width: 200px;
+    /* Điều chỉnh chiều rộng nút bấm */
+    padding: 10px;
+    /* Điều chỉnh padding nếu cần */
+    height: 100%;
+    /* Đảm bảo nút bấm có chiều cao bằng nhóm input */
+    border-radius: 50px;
+    /* Giữ độ bo tròn */
+    border: none;
+    /* Bỏ viền nút bấm nếu cần */
+    background-color: #31D3FF;
+    /* Màu nền của nút bấm */
+    color: white;
+    /* Màu chữ nút bấm */
+}
+
+.header-icon-list {
+    display: flex;
+    justify-content: space-between;
+}
+
+.header-icon-list ul {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    flex-grow: 1;
+}
+
+.header-icon-list li {
+    margin-right: 30px;
+}
+
+.header-icon-list li a {
+    color: #fff;
+}
