@@ -21,6 +21,7 @@
         $category_name = "All Categories"; // Default if no category is selected
     }
     $auction_data = get_auction_data($category_id);
+    $trendin_data = get_trendin_data();
     ?>
 
     <meta charset="UTF-8">
@@ -106,13 +107,12 @@
                                 <?php
                                 if ($auction_data) {
                                     $first_item = true;
-                                    foreach ($auction_data as $auction) {
+                                    foreach ($trendin_data as $auction) {
                                         $product_name = $auction['product_name'];
                                         $current_bid = $auction['current_bid'];
                                         $end_time = $auction['end_time'];
                                         $image_url = $auction['image_url'];
                                         $start_time = $auction['start_time'];
-                                        // Calculate days left
                                         $days_left = caculate_days_left($start_time, $end_time);
                                         if (new DateTime() < new DateTime($start_time)) {
                                             $bid_display = "Starting Price: ";

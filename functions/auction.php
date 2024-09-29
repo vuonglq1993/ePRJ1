@@ -10,8 +10,8 @@ function get_auction_data($category_id=0){
                 ORDER BY a.start_time ASC";
     } else {
         $sql = "SELECT a.product_id, a.current_bid, a.start_time, a.end_time, p.product_name, p.image_url
-                FROM Auctions a
-                JOIN Products p ON a.product_id = p.product_id
+                FROM auctions a
+                JOIN products p ON a.product_id = p.product_id
                 ORDER BY a.start_time ASC";
     }
     return select($sql);
@@ -31,3 +31,11 @@ function caculate_days_left($start_time, $end_time) {
         return "Auction ends in " . $now->diff($end_date_time)->format('%a days');
     } 
 }
+function get_trendin_data(){
+    $sql = "SELECT a.product_id, a.current_bid, a.start_time, a.end_time, p.product_name, p.image_url
+            FROM auctions a
+            JOIN products p ON a.product_id = p.product_id
+            ORDER BY a.start_time ASC";
+    return select($sql);
+}
+
