@@ -13,11 +13,11 @@
             <span class="sidebar-text">Users</span>
         </a>
         <a href="product_management.php" class="list-group-item list-group-item-action bg-dark text-white">
-            <i class="fas fa-shopping-bag"></i>
+            <i class="fa-solid fa-bars"></i>
             <span class="sidebar-text">Categories</span>
         </a>
         <a href="orders.php" class="list-group-item list-group-item-action bg-dark text-white">
-            <i class="fas fa-receipt"></i>
+            <i class="fas fa-shopping-bag"></i>
             <span class="sidebar-text">Products</span>
         </a>
         <a href="reports.php" class="list-group-item list-group-item-action bg-dark text-white">
