@@ -4,6 +4,7 @@
 <head>
     <?php
     include 'functions/db.php';
+    include 'functions/auction.php';
     $categories = select("SELECT * FROM categories");
     $category_id = isset($_GET['cat_id']) ? intval($_GET['cat_id']) : 0;
 
@@ -19,18 +20,7 @@
     } else {
         $category_name = "All Categories"; // Default if no category is selected
     }
-
-    if ($category_id > 0) {
-        $sql = "SELECT a.product_id, a.current_bid, a.end_time, p.product_name, p.image_url
-                FROM Auctions a
-                JOIN Products p ON a.product_id = p.product_id
-                WHERE p.category_id = $category_id";
-    } else {
-        $sql = "SELECT a.product_id, a.current_bid, a.end_time, p.product_name, p.image_url
-                FROM Auctions a
-                JOIN Products p ON a.product_id = p.product_id";
-    }
-    $auction_data = select($sql);
+    $auction_data = get_auction_data($category_id);
     ?>
 
     <meta charset="UTF-8">
@@ -87,7 +77,6 @@
                 <span class="visually-hidden">Next</span>
             </button>
         </div>
-
         <!-- Trending -->
         <div class="container mt-5">
             <div class="row justify-content-center">
@@ -114,929 +103,422 @@
                     <div class="trending">
                         <div id="carouselExample" class="carousel  slide">
                             <div class="carousel-inner trending-carousel-inner">
-                                <div class="trending-carousel-item carousel-item active">
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="card p-2">
-                                                <div class="card-body">
-                                                    <div class="d-flex justify-content-between">
-                                                        <div class="p-2"></div>
-                                                        <div class="p-2">3 days left</div>
-                                                        <div class="p-2"><svg xmlns="http://www.w3.org/2000/svg"
-                                                                width="16" height="16" fill="currentColor"
-                                                                class="bi bi-heart" viewBox="0 0 16 16">
-                                                                <path
-                                                                    d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
-                                                            </svg></div>
-                                                    </div>
-                                                    <div>
-                                                        <img src="images/1.jpg" alt="" class="img-fluid">
-                                                        <div class="row">
-                                                            <div class="col-5 text-start text-dark"
-                                                                style="--bs-text-opacity: .5; font-size: 14px; margin: 4px;">
-                                                                Current Bid:</div>
-                                                            <div class="col-4 text-start"
-                                                                style="font-size: 16px; margin: 2px;">$1,000</div>
+                                <?php
+                                if ($auction_data) {
+                                    $first_item = true;
+                                    foreach ($auction_data as $auction) {
+                                        $product_name = $auction['product_name'];
+                                        $current_bid = $auction['current_bid'];
+                                        $end_time = $auction['end_time'];
+                                        $image_url = $auction['image_url'];
+                                        $start_time = $auction['start_time'];
+                                        // Calculate days left
+                                        $days_left = caculate_days_left($start_time, $end_time);
+                                        if (new DateTime() < new DateTime($start_time)) {
+                                            $bid_display = "Starting Price: ";
+                                        } else {
+                                            $bid_display = "Current Bid: ";
+                                        }
+                                        // Check if this is the first item and add the "active" class
+                                        $active_class = $first_item ? 'active' : 'ms-1';
+                                        $first_item = false;  // After the first item, set to false
+                                        ?>
+                                        <div class="trending-carousel-item carousel-item <?php echo $active_class ?>">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="card p-2">
+                                                        <div class="card-body">
+                                                            <div class="d-flex justify-content-between">
+                                                                <div class="p-2"></div>
+                                                                <div class="p-2"><?php echo $days_left ?></div>
+                                                                <div class="p-2"><svg xmlns="http://www.w3.org/2000/svg"
+                                                                        width="16" height="16" fill="currentColor"
+                                                                        class="bi bi-heart" viewBox="0 0 16 16">
+                                                                        <path
+                                                                            d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
+                                                                    </svg></div>
+                                                            </div>
+                                                            <div>
+                                                                <img src="<?php echo $image_url ?>" alt="" class="img-fluid">
+                                                                <div class="row">
+                                                                    <div class="col-5 text-start text-dark"
+                                                                        style="--bs-text-opacity: .5; font-size: 14px; margin: 4px;">
+                                                                        <?php echo $bid_display ?>
+                                                                    </div>
+                                                                    <div class="col-4 text-start"
+                                                                        style="font-size: 16px; margin: 2px;">
+                                                                        <?php echo format_price($current_bid) ?>
+                                                                    </div>
 
+                                                                </div>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-6 text-start">
-                                            <p class="m-2">Barcelona</p>
-                                            <div class="text-dark" style="--bs-text-opacity: .5;">
-                                                <p class="m-2">Acrilyc, Sand on Canvas</p>
-                                                <p class="m-2">90x70cm</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-6 text-end">
-                                            <div class="text-dark" style="--bs-text-opacity: .5;">
-
-                                                <p class="m-2">Interesting?</p>
-                                                <a href="#" class="btn bidbutton me-2">Bid now</a>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="trending-carousel-item carousel-item ms-1">
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="card p-2">
-                                                <div class="card-body">
-                                                    <div class="d-flex justify-content-between">
-                                                        <div class="p-2"></div>
-                                                        <div class="p-2">3 days left</div>
-                                                        <div class="p-2"><svg xmlns="http://www.w3.org/2000/svg"
-                                                                width="16" height="16" fill="currentColor"
-                                                                class="bi bi-heart" viewBox="0 0 16 16">
-                                                                <path
-                                                                    d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
-                                                            </svg></div>
+                                            <div class="row">
+                                                <div class="col-6 text-start">
+                                                    <p class="m-2"><?php echo htmlspecialchars($product_name) ?></p>
+                                                    <div class="text-dark" style="--bs-text-opacity: .5;">
+                                                        <p class="m-2">Acrilyc, Sand on Canvas</p>
+                                                        <p class="m-2">90x70cm</p>
                                                     </div>
-                                                    <div>
-                                                        <img src="images/1.jpg" alt="" class="img-fluid">
-                                                        <div class="row">
-                                                            <div class="col-5 text-start text-dark"
-                                                                style="--bs-text-opacity: .5; font-size: 14px; margin: 4px;">
-                                                                Current Bid:</div>
-                                                            <div class="col-4 text-start"
-                                                                style="font-size: 16px; margin: 2px;">$1,000</div>
+                                                </div>
+                                                <div class="col-6 text-end">
+                                                    <div class="text-dark" style="--bs-text-opacity: .5;">
 
-                                                        </div>
+                                                        <p class="m-2">Interesting?</p>
+                                                        <a href="#" class="btn bidbutton me-2">Bid now</a>
+
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-6 text-start">
-                                            <p class="m-2">Barcelona</p>
-                                            <div class="text-dark" style="--bs-text-opacity: .5;">
-                                                <p class="m-2">Acrilyc, Sand on Canvas</p>
-                                                <p class="m-2">90x70cm</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-6 text-end">
-                                            <div class="text-dark" style="--bs-text-opacity: .5;">
-
-                                                <p class="m-2">Interesting?</p>
-                                                <a href="#" class="btn bidbutton me-2">Bid now</a>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="trending-carousel-item carousel-item ms-1">
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="card p-2">
-                                                <div class="card-body">
-                                                    <div class="d-flex justify-content-between">
-                                                        <div class="p-2"></div>
-                                                        <div class="p-2">3 days left</div>
-                                                        <div class="p-2"><svg xmlns="http://www.w3.org/2000/svg"
-                                                                width="16" height="16" fill="currentColor"
-                                                                class="bi bi-heart" viewBox="0 0 16 16">
-                                                                <path
-                                                                    d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
-                                                            </svg></div>
-                                                    </div>
-                                                    <div>
-                                                        <img src="images/1.jpg" alt="" class="img-fluid">
-                                                        <div class="row">
-                                                            <div class="col-5 text-start text-dark"
-                                                                style="--bs-text-opacity: .5; font-size: 14px; margin: 4px;">
-                                                                Current Bid:</div>
-                                                            <div class="col-4 text-start"
-                                                                style="font-size: 16px; margin: 2px;">$1,000</div>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-6 text-start">
-                                            <p class="m-2">Barcelona</p>
-                                            <div class="text-dark" style="--bs-text-opacity: .5;">
-                                                <p class="m-2">Acrilyc, Sand on Canvas</p>
-                                                <p class="m-2">90x70cm</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-6 text-end">
-                                            <div class="text-dark" style="--bs-text-opacity: .5;">
-
-                                                <p class="m-2">Interesting?</p>
-                                                <a href="#" class="btn bidbutton me-2">Bid now</a>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="trending-carousel-item carousel-item ms-1">
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="card p-2">
-                                                <div class="card-body">
-                                                    <div class="d-flex justify-content-between">
-                                                        <div class="p-2"></div>
-                                                        <div class="p-2">3 days left</div>
-                                                        <div class="p-2"><svg xmlns="http://www.w3.org/2000/svg"
-                                                                width="16" height="16" fill="currentColor"
-                                                                class="bi bi-heart" viewBox="0 0 16 16">
-                                                                <path
-                                                                    d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
-                                                            </svg></div>
-                                                    </div>
-                                                    <div>
-                                                        <img src="images/1.jpg" alt="" class="img-fluid">
-                                                        <div class="row">
-                                                            <div class="col-5 text-start text-dark"
-                                                                style="--bs-text-opacity: .5; font-size: 14px; margin: 4px;">
-                                                                Current Bid:</div>
-                                                            <div class="col-4 text-start"
-                                                                style="font-size: 16px; margin: 2px;">$1,000</div>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-6 text-start">
-                                            <p class="m-2">Barcelona</p>
-                                            <div class="text-dark" style="--bs-text-opacity: .5;">
-                                                <p class="m-2">Acrilyc, Sand on Canvas</p>
-                                                <p class="m-2">90x70cm</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-6 text-end">
-                                            <div class="text-dark" style="--bs-text-opacity: .5;">
-
-                                                <p class="m-2">Interesting?</p>
-                                                <a href="#" class="btn bidbutton me-2">Bid now</a>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="trending-carousel-item carousel-item ms-1">
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="card p-2">
-                                                <div class="card-body">
-                                                    <div class="d-flex justify-content-between">
-                                                        <div class="p-2"></div>
-                                                        <div class="p-2">3 days left</div>
-                                                        <div class="p-2"><svg xmlns="http://www.w3.org/2000/svg"
-                                                                width="16" height="16" fill="currentColor"
-                                                                class="bi bi-heart" viewBox="0 0 16 16">
-                                                                <path
-                                                                    d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
-                                                            </svg></div>
-                                                    </div>
-                                                    <div>
-                                                        <img src="images/1.jpg" alt="" class="img-fluid">
-                                                        <div class="row">
-                                                            <div class="col-5 text-start text-dark"
-                                                                style="--bs-text-opacity: .5; font-size: 14px; margin: 4px;">
-                                                                Current Bid:</div>
-                                                            <div class="col-4 text-start"
-                                                                style="font-size: 16px; margin: 2px;">$1,000</div>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-6 text-start">
-                                            <p class="m-2">Barcelona</p>
-                                            <div class="text-dark" style="--bs-text-opacity: .5;">
-                                                <p class="m-2">Acrilyc, Sand on Canvas</p>
-                                                <p class="m-2">90x70cm</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-6 text-end">
-                                            <div class="text-dark" style="--bs-text-opacity: .5;">
-
-                                                <p class="m-2">Interesting?</p>
-                                                <a href="#" class="btn bidbutton me-2">Bid now</a>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="trending-carousel-item carousel-item ms-1">
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="card p-2">
-                                                <div class="card-body">
-                                                    <div class="d-flex justify-content-between">
-                                                        <div class="p-2"></div>
-                                                        <div class="p-2">3 days left</div>
-                                                        <div class="p-2"><svg xmlns="http://www.w3.org/2000/svg"
-                                                                width="16" height="16" fill="currentColor"
-                                                                class="bi bi-heart" viewBox="0 0 16 16">
-                                                                <path
-                                                                    d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
-                                                            </svg></div>
-                                                    </div>
-                                                    <div>
-                                                        <img src="images/1.jpg" alt="" class="img-fluid">
-                                                        <div class="row">
-                                                            <div class="col-5 text-start text-dark"
-                                                                style="--bs-text-opacity: .5; font-size: 14px; margin: 4px;">
-                                                                Current Bid:</div>
-                                                            <div class="col-4 text-start"
-                                                                style="font-size: 16px; margin: 2px;">$1,000</div>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-6 text-start">
-                                            <p class="m-2">Barcelona</p>
-                                            <div class="text-dark" style="--bs-text-opacity: .5;">
-                                                <p class="m-2">Acrilyc, Sand on Canvas</p>
-                                                <p class="m-2">90x70cm</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-6 text-end">
-                                            <div class="text-dark" style="--bs-text-opacity: .5;">
-
-                                                <p class="m-2">Interesting?</p>
-                                                <a href="#" class="btn bidbutton me-2">Bid now</a>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="trending-carousel-item carousel-item ms-1">
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="card p-2">
-                                                <div class="card-body">
-                                                    <div class="d-flex justify-content-between">
-                                                        <div class="p-2"></div>
-                                                        <div class="p-2">3 days left</div>
-                                                        <div class="p-2"><svg xmlns="http://www.w3.org/2000/svg"
-                                                                width="16" height="16" fill="currentColor"
-                                                                class="bi bi-heart" viewBox="0 0 16 16">
-                                                                <path
-                                                                    d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
-                                                            </svg></div>
-                                                    </div>
-                                                    <div>
-                                                        <img src="images/1.jpg" alt="" class="img-fluid">
-                                                        <div class="row">
-                                                            <div class="col-5 text-start text-dark"
-                                                                style="--bs-text-opacity: .5; font-size: 14px; margin: 4px;">
-                                                                Current Bid:</div>
-                                                            <div class="col-4 text-start"
-                                                                style="font-size: 16px; margin: 2px;">$1,000</div>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-6 text-start">
-                                            <p class="m-2">Barcelona</p>
-                                            <div class="text-dark" style="--bs-text-opacity: .5;">
-                                                <p class="m-2">Acrilyc, Sand on Canvas</p>
-                                                <p class="m-2">90x70cm</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-6 text-end">
-                                            <div class="text-dark" style="--bs-text-opacity: .5;">
-
-                                                <p class="m-2">Interesting?</p>
-                                                <a href="#" class="btn bidbutton me-2">Bid now</a>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="trending-carousel-item carousel-item ms-1">
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="card p-2">
-                                                <div class="card-body">
-                                                    <div class="d-flex justify-content-between">
-                                                        <div class="p-2"></div>
-                                                        <div class="p-2">3 days left</div>
-                                                        <div class="p-2"><svg xmlns="http://www.w3.org/2000/svg"
-                                                                width="16" height="16" fill="currentColor"
-                                                                class="bi bi-heart" viewBox="0 0 16 16">
-                                                                <path
-                                                                    d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
-                                                            </svg></div>
-                                                    </div>
-                                                    <div>
-                                                        <img src="images/1.jpg" alt="" class="img-fluid">
-                                                        <div class="row">
-                                                            <div class="col-5 text-start text-dark"
-                                                                style="--bs-text-opacity: .5; font-size: 14px; margin: 4px;">
-                                                                Current Bid:</div>
-                                                            <div class="col-4 text-start"
-                                                                style="font-size: 16px; margin: 2px;">$1,000</div>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-6 text-start">
-                                            <p class="m-2">Barcelona</p>
-                                            <div class="text-dark" style="--bs-text-opacity: .5;">
-                                                <p class="m-2">Acrilyc, Sand on Canvas</p>
-                                                <p class="m-2">90x70cm</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-6 text-end">
-                                            <div class="text-dark" style="--bs-text-opacity: .5;">
-
-                                                <p class="m-2">Interesting?</p>
-                                                <a href="#" class="btn bidbutton me-2">Bid now</a>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="trending-carousel-item carousel-item ms-1">
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="card p-2">
-                                                <div class="card-body">
-                                                    <div class="d-flex justify-content-between">
-                                                        <div class="p-2"></div>
-                                                        <div class="p-2">3 days left</div>
-                                                        <div class="p-2"><svg xmlns="http://www.w3.org/2000/svg"
-                                                                width="16" height="16" fill="currentColor"
-                                                                class="bi bi-heart" viewBox="0 0 16 16">
-                                                                <path
-                                                                    d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
-                                                            </svg></div>
-                                                    </div>
-                                                    <div>
-                                                        <img src="images/1.jpg" alt="" class="img-fluid">
-                                                        <div class="row">
-                                                            <div class="col-5 text-start text-dark"
-                                                                style="--bs-text-opacity: .5; font-size: 14px; margin: 4px;">
-                                                                Current Bid:</div>
-                                                            <div class="col-4 text-start"
-                                                                style="font-size: 16px; margin: 2px;">$1,000</div>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-6 text-start">
-                                            <p class="m-2">Barcelona</p>
-                                            <div class="text-dark" style="--bs-text-opacity: .5;">
-                                                <p class="m-2">Acrilyc, Sand on Canvas</p>
-                                                <p class="m-2">90x70cm</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-6 text-end">
-                                            <div class="text-dark" style="--bs-text-opacity: .5;">
-
-                                                <p class="m-2">Interesting?</p>
-                                                <a href="#" class="btn bidbutton me-2">Bid now</a>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="trending-carousel-item carousel-item ms-1">
-                                    <div class="row">
-                                        <div class="col">
-                                            <div class="card p-2">
-                                                <div class="card-body">
-                                                    <div class="d-flex justify-content-between">
-                                                        <div class="p-2"></div>
-                                                        <div class="p-2">3 days left</div>
-                                                        <div class="p-2"><svg xmlns="http://www.w3.org/2000/svg"
-                                                                width="16" height="16" fill="currentColor"
-                                                                class="bi bi-heart" viewBox="0 0 16 16">
-                                                                <path
-                                                                    d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
-                                                            </svg></div>
-                                                    </div>
-                                                    <div>
-                                                        <img src="images/1.jpg" alt="" class="img-fluid">
-                                                        <div class="row">
-                                                            <div class="col-5 text-start text-dark"
-                                                                style="--bs-text-opacity: .5; font-size: 14px; margin: 4px;">
-                                                                Current Bid:</div>
-                                                            <div class="col-4 text-start"
-                                                                style="font-size: 16px; margin: 2px;">$1,000</div>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-6 text-start">
-                                            <p class="m-2">Barcelona</p>
-                                            <div class="text-dark" style="--bs-text-opacity: .5;">
-                                                <p class="m-2">Acrilyc, Sand on Canvas</p>
-                                                <p class="m-2">90x70cm</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-6 text-end">
-                                            <div class="text-dark" style="--bs-text-opacity: .5;">
-
-                                                <p class="m-2">Interesting?</p>
-                                                <a href="#" class="btn bidbutton me-2">Bid now</a>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-
-
-
+                                        <?php
+                                    }
+                                } else {
+                                    echo "<p>No trending items available.</p>";
+                                }
+                                ?>
                             </div>
                             <button class="carousel-control-prev trending-carousel-control-prev" type="button"
-                                data-bs-target="#testimonialCarousel" data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Previous</span>
-                            </button>
-                            <button class="carousel-control-next trending-carousel-control-next" type="button"
-                                data-bs-target="#testimonialCarousel" data-bs-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Next</span>
-                            </button>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Collections -->
-        <div class="container mt-5">
-            <div class="row justify-content-center">
-                <div class="col-11">
-                    <div class="row justify-content-center">
-                        <div class="d-flex flex-row">
-                            <div class="p-2">
-                                <p class="fs-3">Buy anything that matches your style</p>
-                            </div>
-                            <div class="p-2 mt-3">
-                                <p><a href="#"
-                                        class="link-body-emphasis link-offset-2 link-underline-opacity-25 link-opacity-25 link-underline-opacity-75-hover">See
-                                        all collections</a></p>
-                            </div>
-                        </div>
-                        <div class="text-dark ps-4" style="--bs-text-opacity: .5;">
-                            <p class="fs-6 ">Discover our curation for sale
-                            </p>
-                        </div>
-                    </div>
-                    <div class="row mt-5">
-                        <div class="collections">
-                            <div id="carouselExampleIndicators" class="carousel">
-                                <div class="carousel-inner collection-carousel-inner">
-                                    <div class="carousel-item active collection-carousel-item ms-1">
-                                        <div class="row">
-                                            <img src="images/1.jpg" alt="" class="img-fluid" class="img-fluid" />
-                                            <div class="col-6 text-start text-dark">
-                                                <p style="font-size: 13px;"><strong>ARTWORKS NEW COLLECTIONS
-                                                        2024</strong><br>35 Objects</p>
-                                            </div>
-                                            <div class="row text-center">
-                                                <a class="text-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
-                                                    style="font-size: 14px;" href="#">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                        fill="currentColor" class="bi bi-caret-right-fill"
-                                                        viewBox="0 0 16 16">
-                                                        <path
-                                                            d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
-                                                    </svg> Discover all <svg xmlns="http://www.w3.org/2000/svg"
-                                                        width="16" height="16" fill="currentColor"
-                                                        class="bi bi-caret-left-fill" viewBox="0 0 16 16">
-                                                        <path
-                                                            d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />
-                                                    </svg>
-                                                </a>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="carousel-item collection-carousel-item ms-1">
-                                        <div class="row">
-                                            <img src="images/1.jpg" alt="" class="img-fluid" class="img-fluid" />
-                                            <div class="col-6 text-start text-dark">
-                                                <p style="font-size: 13px;"><strong>ARTWORKS NEW COLLECTIONS
-                                                        2024</strong><br>35 Objects</p>
-                                            </div>
-                                            <div class="row text-center">
-                                                <a class="text-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
-                                                    style="font-size: 14px;" href="#">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                        fill="currentColor" class="bi bi-caret-right-fill"
-                                                        viewBox="0 0 16 16">
-                                                        <path
-                                                            d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
-                                                    </svg> Discover all <svg xmlns="http://www.w3.org/2000/svg"
-                                                        width="16" height="16" fill="currentColor"
-                                                        class="bi bi-caret-left-fill" viewBox="0 0 16 16">
-                                                        <path
-                                                            d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />
-                                                    </svg>
-                                                </a>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="carousel-item collection-carousel-item ms-1">
-                                        <div class="row">
-                                            <img src="images/1.jpg" alt="" class="img-fluid" class="img-fluid" />
-                                            <div class="col-6 text-start text-dark">
-                                                <p style="font-size: 13px;"><strong>ARTWORKS NEW COLLECTIONS
-                                                        2024</strong><br>35 Objects</p>
-                                            </div>
-                                            <div class="row text-center">
-                                                <a class="text-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
-                                                    style="font-size: 14px;" href="#">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                        fill="currentColor" class="bi bi-caret-right-fill"
-                                                        viewBox="0 0 16 16">
-                                                        <path
-                                                            d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
-                                                    </svg> Discover all <svg xmlns="http://www.w3.org/2000/svg"
-                                                        width="16" height="16" fill="currentColor"
-                                                        class="bi bi-caret-left-fill" viewBox="0 0 16 16">
-                                                        <path
-                                                            d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />
-                                                    </svg>
-                                                </a>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="carousel-item collection-carousel-item ms-1">
-                                        <div class="row">
-                                            <img src="images/1.jpg" alt="" class="img-fluid" class="img-fluid" />
-                                            <div class="col-6 text-start text-dark">
-                                                <p style="font-size: 13px;"><strong>ARTWORKS NEW COLLECTIONS
-                                                        2024</strong><br>35 Objects</p>
-                                            </div>
-                                            <div class="row text-center">
-                                                <a class="text-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
-                                                    style="font-size: 14px;" href="#">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                        fill="currentColor" class="bi bi-caret-right-fill"
-                                                        viewBox="0 0 16 16">
-                                                        <path
-                                                            d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
-                                                    </svg> Discover all <svg xmlns="http://www.w3.org/2000/svg"
-                                                        width="16" height="16" fill="currentColor"
-                                                        class="bi bi-caret-left-fill" viewBox="0 0 16 16">
-                                                        <path
-                                                            d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />
-                                                    </svg>
-                                                </a>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="carousel-item collection-carousel-item ms-1">
-                                        <div class="row">
-                                            <img src="images/1.jpg" alt="" class="img-fluid" class="img-fluid" />
-                                            <div class="col-6 text-start text-dark">
-                                                <p style="font-size: 13px;"><strong>ARTWORKS NEW COLLECTIONS
-                                                        2024</strong><br>35 Objects</p>
-                                            </div>
-                                            <div class="row text-center">
-                                                <a class="text-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
-                                                    style="font-size: 14px;" href="#">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                        fill="currentColor" class="bi bi-caret-right-fill"
-                                                        viewBox="0 0 16 16">
-                                                        <path
-                                                            d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
-                                                    </svg> Discover all <svg xmlns="http://www.w3.org/2000/svg"
-                                                        width="16" height="16" fill="currentColor"
-                                                        class="bi bi-caret-left-fill" viewBox="0 0 16 16">
-                                                        <path
-                                                            d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />
-                                                    </svg>
-                                                </a>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="carousel-item collection-carousel-item ms-1">
-                                        <div class="row">
-                                            <img src="images/1.jpg" alt="" class="img-fluid" class="img-fluid" />
-                                            <div class="col-6 text-start text-dark">
-                                                <p style="font-size: 13px;"><strong>ARTWORKS NEW COLLECTIONS
-                                                        2024</strong><br>35 Objects</p>
-                                            </div>
-                                            <div class="row text-center">
-                                                <a class="text-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
-                                                    style="font-size: 14px;" href="#">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                        fill="currentColor" class="bi bi-caret-right-fill"
-                                                        viewBox="0 0 16 16">
-                                                        <path
-                                                            d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
-                                                    </svg> Discover all <svg xmlns="http://www.w3.org/2000/svg"
-                                                        width="16" height="16" fill="currentColor"
-                                                        class="bi bi-caret-left-fill" viewBox="0 0 16 16">
-                                                        <path
-                                                            d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />
-                                                    </svg>
-                                                </a>
-
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-
-                                </div>
-
-                                <button class="carousel-control-prev collection-carousel-control-prev" type="button"
                                     data-bs-target="#testimonialCarousel" data-bs-slide="prev">
                                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                     <span class="visually-hidden">Previous</span>
                                 </button>
-                                <button class="carousel-control-next collection-carousel-control-next" type="button"
+                                <button class="carousel-control-next trending-carousel-control-next" type="button"
                                     data-bs-target="#testimonialCarousel" data-bs-slide="next">
                                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                     <span class="visually-hidden">Next</span>
                                 </button>
-                            </div>
+
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- Navigate -->
-        <div class="container mt-5">
-            <div class="navigating">
+            <!-- Collections -->
+            <div class="container mt-5">
                 <div class="row justify-content-center">
                     <div class="col-11">
-                        <p class="fs-3" style="margin-bottom: 1px;">What are you looking for?</p>
-                        <div class="text-dark" style="--bs-text-opacity: .5;">
-                            <p class="fs-6">Navigate through our most searched topics in our online gallery to start
-                                your
-                                jouney!
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row  justify-content-center">
-                    <div class="col-2">
-                        <?php foreach ($categories as $category): ?>
-                            <p class="ms-2 mb-3"><a href="index.php?cat_id=<?php echo $category['category_id'] ?>"
-                                    class="link-body-emphasis link-offset-2 link-underline-opacity-0 link-opacity-25 link-underline-opacity-0-hover">
-                                    <?php echo htmlspecialchars($category['category_name']) ?>
-                                </a></p>
-                        <?php endforeach; ?>
-                    </div>
-                    <div class="col-9">
-                        <div class="row">
-                            <?php
-                            if ($auction_data) {
-                                foreach ($auction_data as $auction) {
-                                    $product_name = $auction['product_name'];
-                                    $current_bid = $auction['current_bid'];
-                                    $end_date = $auction['end_time'];
-                                    $image_url = $auction['image_url'];
-
-                                    // Calculate days left
-                                    $end_date_time = new DateTime($end_date);
-                                    $now = new DateTime();
-                                    $interval = $now->diff($end_date_time);
-                                    $days_left = $interval->format('%a days left');
-                                
-                            ?>
-                            <div class="col-sm-12 col-md-6 col-lg-4">
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="card p-2">
-                                            <div class="card-body">
-                                                <div class="d-flex justify-content-between">
-                                                    <div class="p-2"></div>
-                                                    <div class="p-2"><?php echo $days_left ?></div>
-                                                    <div class="p-2"><svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                            height="16" fill="currentColor" class="bi bi-heart"
-                                                            viewBox="0 0 16 16">
-                                                            <path
-                                                                d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
-                                                        </svg></div>
-                                                </div>
-                                                <div>
-                                                    <img src="<?php echo htmlspecialchars($image_url) ?>" alt=""
-                                                        class="img-fluid">
-                                                    <div class="row">
-                                                        <div class="col-5 text-start text-dark"
-                                                            style="--bs-text-opacity: .5; font-size: 14px; margin: 4px;">
-                                                            Current Bid:</div>
-                                                        <div class="col-4 text-start"
-                                                            style="font-size: 16px; margin: 2px;">
-                                                            $<?php echo htmlspecialchars($current_bid) ?></div>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-6 text-start">
-                                            <p class="m-2"><?php echo htmlspecialchars($product_name) ?></p>
-                                            <div class="text-dark" style="--bs-text-opacity: .5;">
-                                                <p class="m-2">Acrilyc, Sand on Canvas</p>
-                                                <p class="m-2">90x70cm</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-6 text-end">
-                                            <div class="text-dark" style="--bs-text-opacity: .5;">
-
-                                                <p class="m-2">Interesting?</p>
-                                                <a href="#" class="btn bidbutton me-2">Bid now</a>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-12 col-md-6 col-lg-4">
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="card p-2">
-                                            <div class="card-body">
-                                                <div class="d-flex justify-content-between">
-                                                    <div class="p-2"></div>
-                                                    <div class="p-2"><?php echo $days_left ?></div>
-                                                    <div class="p-2"><svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                            height="16" fill="currentColor" class="bi bi-heart"
-                                                            viewBox="0 0 16 16">
-                                                            <path
-                                                                d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
-                                                        </svg></div>
-                                                </div>
-                                                <div>
-                                                    <img src="<?php echo htmlspecialchars($image_url) ?>" alt=""
-                                                        class="img-fluid">
-                                                    <div class="row">
-                                                        <div class="col-5 text-start text-dark"
-                                                            style="--bs-text-opacity: .5; font-size: 14px; margin: 4px;">
-                                                            Current Bid:</div>
-                                                        <div class="col-4 text-start"
-                                                            style="font-size: 16px; margin: 2px;">
-                                                            $<?php echo htmlspecialchars($current_bid) ?></div>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-6 text-start">
-                                            <p class="m-2"><?php echo htmlspecialchars($product_name) ?></p>
-                                            <div class="text-dark" style="--bs-text-opacity: .5;">
-                                                <p class="m-2">Acrilyc, Sand on Canvas</p>
-                                                <p class="m-2">90x70cm</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-6 text-end">
-                                            <div class="text-dark" style="--bs-text-opacity: .5;">
-
-                                                <p class="m-2">Interesting?</p>
-                                                <a href="#" class="btn bidbutton me-2">Bid now</a>
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-12 col-md-6 col-lg-4">
-                                <div class="row">
-                                    <div class="col">
-                                        <div class="card p-2">
-                                            <div class="card-body">
-                                                <div class="d-flex justify-content-between">
-                                                    <div class="p-2"></div>
-                                                    <div class="p-2">3 days left</div>
-                                                    <div class="p-2"><svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                            height="16" fill="currentColor" class="bi bi-heart"
-                                                            viewBox="0 0 16 16">
-                                                            <path
-                                                                d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
-                                                        </svg></div>
-                                                </div>
-                                                <div>
-                                                    <img src="images/1.jpg" alt="" class="img-fluid">
-                                                    <div class="row">
-                                                        <div class="col-5 text-start text-dark"
-                                                            style="--bs-text-opacity: .5; font-size: 14px; margin: 4px;">
-                                                            Current Bid:</div>
-                                                        <div class="col-4 text-start"
-                                                            style="font-size: 16px; margin: 2px;">$1,000</div>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-6 text-start">
-                                        <p class="m-2">Barcelona</p>
-                                        <div class="text-dark" style="--bs-text-opacity: .5;">
-                                            <p class="m-2">Acrilyc, Sand on Canvas</p>
-                                            <p class="m-2">90x70cm</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-6 text-end">
-                                        <div class="text-dark" style="--bs-text-opacity: .5;">
-
-                                            <p class="m-2">Interesting?</p>
-                                            <a href="#" class="btn bidbutton me-2">Bid now</a>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <?php
-            }
-        } else {
-            echo "<p>No auction items available.</p>";
-        }
-        ?>
-                        </div>
                         <div class="row justify-content-center">
-                            <div class="text-center">
-                                <a href="#" class="btn seeall">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
-                                        <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
-                                    </svg>
-                                    See "<strong><?php echo htmlspecialchars($category_name) ?></strong>"
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-left-fill" viewBox="0 0 16 16">
-                                        <path d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />
-                                    </svg>
-                                </a>
+                            <div class="d-flex flex-row">
+                                <div class="p-2">
+                                    <p class="fs-3">Buy anything that matches your style</p>
+                                </div>
+                                <div class="p-2 mt-3">
+                                    <p><a href="#"
+                                            class="link-body-emphasis link-offset-2 link-underline-opacity-25 link-opacity-25 link-underline-opacity-75-hover">See
+                                            all collections</a></p>
+                                </div>
+                            </div>
+                            <div class="text-dark ps-4" style="--bs-text-opacity: .5;">
+                                <p class="fs-6 ">Discover our curation for sale
+                                </p>
                             </div>
                         </div>
-                        
+                        <div class="row mt-5">
+                            <div class="collections">
+                                <div id="carouselExampleIndicators" class="carousel">
+                                    <div class="carousel-inner collection-carousel-inner">
+                                        <div class="carousel-item active collection-carousel-item ms-1">
+                                            <div class="row">
+                                                <img src="images/1.jpg" alt="" class="img-fluid" class="img-fluid" />
+                                                <div class="col-6 text-start text-dark">
+                                                    <p style="font-size: 13px;"><strong>ARTWORKS NEW COLLECTIONS
+                                                            2024</strong><br>35 Objects</p>
+                                                </div>
+                                                <div class="row text-center">
+                                                    <a class="text-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
+                                                        style="font-size: 14px;" href="#">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                            fill="currentColor" class="bi bi-caret-right-fill"
+                                                            viewBox="0 0 16 16">
+                                                            <path
+                                                                d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
+                                                        </svg> Discover all <svg xmlns="http://www.w3.org/2000/svg"
+                                                            width="16" height="16" fill="currentColor"
+                                                            class="bi bi-caret-left-fill" viewBox="0 0 16 16">
+                                                            <path
+                                                                d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />
+                                                        </svg>
+                                                    </a>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="carousel-item collection-carousel-item ms-1">
+                                            <div class="row">
+                                                <img src="images/1.jpg" alt="" class="img-fluid" class="img-fluid" />
+                                                <div class="col-6 text-start text-dark">
+                                                    <p style="font-size: 13px;"><strong>ARTWORKS NEW COLLECTIONS
+                                                            2024</strong><br>35 Objects</p>
+                                                </div>
+                                                <div class="row text-center">
+                                                    <a class="text-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
+                                                        style="font-size: 14px;" href="#">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                            fill="currentColor" class="bi bi-caret-right-fill"
+                                                            viewBox="0 0 16 16">
+                                                            <path
+                                                                d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
+                                                        </svg> Discover all <svg xmlns="http://www.w3.org/2000/svg"
+                                                            width="16" height="16" fill="currentColor"
+                                                            class="bi bi-caret-left-fill" viewBox="0 0 16 16">
+                                                            <path
+                                                                d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />
+                                                        </svg>
+                                                    </a>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="carousel-item collection-carousel-item ms-1">
+                                            <div class="row">
+                                                <img src="images/1.jpg" alt="" class="img-fluid" class="img-fluid" />
+                                                <div class="col-6 text-start text-dark">
+                                                    <p style="font-size: 13px;"><strong>ARTWORKS NEW COLLECTIONS
+                                                            2024</strong><br>35 Objects</p>
+                                                </div>
+                                                <div class="row text-center">
+                                                    <a class="text-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
+                                                        style="font-size: 14px;" href="#">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                            fill="currentColor" class="bi bi-caret-right-fill"
+                                                            viewBox="0 0 16 16">
+                                                            <path
+                                                                d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
+                                                        </svg> Discover all <svg xmlns="http://www.w3.org/2000/svg"
+                                                            width="16" height="16" fill="currentColor"
+                                                            class="bi bi-caret-left-fill" viewBox="0 0 16 16">
+                                                            <path
+                                                                d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />
+                                                        </svg>
+                                                    </a>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="carousel-item collection-carousel-item ms-1">
+                                            <div class="row">
+                                                <img src="images/1.jpg" alt="" class="img-fluid" class="img-fluid" />
+                                                <div class="col-6 text-start text-dark">
+                                                    <p style="font-size: 13px;"><strong>ARTWORKS NEW COLLECTIONS
+                                                            2024</strong><br>35 Objects</p>
+                                                </div>
+                                                <div class="row text-center">
+                                                    <a class="text-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
+                                                        style="font-size: 14px;" href="#">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                            fill="currentColor" class="bi bi-caret-right-fill"
+                                                            viewBox="0 0 16 16">
+                                                            <path
+                                                                d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
+                                                        </svg> Discover all <svg xmlns="http://www.w3.org/2000/svg"
+                                                            width="16" height="16" fill="currentColor"
+                                                            class="bi bi-caret-left-fill" viewBox="0 0 16 16">
+                                                            <path
+                                                                d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />
+                                                        </svg>
+                                                    </a>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="carousel-item collection-carousel-item ms-1">
+                                            <div class="row">
+                                                <img src="images/1.jpg" alt="" class="img-fluid" class="img-fluid" />
+                                                <div class="col-6 text-start text-dark">
+                                                    <p style="font-size: 13px;"><strong>ARTWORKS NEW COLLECTIONS
+                                                            2024</strong><br>35 Objects</p>
+                                                </div>
+                                                <div class="row text-center">
+                                                    <a class="text-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
+                                                        style="font-size: 14px;" href="#">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                            fill="currentColor" class="bi bi-caret-right-fill"
+                                                            viewBox="0 0 16 16">
+                                                            <path
+                                                                d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
+                                                        </svg> Discover all <svg xmlns="http://www.w3.org/2000/svg"
+                                                            width="16" height="16" fill="currentColor"
+                                                            class="bi bi-caret-left-fill" viewBox="0 0 16 16">
+                                                            <path
+                                                                d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />
+                                                        </svg>
+                                                    </a>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="carousel-item collection-carousel-item ms-1">
+                                            <div class="row">
+                                                <img src="images/1.jpg" alt="" class="img-fluid" class="img-fluid" />
+                                                <div class="col-6 text-start text-dark">
+                                                    <p style="font-size: 13px;"><strong>ARTWORKS NEW COLLECTIONS
+                                                            2024</strong><br>35 Objects</p>
+                                                </div>
+                                                <div class="row text-center">
+                                                    <a class="text-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
+                                                        style="font-size: 14px;" href="#">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                            fill="currentColor" class="bi bi-caret-right-fill"
+                                                            viewBox="0 0 16 16">
+                                                            <path
+                                                                d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
+                                                        </svg> Discover all <svg xmlns="http://www.w3.org/2000/svg"
+                                                            width="16" height="16" fill="currentColor"
+                                                            class="bi bi-caret-left-fill" viewBox="0 0 16 16">
+                                                            <path
+                                                                d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />
+                                                        </svg>
+                                                    </a>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+                                    </div>
+
+                                    <button class="carousel-control-prev collection-carousel-control-prev" type="button"
+                                        data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Previous</span>
+                                    </button>
+                                    <button class="carousel-control-next collection-carousel-control-next" type="button"
+                                        data-bs-target="#testimonialCarousel" data-bs-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Next</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+            <!-- Navigate -->
+            <div class="container mt-5">
+                <div class="navigating">
+                    <div class="row justify-content-center">
+                        <div class="col-11">
+                            <p class="fs-3" style="margin-bottom: 1px;">What are you looking for?</p>
+                            <div class="text-dark" style="--bs-text-opacity: .5;">
+                                <p class="fs-6">Navigate through our most searched topics in our online gallery to start
+                                    your
+                                    jouney!
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row  justify-content-center">
+                        <div class="col-2">
+                            <?php foreach ($categories as $category): ?>
+                                <p class="ms-2 mb-3"><a href="index.php?cat_id=<?php echo $category['category_id'] ?>"
+                                        class="link-body-emphasis link-offset-2 link-underline-opacity-0 link-opacity-25 link-underline-opacity-0-hover">
+                                        <?php echo htmlspecialchars($category['category_name']) ?>
+                                    </a></p>
+                            <?php endforeach; ?>
+                        </div>
+                        <div class="col-9">
+                            <div class="row">
+
+                                <?php
+                                if ($auction_data) {
+                                    foreach ($auction_data as $auction) {
+                                        $product_name = $auction['product_name'];
+                                        $current_bid = $auction['current_bid'];
+                                        $end_time = $auction['end_time'];
+                                        $image_url = $auction['image_url'];
+                                        $start_time = $auction['start_time'];
+                                        $days_left = caculate_days_left($start_time, $end_time);
+                                        if (new DateTime() < new DateTime($start_time)) {
+                                            $bid_display = "Starting Price: ";
+                                        } else {
+                                            $bid_display = "Current Bid: ";
+                                        }
+                                        ?>
+                                        <div class="col-sm-12 col-md-6 col-lg-4">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="card p-2">
+                                                        <div class="card-body">
+                                                            <div class="d-flex justify-content-between">
+                                                                <div class="p-2"></div>
+                                                                <div class="p-2"><?php echo $days_left ?></div>
+                                                                <div class="p-2"><svg xmlns="http://www.w3.org/2000/svg"
+                                                                        width="16" height="16" fill="currentColor"
+                                                                        class="bi bi-heart" viewBox="0 0 16 16">
+                                                                        <path
+                                                                            d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
+                                                                    </svg></div>
+                                                            </div>
+                                                            <div>
+                                                                <img src="<?php echo htmlspecialchars($image_url) ?>" alt=""
+                                                                    class="img-fluid">
+                                                                <div class="row">
+                                                                    <div class="col-5 text-start text-dark"
+                                                                        style="--bs-text-opacity: .5; font-size: 14px; margin: 4px;">
+                                                                        <?php echo $bid_display ?>
+                                                                    </div>
+                                                                    <div class="col-4 text-start"
+                                                                        style="font-size: 16px; margin: 2px;">
+                                                                        <?php echo format_price($current_bid) ?>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-6 text-start">
+                                                        <p class="m-2"><?php echo htmlspecialchars($product_name) ?></p>
+                                                        <div class="text-dark" style="--bs-text-opacity: .5;">
+                                                            <p class="m-2">Acrilyc, Sand on Canvas</p>
+                                                            <p class="m-2">90x70cm</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6 text-end">
+                                                        <div class="text-dark" style="--bs-text-opacity: .5;">
+
+                                                            <p class="m-2">Interesting?</p>
+                                                            <a href="#" class="btn bidbutton me-2">Bid now</a>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <?php
+                                    }
+                                } else {
+                                    echo "<p>No auction items available.</p>";
+                                }
+                                ?>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="text-center">
+                                    <a href="#" class="btn seeall">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+                                            <path
+                                                d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
+                                        </svg>
+                                        See "<strong><?php echo htmlspecialchars($category_name) ?></strong>"
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-caret-left-fill" viewBox="0 0 16 16">
+                                            <path
+                                                d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Get insipred section -->
