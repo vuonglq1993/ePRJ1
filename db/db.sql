@@ -83,7 +83,19 @@ CREATE TABLE Reviews (
     FOREIGN KEY (user_id) REFERENCES Users(user_id) ON DELETE CASCADE
 );
 
--- dữ liệu cho bảng categories:
+
+Tạo bảng user_likes
+CREATE TABLE user_likes (
+    id SERIAL PRIMARY KEY,
+    user_id INT NOT NULL,
+    product_id INT NOT NULL,
+    liked_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(user_id),
+    FOREIGN KEY (product_id) REFERENCES products(product_id),
+    UNIQUE (user_id, product_id) 
+);
+
+dữ liệu cho bảng categories:
 INSERT INTO categories (category_name)
 VALUES
     ('Art'),
@@ -153,7 +165,5 @@ VALUES
 ("Marni Red & Black Suit",'5',"The Marni Red & Black Suit is a sophisticated and fashion-forward suit ensemble. With a combination of red and black tones, it showcases a modern design for a bold and confident look.",'400','10000',"https://cdn.dummyjson.com/products/images/womens-dresses/Marni%20Red%20&%20Black%20Suit/1.png"),
 ("Blue Women's Handbag",'5',"The Blue Women's Handbag is a stylish and spacious accessory for everyday use. With a vibrant blue color and multiple compartments, it combines fashion and functionality.",'400','20000',"https://cdn.dummyjson.com/products/images/womens-bags/Blue%20Women's%20Handbag/1.png"),
 ("Heshe Women's Leather Bag",'5',"The Heshe Women's Leather Bag is a luxurious and high-quality leather bag for the sophisticated woman. With a timeless design and durable craftsmanship, it's a versatile accessory.",'150','17500',"https://cdn.dummyjson.com/products/images/womens-bags/Heshe%20Women's%20Leather%20Bag/1.png")
-
-
 
 
