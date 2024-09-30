@@ -6,6 +6,7 @@
     include 'functions/db.php';
     include 'functions/auction.php';
     $categories = select("SELECT * FROM categories");
+    $products = select("SELECT image_url FROM products LIMIT 5");
     $category_id = isset($_GET['cat_id']) ? intval($_GET['cat_id']) : 0;
 
     if ($category_id > 0) {
@@ -39,6 +40,7 @@
         integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
         crossorigin="anonymous"></script>
     <script src="javascript/index.js"></script>
+    <script src="javascript/fav.js"></script>
     <title>Home</title>
 </head>
 
@@ -48,6 +50,7 @@
         <!-- Featured content -->
 
         <div id="carouselExampleIndicators" class="carousel slide">
+       
             <div class="carousel-indicators">
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
                     aria-current="true" aria-label="Slide 1"></button>
@@ -55,18 +58,28 @@
                     aria-label="Slide 2"></button>
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
                     aria-label="Slide 3"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3"
+                    aria-label="Slide 4"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4"
+                    aria-label="Slide 5"></button>
             </div>
+            <?php if($products){
+                    $first_item1 = true;
+                    foreach($products as $product){
+                        $image_url = $product['image_url'];
+                        $active_class1 = $first_item1 ? 'active' : '';
+                        $first_item1= false;
+                   
+                ?>
             <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="./images/1.jpg" class="d-block img-fluid w-100" alt="...">
-                </div>
-                <div class="carousel-item">
-                    <img src="./images/1.jpg" class="d-block img-fluid w-100" alt="...">
-                </div>
-                <div class="carousel-item">
-                    <img src="./images/1.jpg" class="d-block img-fluid w-100" alt="...">
+                <div class="carousel-item <?php echo $active_class1; ?>">
+                    <img src="<?php echo $image_url; ?>" class="d-block img-fluid w-100" alt="...">
                 </div>
             </div>
+            <?php
+             }
+            }  
+            ?>
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
                 data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -119,24 +132,23 @@
                                         } else {
                                             $bid_display = "Current Bid: ";
                                         }
-                                        // Check if this is the first item and add the "active" class
                                         $active_class = $first_item ? 'active' : 'ms-1';
-                                        $first_item = false;  // After the first item, set to false
+                                        $first_item = false;  
                                         ?>
                                         <div class="trending-carousel-item carousel-item <?php echo $active_class ?>">
                                             <div class="row">
                                                 <div class="col">
                                                     <div class="card p-2">
                                                         <div class="card-body">
-                                                            <div class="d-flex justify-content-between">
-                                                                <div class="p-2"></div>
-                                                                <div class="p-2"><?php echo $days_left ?></div>
-                                                                <div class="p-2"><a href="#" method="post" onclick="toggleLike()"><svg xmlns="http://www.w3.org/2000/svg"
-                                                                        width="16" height="16" fill="currentColor"
-                                                                        class="bi bi-heart" viewBox="0 0 16 16">
-                                                                        <path
-                                                                            d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
-                                                                    </svg></a></div>
+                                                            <div class="row justify-content-between">
+                                                                
+                                                                <div class="col-10"><p class=""><?php echo $days_left ?></p></div>
+                                                                <div class="col-2">
+                                                                    <a href="#" id="noActionLink" method="post" onclick="toggleLike(this)">
+                                                                    <i class="bi bi-heart"></i>
+                                                                </a>
+                                                            </div>
+                                                                    
                                                             </div>
                                                             <div>
                                                                 <img src="<?php echo $image_url ?>" alt="" class="img-fluid">
@@ -446,12 +458,11 @@
                                                             <div class="d-flex justify-content-between">
                                                                 <div class="p-2"></div>
                                                                 <div class="p-2"><?php echo $days_left ?></div>
-                                                                <div class="p-2"><svg xmlns="http://www.w3.org/2000/svg"
-                                                                        width="16" height="16" fill="currentColor"
-                                                                        class="bi bi-heart" viewBox="0 0 16 16">
-                                                                        <path
-                                                                            d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143q.09.083.176.171a3 3 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15" />
-                                                                    </svg></div>
+                                                                <div class="p-2">
+                                                                    <a href="#" id="noActionLink" method="post" onclick="toggleLike(this)">
+                                                                    <i class="bi bi-heart"></i>
+                                                                    </a>
+                                                                </div>
                                                             </div>
                                                             <div>
                                                                 <img src="<?php echo htmlspecialchars($image_url) ?>" alt=""

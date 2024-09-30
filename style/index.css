@@ -64,6 +64,9 @@ main{
       flex: 0 0 calc(100% / 2);
     }
   }
+  .card-body p {
+    font-size: 1px;
+  }
   @media screen and (min-width: 1024px) {
     .trending .carousel-item{
       display: block;
