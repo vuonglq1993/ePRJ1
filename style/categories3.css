@@ -1,0 +1,54 @@
+html, body {
+    font-family: 'Arial', 'Helvetica', sans-serif;
+  }
+main, header{
+    overflow: hidden;
+  }
+
+  .bg-color{
+    background-color: #c7c7c7;
+  }
+  .color666{
+    color: #666666;
+  }
+
+  .color0028BA{
+    color: #0028BA;
+  }
+
+  .follow{
+    border: 1px solid black;
+    border-radius: 2rem;
+    background-color: white;
+    padding: 1rem;
+}
+
+.no-border {
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+    margin-top: -5px !important;
+    margin-left: 10px;
+    padding-right: -10px !important;
+  }
+
+  .hidden select {
+    appearance: none !important; 
+    -webkit-appearance: none !important; 
+    -moz-appearance: none !important; 
+    padding-right: 2rem; 
+  }
+
+  .bidbutton{
+    background-color: rgb(0, 162, 255) !important;
+    border-radius: 2rem !important;
+    color: rgb(255, 255, 255) !important;
+    margin-top: 1px !important;
+    font-size: 19px !important;
+}
+
+  @media screen and (min-width: 1024px) {
+    .collectionname{
+        padding-left: 5.5rem !important;
+    }
+  }
