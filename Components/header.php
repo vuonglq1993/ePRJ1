@@ -1,7 +1,7 @@
 <header>
     <div class="headerr pt-2 pb-2 row">
         <div class="col-md-2 d-flex justify-content-center align-items-center">
-            <img src="../images/header/Group.png" alt="" class="logo-img">
+            <a href="index.php"><img src="../images/header/Group.png" alt="" class="logo-img"></a>
         </div>
         <div class="d-flex col-md-4">
             <ul class="header-links-list d-flex flex-grow-1">
