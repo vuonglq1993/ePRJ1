@@ -24,9 +24,7 @@
 </head>
 
 <body>
-    <header>
         <?php include 'Components/header.php'; ?>
-    </header>
     <main>
         <div class="container mt-5">
             <div class="row justify-content-center">
@@ -181,9 +179,7 @@
             </div>
         </div>
     </main>
-    <footer>
         <?php include 'Components/footer.php'; ?>
-    </footer>
 </body>
 
 </html>

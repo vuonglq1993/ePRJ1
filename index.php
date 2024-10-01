@@ -58,9 +58,7 @@
 </head>
 
 <body>
-    <header>
     <?php include 'Components/header.php'; ?> 
-    </header>
     <main>
         <!-- Featured content -->
 
@@ -743,9 +741,7 @@
             </div>
         </div>
     </main>
-    <footer>
     <?php include 'Components/footer.php'; ?>
-    </footer>
 </body>
 
 </html>

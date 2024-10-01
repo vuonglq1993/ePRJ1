@@ -29,9 +29,9 @@
 </head>
 
 <body>
-    <header>
+    <!-- Header -->
         <?php include 'Components/header.php'; ?>
-    </header>
+
 
     <main>
         <!-- Name of the collection -->
@@ -428,9 +428,8 @@
             </div>
         </div>
     </main>
-    <footer>
+    <!-- footer  -->
     <?php include 'Components/footer.php'; ?>
-    </footer>
 </body>
 
 </html>

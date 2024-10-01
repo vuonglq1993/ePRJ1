@@ -21,8 +21,8 @@
 </head>
 
 <body>
-    <header></header>
-    <main>
+        <?php include "Components/header.php"; ?>
+<main>
         <!-- Featured content -->
 
         <div id="carouselExampleIndicators" class="carousel slide">
@@ -812,7 +812,7 @@
             </div>
         </div>
     </main>
-    <footer></footer>
+    <?php include 'Components/footer.php'; ?>
 </body>
 
 </html>
