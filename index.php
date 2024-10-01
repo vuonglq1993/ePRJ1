@@ -140,6 +140,7 @@
                                 if ($trendin_data) {
                                     $first_item = true;
                                     foreach ($trendin_data as $auction) {
+                                        $product_id = $auction['product_id'];
                                         $product_name = $auction['product_name'];
                                         $current_bid = $auction['current_bid'];
                                         $end_time = $auction['end_time'];
@@ -165,7 +166,7 @@
                                                                 <div class="p-2"><?php echo $days_left ?>
                                                                 </div>
                                                                 <div class="p-2">
-                                                                    <a href="#" class="no-action"
+                                                                    <a href="#" class="no-action" data-product-id="<?php echo $product_id; ?>"
                                                                         method="post"
                                                                         onclick="toggleLike(this)">
                                                                         <i class="bi bi-heart"></i>
