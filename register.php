@@ -29,7 +29,7 @@
             <div class="row">
                 <div class="col-4">
                     <h1>Register</h1>
-                    <form action="functions/fregister.php" method="post">
+                    <form action="./post_register.php" method="post">
                         <div class="mb-3">
                             <label for="username" class="form-label">Username</label>
                             <input type="text" id="username" class="form-control" name="username" required />

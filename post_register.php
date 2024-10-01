@@ -1,5 +1,5 @@
-<?php 
-include_once 'db.php';
+<?php
+include_once 'functions/db.php';
 
 if (isset($_POST['register'])){
     $username = trim($_POST['username']);
@@ -22,7 +22,8 @@ if (isset($_POST['register'])){
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("sssss", $username, $email, $hashed_password, $phone, $address);
     if ($stmt->execute()){
-        echo "Registration successful";
+        header('./login.php');
+        exit();
     } else {
         echo "Registration failed" . $stmt->error;
     }

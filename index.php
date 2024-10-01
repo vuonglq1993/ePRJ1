@@ -3,6 +3,16 @@
 
 <head>
     <?php
+    session_start();
+    if (isset($_SESSION['user_id'])) {
+        header("Location: login.php");
+        exit();
+    }
+    if (isset($_SESSION['username'])) {
+        echo "Welcome, " . htmlspecialchars($_SESSION['username']) . "!";
+    } else {
+        echo "Welcome, guest!";
+    }
     include 'functions/db.php';
     include 'functions/auction.php';
     include 'functions/collection.php';
@@ -10,7 +20,6 @@
     $products = select("SELECT image_url FROM products LIMIT 5");
     $brands = select("SELECT brand_image FROM brands");
     $category_id = isset($_GET['cat_id']) ? intval($_GET['cat_id']) : 0;
-
     if ($category_id > 0) {
         $category_result = select("SELECT category_name FROM categories WHERE category_id = $category_id");
 
