@@ -1,13 +1,13 @@
 <header>
     <div class="headerr pt-2 pb-2 row">
         <div class="col-md-2 d-flex justify-content-center align-items-center">
-            <img src="../images/header/Group.png" alt="" class="logo-img">
+            <a href="index.php"><img src="../images/header/Group.png" alt="" class="logo-img"></a>
         </div>
         <div class="d-flex col-md-4">
             <ul class="header-links-list d-flex flex-grow-1">
-                <li class="flex-fill"><a href="">Categories</a></li>
+                <li class="flex-fill"><a href="/categories1.php">Categories</a></li>
                 <li class="flex-fill"><a href="">Popular Artists</a></li>
-                <li class="flex-fill"><a href="">Inspire me</a></li>
+                <li class="flex-fill"><a href="/inspire_me.php">Inspire me</a></li>
             </ul>
             </div>
             <div class="d-flex col-md-4">
