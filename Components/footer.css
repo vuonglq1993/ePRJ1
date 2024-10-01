@@ -9,21 +9,16 @@
 
 .footer-links-list {
     list-style-type: none;
-    /* Bỏ dấu chấm ở đầu danh sách */
     padding: 0;
-    /* Bỏ padding cho ul */
 }
 
 .footer-links-list li {
     margin-bottom: 5px;
-    /* Khoảng cách giữa các đường link */
 }
 
 .footer-links-list li a {
     text-decoration: none;
-    /* Không gạch chân link mặc định */
     color: inherit;
-    /* Giữ màu chữ giống như văn bản thường */
 }
 
 .footer-links-list li a:hover {

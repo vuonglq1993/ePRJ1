@@ -1,0 +1,63 @@
+html, body {
+    font-family: 'Arial', 'Helvetica', sans-serif;
+  }
+main, header{
+    overflow: hidden;
+  }
+
+  .bg-color{
+    background-color: #c7c7c7;
+  }
+  .color666{
+    color: #666666;
+  }
+
+  .color0028BA{
+    color: #0028BA !important;
+  }
+
+  .follow{
+    border: 1px solid black;
+    border-radius: 2rem;
+    background-color: white;
+    padding: 1rem;
+}
+
+.no-border {
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+    margin-top: -5px !important;
+    margin-left: 10px;
+    padding-right: -10px !important;
+  }
+
+  .form-select {
+    --bs-form-select-bg-img: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%230028BA ' class='bi bi-caret-down-fill' viewBox='0 0 16 16'%3E%3Cpath d='M7.247 11.14l-4.796-5.481C2.065 5.325 2.52 4.5 3.173 4.5h9.654c.653 0 1.108.825.722 1.159l-4.796 5.48c-.566.647-1.512.647-2.078 0z'/%3E%3C/svg%3E") !important;
+    --bs-form-select-bg-position: right 0.75rem center !important;
+    --bs-form-select-bg-size: 1.5em !important;
+    --bs-form-select-indicator: none !important;
+    padding-right: 2.5rem !important;
+  }
+  
+
+  .hidden select {
+    appearance: none !important; 
+    -webkit-appearance: none !important; 
+    -moz-appearance: none !important; 
+    padding-right: 2rem; 
+  }
+
+  .bidbutton{
+    background-color: rgb(0, 162, 255) !important;
+    border-radius: 2rem !important;
+    color: rgb(255, 255, 255) !important;
+    margin-top: 1px !important;
+    font-size: 19px !important;
+}
+
+  @media screen and (min-width: 1024px) {
+    .collectionname{
+        padding-left: 5.5rem !important;
+    }
+  }

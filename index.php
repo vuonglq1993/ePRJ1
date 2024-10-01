@@ -30,6 +30,8 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="style/index.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="Components/header.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -135,7 +137,7 @@
                                         $active_class = $first_item ? 'active' : 'ms-1';
                                         $first_item = false;  
                                         ?>
-                                        <div class="trending-carousel-item carousel-item <?php echo $active_class ?>">
+                                        <div class="trending-carousel-item carousel-item ">
                                             <div class="row">
                                                 <div class="col">
                                                     <div class="card p-2">
@@ -161,6 +163,27 @@
                                                                         style="font-size: 16px; margin: 2px;">
                                                                         <?php echo format_price($current_bid) ?>
                                                                     </div>
+                                <div class="trending-carousel-item carousel-item <?php echo $active_class ?>">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="card p-2">
+                                                <div class="card-body">
+                                                    <div class="d-flex justify-content-between">
+                                                        <div class="p-2"></div>
+                                                        <div class="p-2"><?php echo $days_left ?></div>
+                                                        <div class="p-2">
+                                                            <a href="#" id="noActionLink" method="post" onclick="toggleLike(this)">
+                                                            <i class="bi bi-heart"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <img src="<?php echo $image_url ?>" alt="" class="img-fluid">
+                                                        <div class="row">
+                                                            <div class="col-5 text-start text-dark"
+                                                                style="--bs-text-opacity: .5; font-size: 14px; margin: 4px;">
+                                                                <?php echo $bid_display ?></div>
+                                                            <div class="col-4 text-start"
+                                                                style="font-size: 16px; margin: 2px;"><?php echo format_price($current_bid) ?></div>
 
                                                                 </div>
                                                             </div>
@@ -634,14 +657,14 @@
                             <div class="container">
                                 <div class="row inputemail">
                                     <div class="col-1">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                            fill="currentColor" class="bi bi-envelope mt-1" viewBox="0 0 16 16">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
                                             <path
                                                 d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1zm13 2.383-4.708 2.825L15 11.105zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741M1 11.105l4.708-2.897L1 5.383z" />
                                         </svg>
                                     </div>
                                     <div class="col-10">
-                                        <input type="email" class="no-border input-group" id="exampleInputEmail1"
+                                        <input type="email" class="no-border" id="exampleInputEmail1"
                                             placeholder='Email address'>
                                     </div>
                                 </div>
@@ -715,17 +738,17 @@
 
         <!-- Download app section  -->
         <div class="row downloadsection mt-5 mb-5">
-            <div class="downloadapp col-md-5 col-sm-11">
-                <p class="fs-2 mt-5">Download the <strong>BIDSPIRIT</strong> app</p>
-                <p class="fs-5">and discover special object anytime, anywhere</p>
-                <div class="row mt-5">
-                    <div class="col-md-6 col-sm-12">
-                        <img src="./images/Appstore.png" class="img-fluid" alt="" />
+            <div class="downloadapp col-md-5 col-sm-11" style="padding: 3rem";>
+                    <p class="fs-2 mt-5">Download the <strong>BIDSPIRIT</strong> app</p>
+                    <p class="fs-5">and discover special object anytime, anywhere</p>
+                    <div class="row mt-5">
+                        <div class="col-md-6 col-sm-12 mb-3">
+                            <a href="#"><img src="./images/Appstore.png" class="img-fluid" alt="" /></a>
+                        </div>
+                        <div class="col-md-6 col-sm-12  mb-3">
+                        <a href="#"><img src="./images/CHplay.png" class="img-fluid" alt="" /></a>
+                        </div>
                     </div>
-                    <div class="col-md-6 col-sm-12">
-                        <img src="./images/CHplay.png" class="img-fluid" alt="" />
-                    </div>
-                </div>
             </div>
             <div class="col-md-7 col-sm-12">
                 <img src="./images/footerapp.png" class="img-fluid" alt="" />
