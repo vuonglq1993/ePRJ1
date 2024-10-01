@@ -2,6 +2,10 @@
 <html lang="en">
 
 <head>
+    <?php
+        include './functions/db.php';
+        $categories = select("SELECT * FROM categories");
+    ?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -47,51 +51,11 @@
                         </p>
                     </div>
                     <div class="row">
+                        <?php foreach($categories as $category): ?>
                         <div class="col-md-4 col-sm-6">
-                            <img src="./images/index/books.png" class="img-fluid mt-2" alt="" />
+                            <img src="<?php echo htmlspecialchars($category['image_url']) ?>" class="img-fluid mt-2" alt="" />
                         </div>
-                        <div class="col-md-4 col-sm-6">
-                            <img src="./images/index/books.png" class="img-fluid mt-2" alt="" />
-                        </div>
-                        <div class="col-md-4 col-sm-6">
-                            <img src="./images/index/books.png" class="img-fluid mt-2" alt="" />
-                        </div>
-                        <div class="col-md-4 col-sm-6">
-                            <img src="./images/index/books.png" class="img-fluid mt-2" alt="" />
-                        </div>
-                        <div class="col-md-4 col-sm-6">
-                            <img src="./images/index/books.png" class="img-fluid mt-2" alt="" />
-                        </div>
-                        <div class="col-md-4 col-sm-6">
-                            <img src="./images/index/books.png" class="img-fluid mt-2" alt="" />
-                        </div>
-                        <div class="col-md-4 col-sm-6">
-                            <img src="./images/index/books.png" class="img-fluid mt-2" alt="" />
-                        </div>
-                        <div class="col-md-4 col-sm-6">
-                            <img src="./images/index/books.png" class="img-fluid mt-2" alt="" />
-                        </div>
-                        <div class="col-md-4 col-sm-6">
-                            <img src="./images/index/modeltrains.png" class="img-fluid mt-2" alt="" />
-                        </div>
-                        <div class="col-md-4 col-sm-6">
-                            <img src="./images/index/wine.png" class="img-fluid mt-2" alt="" />
-                        </div>
-                        <div class="col-md-4 col-sm-6">
-                            <img src="./images/index/bags.png" class="img-fluid mt-2" alt="" />
-                        </div>
-                        <div class="col-md-4 col-sm-6">
-                            <img src="./images/index/moderncoin.png" class="img-fluid mt-2" alt="" />
-                        </div>
-                        <div class="col-md-4 col-sm-6">
-                            <img src="./images/index/champage.png" class="img-fluid mt-2" alt="" />
-                        </div>
-                        <div class="col-md-4 col-sm-6">
-                            <img src="./images/index/stamps.png" class="img-fluid mt-2" alt="" />
-                        </div>
-                        <div class="col-md-4 col-sm-6">
-                            <img src="./images/index/jewellery.png" class="img-fluid mt-2" alt="" />
-                        </div>
+                        <?php endforeach ?>
                     </div>
                 </div>
             </div>

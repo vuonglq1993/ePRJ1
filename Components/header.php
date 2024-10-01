@@ -5,9 +5,9 @@
         </div>
         <div class="d-flex col-md-4">
             <ul class="header-links-list d-flex flex-grow-1">
-                <li class="flex-fill"><a href="/categories1.php">Categories</a></li>
+                <li class="flex-fill"><a href="../eprj1/categories1.php">Categories</a></li>
                 <li class="flex-fill"><a href="">Popular Artists</a></li>
-                <li class="flex-fill"><a href="/inspire_me.php">Inspire me</a></li>
+                <li class="flex-fill"><a href="../eprj1/inspire_me.php">Inspire me</a></li>
             </ul>
             </div>
             <div class="d-flex col-md-4">
