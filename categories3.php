@@ -83,9 +83,6 @@
                                     <option value="3">Three</option>
                                 </select>
                             </div>
-                            <div>
-                                <i class="bi bi-caret-down-fill color0028BA"></i>
-                            </div>
                         </div>
                     </div>
                     <div class="row">
