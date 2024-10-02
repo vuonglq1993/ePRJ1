@@ -4,6 +4,10 @@ include_once 'db.php';
 function get_fav_data($user_id, $sort_by = 'start_time')
 {
     if ($user_id > 0) {
+        $valid_sort_options = ['start_time', 'current_bid', 'product_name'];
+        if (!in_array($sort_by, $valid_sort_options)) {
+            $sort_by = 'start_time';
+        }
         $sql = "SELECT ul.user_id, ul.product_id, p.product_id, p.product_name, p.image_url, a.product_id, a.start_time, a.end_time, a.current_bid
                 FROM user_likes ul
                 JOIN products p ON ul.product_id = p.product_id
@@ -44,3 +48,21 @@ function caculate_days_left($start_time, $end_time)
         return "Auction ends in " . $now->diff($end_date_time)->format('%a days');
     }
 }
+
+function count_fav_data($user_id)
+{
+    if ($user_id > 0) {
+        $sql = "SELECT COUNT(*) AS total FROM user_likes WHERE user_id = ?";
+        $conn = connect();
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param('i', $user_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+        $stmt->close();
+        $conn->close();
+        return $row['total'];
+    } else {
+        return 0;
+    }
+} 
