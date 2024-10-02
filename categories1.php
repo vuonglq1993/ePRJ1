@@ -53,7 +53,7 @@
                     <div class="row">
                         <?php foreach($categories as $category): ?>
                         <div class="col-md-4 col-sm-6">
-                            <img src="<?php echo htmlspecialchars($category['image_url']); ?>" class="img-fluid mt-2" alt="" />
+                            <a href="#"><img src="<?php echo htmlspecialchars($category['image_url']); ?>" class="img-fluid mt-2" alt="" /></a>
                         </div>
                         <?php endforeach; ?>
                     </div>
