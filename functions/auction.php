@@ -1,7 +1,7 @@
 <?php
 include_once 'functions/db.php';
 
-function get_auction_data($category_id = 0, $user_id)
+function get_auction_data($user_id, $category_id = 0)
 {
     if ($category_id > 0) {
         $sql = "SELECT a.product_id, a.current_bid, a.start_time, a.end_time, p.product_name, p.image_url, ul.id AS liked
@@ -36,7 +36,7 @@ function caculate_days_left($start_time, $end_time)
         return "Auction ends in " . $now->diff($end_date_time)->format('%a days');
     }
 }
-function get_trendin_data($user_id)
+function get_trendin_data( $user_id)
 {
     $sql = "SELECT a.product_id, a.current_bid, a.start_time, a.end_time, p.product_name, p.image_url, ul.id AS liked
             FROM auctions a

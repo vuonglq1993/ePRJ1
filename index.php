@@ -28,7 +28,7 @@
     } else {
         $category_name = "All Categories"; // Default if no category is selected
     }
-    $auction_data = get_auction_data($category_id, $user_id);
+    $auction_data = get_auction_data($user_id,$category_id );
     $trendin_data = get_trendin_data($user_id);
     $collection_data = get_collection_data();
     ?>
