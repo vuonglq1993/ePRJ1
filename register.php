@@ -1,7 +1,10 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+    <?php
+    include 'functions/db.php';
+    ?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -19,27 +22,36 @@
     <script src="js/index.js"></script>
     <title>Register</title>
 </head>
+
 <body>
     <main>
         <div class="container">
             <div class="row">
                 <div class="col-4">
                     <h1>Register</h1>
-                    <form action="/post_register.php" method="post">
+                    <form action="./post_register.php" method="post">
                         <div class="mb-3">
-                            <label class="form-label">Full name</label>
-                            <input type="text" class="form-control" name="full_name" />
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text" id="username" class="form-control" name="username" required />
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Email</label>
-                            <input type="email" class="form-control" name="email" />
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" id="email" class="form-control" name="email" required />
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Password</label>
-                            <input type="password" class="form-control" name="password" />
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" id="password" class="form-control" name="password" required />
                         </div>
                         <div class="mb-3">
-                            <button type="submit" class="btn btn-primary">Register</button>
+                            <label for="phone" class="form-label">Phone</label>
+                            <input type="text" id="phone" class="form-control" name="phone" />
+                        </div>
+                        <div class="mb-3">
+                            <label for="address" class="form-label">Address</label>
+                            <textarea id="address" name="address" class="form-control"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <button type="submit" name="register" value="Register" class="btn btn-primary">Register</button>
                         </div>
                     </form>
                 </div>

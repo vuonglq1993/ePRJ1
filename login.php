@@ -26,17 +26,17 @@
             <div class="row">
                 <div class="col-4">
                     <h1>Login</h1>
-                    <form action="/post_login.php" method="post">
+                    <form action="/ePRJ1/post_login.php" method="post">
                         <div class="mb-3">
-                            <label class="form-label">Email</label>
-                            <input type="email" class="form-control" name="email" />
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" id="email" class="form-control" name="email" required/>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Password</label>
-                            <input type="password" class="form-control" name="password" />
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" id="password" class="form-control" name="password" required />
                         </div>
                         <div class="mb-3">
-                            <button type="submit" class="btn btn-primary">Log in</button>
+                            <button type="submit" name="login" class="btn btn-primary">Log in</button>
                         </div>
                     </form>
                 </div>
