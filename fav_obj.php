@@ -29,9 +29,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
         integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
         crossorigin="anonymous"></script>
-    <script src="/ePRJ1/javascript/index.js"></script>
-    <script src="/ePRJ1/javascript/fav.js"></script>
-    <title>Home</title>
+    <script src="/javascript/index.js"></script>
+    <script src="/javascript/fav.js"></script>
+    <title>Favourites</title>
 </head>
 
 <body>

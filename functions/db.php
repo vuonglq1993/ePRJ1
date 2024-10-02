@@ -1,12 +1,14 @@
-<?php
+<?php 
 function connect(){
-    $host = "localhost";
-    $user = "root";
-    $password = "";
-    $database = "test";
-    $conn = new mysqli($host, $user, $password, $database);
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
+    $config = file_get_contents("app_setting.json");// string
+    $config = json_decode($config);
+    $host = $config->host;
+    $user = $config->user;
+    $pass = $config->pass;
+    $db = $config->db;
+    $conn = new mysqli($host,$user,$pass,$db);
+    if($conn->error){
+        die("Connect refused!");
     }
     return $conn;
 }

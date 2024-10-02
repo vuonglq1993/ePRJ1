@@ -3,3 +3,4 @@ test.js
 test.php
 db/db.sql
 functions/db.php
+app_setting.json

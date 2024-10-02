@@ -23,7 +23,7 @@ if (isset($_POST['login'])) {
         $stmt_update = $conn->prepare($sql_update_login);
         $stmt_update->bind_param("i", $user['user_id']);
         if($stmt_update->execute()){
-            header("Location: /ePRJ1/index.php");
+            header("Location: index.php");
         exit();
         } else {
             echo "Error updating login status" . $stmt_update -> error;
