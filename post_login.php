@@ -17,13 +17,13 @@ if (isset($_POST['login'])) {
     $user = $result->fetch_assoc();
 
     if ($user && password_verify($password, $user['password'])) {
-        $_SESSION['user_id'] = $user['id'];
+        $_SESSION['user_id'] = $user['user_id'];
         $_SESSION['username'] = $user['username'];
         $sql_update_login = "UPDATE users SET loggedIn = 1, lastLoggedIn = NOW() WHERE user_id = ?";
         $stmt_update = $conn->prepare($sql_update_login);
         $stmt_update->bind_param("i", $user['user_id']);
         if($stmt_update->execute()){
-            header("Location: index.php");
+            header("Location: /ePRJ1/index.php");
         exit();
         } else {
             echo "Error updating login status" . $stmt_update -> error;

@@ -26,7 +26,7 @@
             <div class="row">
                 <div class="col-4">
                     <h1>Login</h1>
-                    <form action="./post_login.php" method="post">
+                    <form action="/ePRJ1/post_login.php" method="post">
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
                             <input type="email" id="email" class="form-control" name="email" required/>
