@@ -88,7 +88,7 @@
                                 $end_time = $fav['end_time'];
                                 $start_time = $fav['start_time'];
                                 $image_url = $fav['image_url'];
-                                $days_left = caculate_days_left($start_time, $end_time);
+                                $days_left = caculate_days_left1($start_time, $end_time);
                                 if (new DateTime() < new DateTime($start_time)) {
                                     $bid_display = "Starting price: ";
                                 } else if (new DateTime() > new DateTime($start_time) && new DateTime() < new DateTime($end_time)) {
@@ -120,7 +120,7 @@
                                                                 style="--bs-text-opacity: .5; font-size: 14px; margin: 4px;">
                                                                 <?php echo $bid_display ?></div>
                                                             <div class="col-4 text-start" style="font-size: 16px; margin: 2px;">
-                                                                <?php echo format_price($current_bid) ?></div>
+                                                                <?php echo format_price1($current_bid) ?></div>
 
                                                         </div>
                                                     </div>

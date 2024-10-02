@@ -31,11 +31,11 @@ function get_fav_data($user_id, $sort_by = 'start_time')
     }
 }
 
-function format_price($price)
+function format_price1($price)
 {
     return '$' . rtrim(rtrim(number_format($price, 2), '0'), '.');
 }
-function caculate_days_left($start_time, $end_time)
+function caculate_days_left1($start_time, $end_time)
 {
     $start_date_time = new DateTime($start_time);
     $end_date_time = new DateTime($end_time);
