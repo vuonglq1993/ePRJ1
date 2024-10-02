@@ -4,10 +4,7 @@
 <head>
     <?php
     session_start();
-    if (isset($_SESSION['user_id'])) {
-        header("Location: login.php");
-        exit();
-    }
+    $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 0;
     if (isset($_SESSION['username'])) {
         echo "Welcome, " . htmlspecialchars($_SESSION['username']) . "!";
     } else {
@@ -31,8 +28,8 @@
     } else {
         $category_name = "All Categories"; // Default if no category is selected
     }
-    $auction_data = get_auction_data($category_id);
-    $trendin_data = get_trendin_data();
+    $auction_data = get_auction_data($category_id, $user_id);
+    $trendin_data = get_trendin_data($user_id);
     $collection_data = get_collection_data();
     ?>
 
@@ -44,9 +41,9 @@
     <link rel="stylesheet" href="Components/header.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
     <link rel="stylesheet" href="Components/header.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
-<link rel="stylesheet" href="Components/footer.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+    <link rel="stylesheet" href="Components/footer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
@@ -58,16 +55,16 @@
     <script src="javascript/index.js"></script>
     <script src="javascript/fav.js"></script>
     <script>
-    // Ensure noActionLink runs after the DOM is fully loaded
-    document.addEventListener('DOMContentLoaded', function() {
-        noActionLink(); // Initialize noActionLink
-    });
-</script>
+        // Ensure noActionLink runs after the DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            noActionLink(); // Initialize noActionLink
+        });
+    </script>
     <title>Home</title>
 </head>
 
 <body>
-    <?php include 'Components/header.php'; ?> 
+    <?php include 'Components/header.php'; ?>
     <main>
         <!-- Featured content -->
 
@@ -172,7 +169,7 @@
                                                                     <a href="#" class="no-action" data-product-id="<?php echo $product_id; ?>"
                                                                         method="post"
                                                                         onclick="toggleLike(this)">
-                                                                        <i class="bi bi-heart"></i>
+                                                                        <i class="bi <?php echo $auction['liked'] ? 'bi-heart-fill' : 'bi-heart'; ?>"></i>
                                                                     </a>
                                                                 </div>
                                                             </div>
@@ -237,7 +234,7 @@
                     </div>
                 </div>
             </div>
-    <!-- Collections -->
+            <!-- Collections -->
             <div class="container mt-5">
                 <div class="row justify-content-center">
                     <div class="col-11">
@@ -261,82 +258,82 @@
                             <div class="collections">
                                 <div id="carouselExampleIndicators" class="carousel">
                                     <div class="carousel-inner collection-carousel-inner">
-                                    <?php 
+                                        <?php
                                         if ($collection_data) {
                                             $first_item = true;
-                                            foreach($collection_data as $collection){
+                                            foreach ($collection_data as $collection) {
                                                 $image_url = $collection['images'];
                                                 $collection_name = $collection['collection_name'];
                                                 $collection_desc = $collection['collection_desc'];
                                                 $product_count = $collection['product_count'];
-                                            $active_class = $first_item ? 'active' : '';
-                                            $first_item = false;
-                                    ?>
-                                        <div
-                                            class="carousel-item collection-carousel-item ms-1 <?php echo $active_class; ?>">
-                                            <div class="row">
-                                                <img src="images/1.jpg" alt="" class="img-fluid"
-                                                    class="img-fluid" />
-                                                <div class="col-6 text-start text-dark">
-                                                    <p style="font-size: 13px;"><strong><?php echo strtoupper(htmlspecialchars($collection_name)) ?></strong><br><?php echo htmlspecialchars($product_count) ?> Objects</p>
-                                                </div>
-                                                <div class="row text-center">
-                                                    <a href="#" class="text-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
-                                                        style="font-size: 14px;" href="#">
-                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                            width="16" height="16"
-                                                            fill="currentColor"
-                                                            class="bi bi-caret-right-fill"
-                                                            viewBox="0 0 16 16">
-                                                            <path
-                                                                d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
-                                                        </svg> Discover all <svg
-                                                            xmlns="http://www.w3.org/2000/svg"
-                                                            width="16" height="16"
-                                                            fill="currentColor"
-                                                            class="bi bi-caret-left-fill"
-                                                            viewBox="0 0 16 16">
-                                                            <path
-                                                                d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />
-                                                        </svg>
-                                                    </a>
+                                                $active_class = $first_item ? 'active' : '';
+                                                $first_item = false;
+                                        ?>
+                                                <div
+                                                    class="carousel-item collection-carousel-item ms-1 <?php echo $active_class; ?>">
+                                                    <div class="row">
+                                                        <img src="images/1.jpg" alt="" class="img-fluid"
+                                                            class="img-fluid" />
+                                                        <div class="col-6 text-start text-dark">
+                                                            <p style="font-size: 13px;"><strong><?php echo strtoupper(htmlspecialchars($collection_name)) ?></strong><br><?php echo htmlspecialchars($product_count) ?> Objects</p>
+                                                        </div>
+                                                        <div class="row text-center">
+                                                            <a href="#" class="text-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
+                                                                style="font-size: 14px;" href="#">
+                                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                                    width="16" height="16"
+                                                                    fill="currentColor"
+                                                                    class="bi bi-caret-right-fill"
+                                                                    viewBox="0 0 16 16">
+                                                                    <path
+                                                                        d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
+                                                                </svg> Discover all <svg
+                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                    width="16" height="16"
+                                                                    fill="currentColor"
+                                                                    class="bi bi-caret-left-fill"
+                                                                    viewBox="0 0 16 16">
+                                                                    <path
+                                                                        d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />
+                                                                </svg>
+                                                            </a>
 
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <div
-                                            class="carousel-item collection-carousel-item ms-1 <?php echo $active_class; ?>">
-                                            <div class="row">
-                                                <img src="images/1.jpg" alt="" class="img-fluid"
-                                                    class="img-fluid" />
-                                                <div class="col-6 text-start text-dark">
-                                                    <p style="font-size: 13px;"><strong><?php echo strtoupper(htmlspecialchars($collection_name)) ?></strong><br><?php echo htmlspecialchars($product_count) ?> Objects</p>
-                                                </div>
-                                                <div class="row text-center">
-                                                    <a href="#" class="text-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
-                                                        style="font-size: 14px;" href="#">
-                                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                                            width="16" height="16"
-                                                            fill="currentColor"
-                                                            class="bi bi-caret-right-fill"
-                                                            viewBox="0 0 16 16">
-                                                            <path
-                                                                d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
-                                                        </svg> Discover all <svg
-                                                            xmlns="http://www.w3.org/2000/svg"
-                                                            width="16" height="16"
-                                                            fill="currentColor"
-                                                            class="bi bi-caret-left-fill"
-                                                            viewBox="0 0 16 16">
-                                                            <path
-                                                                d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />
-                                                        </svg>
-                                                    </a>
+                                                <div
+                                                    class="carousel-item collection-carousel-item ms-1 <?php echo $active_class; ?>">
+                                                    <div class="row">
+                                                        <img src="images/1.jpg" alt="" class="img-fluid"
+                                                            class="img-fluid" />
+                                                        <div class="col-6 text-start text-dark">
+                                                            <p style="font-size: 13px;"><strong><?php echo strtoupper(htmlspecialchars($collection_name)) ?></strong><br><?php echo htmlspecialchars($product_count) ?> Objects</p>
+                                                        </div>
+                                                        <div class="row text-center">
+                                                            <a href="#" class="text-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
+                                                                style="font-size: 14px;" href="#">
+                                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                                    width="16" height="16"
+                                                                    fill="currentColor"
+                                                                    class="bi bi-caret-right-fill"
+                                                                    viewBox="0 0 16 16">
+                                                                    <path
+                                                                        d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
+                                                                </svg> Discover all <svg
+                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                    width="16" height="16"
+                                                                    fill="currentColor"
+                                                                    class="bi bi-caret-left-fill"
+                                                                    viewBox="0 0 16 16">
+                                                                    <path
+                                                                        d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />
+                                                                </svg>
+                                                            </a>
 
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                        <?php 
+                                        <?php
                                             }
                                         } else {
                                             echo "<p>No collections available.</p>";
@@ -464,6 +461,7 @@
                                 <?php
                                 if ($auction_data) {
                                     foreach ($auction_data as $auction) {
+                                        $product_id = $auction['product_id'];
                                         $product_name = $auction['product_name'];
                                         $current_bid = $auction['current_bid'];
                                         $end_time = $auction['end_time'];
@@ -486,10 +484,10 @@
                                                                 <div class="p-2"><?php echo $days_left ?>
                                                                 </div>
                                                                 <div class="p-2">
-                                                                    <a href="#" class="no-action"
+                                                                    <a href="#" class="no-action" data-product-id="<?php echo $product_id; ?>"
                                                                         method="post"
                                                                         onclick="toggleLike(this)">
-                                                                        <i class="bi bi-heart"></i>
+                                                                        <i class="bi <?php echo $auction['liked'] ? 'bi-heart-fill' : 'bi-heart'; ?>"></i>
                                                                     </a>
                                                                 </div>
                                                             </div>
@@ -722,11 +720,11 @@
                         <p class="fs-3" style="margin-bottom: 5px;">Iconic Brands</p>
                     </div>
                     <div class="row">
-                    <?php foreach ($brands as $brand): ?>
-                        <div class="col-md-2 mt-3 sm-4">
-                            <img src="<?php echo htmlspecialchars($brand["brand_image"]); ?>" class="img-fluid" alt="" />
-                        </div>
-                    <?php endforeach;?>
+                        <?php foreach ($brands as $brand): ?>
+                            <div class="col-md-2 mt-3 sm-4">
+                                <img src="<?php echo htmlspecialchars($brand["brand_image"]); ?>" class="img-fluid" alt="" />
+                            </div>
+                        <?php endforeach; ?>
                     </div>
                 </div>
             </div>
