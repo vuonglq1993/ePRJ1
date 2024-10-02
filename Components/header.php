@@ -20,10 +20,10 @@
         <div class="d-flex header-icon-list col-md-2 justify-content-between">
             <ul class="d-flex list-unstyled m-0 flex-grow-1 justify-content-end">
                 <li class="me-3">
-                    <a href=""><i class="fa-solid fa-user fa-2x"></i></a>
+                    <a href="#"><i class="fa-solid fa-user fa-2x"></i></a>
                 </li>
                 <li class="position-relative me-3">
-                    <a href="#">
+                    <a href="/ePRJ1/fav_obj.php">
                         <i class="fas fa-heart fa-2x"></i>
                         <span
                             class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">1</span>
