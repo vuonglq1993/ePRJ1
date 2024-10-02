@@ -1,6 +1,5 @@
 function toggleLike(element){
     const productId = element.getAttribute('data-product-id');
-    console.log("Product Id: "+ productId);
 
     const xhr = new XMLHttpRequest();
     xhr.open('POST', 'functions/save_like.php', true);
