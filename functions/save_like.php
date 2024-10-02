@@ -2,15 +2,6 @@
 session_start();
 include_once("db.php");
 
-// Ensure the user is logged in
-if (!isset($_SESSION['user_id'])) {
-    error_log("Session not found. User not logged in.");
-    echo "You are not logged in";
-    exit;
-} else {
-    echo "User is logged in. User ID: " . $_SESSION['user_id'];  // Debug output
-}
-
 // Get the user ID and product ID
 $user_id = $_SESSION['user_id'];
 $product_id = isset($_POST['product_id']) ? intval($_POST['product_id']) : 0;
