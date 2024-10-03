@@ -46,3 +46,14 @@ function get_trendin_data( $user_id)
     $result = select($sql, [$user_id]);
     return $result;
 }
+function get_product_data($product_id)
+{
+    if ($product_id > 0) {
+        $sql = "SELECT p.*, a.start_time, a.end_time, c.collection_name
+            FROM products p
+            JOIN auctions a ON p.product_id = a.product_id
+            JOIN collections c ON p.collection_id = c.collection_id
+            WHERE p.product_id = ?"; 
+    }
+    return findById($sql, [$product_id]);
+}

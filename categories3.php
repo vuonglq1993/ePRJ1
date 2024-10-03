@@ -3,8 +3,17 @@
 
 <head>
     <?php
+    session_start();
+    // $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 0;
+    if (isset($_SESSION['username'])) {
+        echo "Welcome, " . htmlspecialchars($_SESSION['username']) . "!";
+    } else {
+        echo "Welcome, guest!";
+    }
     include 'functions/db.php';
-    $categories = select("SELECT * FROM categories");
+    include 'functions/auction.php';
+    $product_id = isset($_GET['product_id']) ? intval($_GET['product_id']) : 0;
+    $product_data = get_product_data($product_id);
     ?>
 
     <meta charset="UTF-8">
@@ -36,10 +45,27 @@
     <main>
         <!-- Name of the collection -->
         <div class="row collectionname mt-5 mb-5">
+            <?php 
+                if($product_data){
+                        $product_name = $product_data['product_name'];
+                        $product_description = $product_data['description'];
+                        $product_image = $product_data['image_url'];
+                        $product_collection = $product_data['collection_name'];
+                        $start_time = $product_data['start_time'];
+                        $formatted_start_time = date('F j, Y, g:i a', strtotime($start_time));
+                        $end_time = $product_data['end_time'];
+                        if (new DateTime() < new DateTime($start_time)) {
+                            $status = 'Upcoming in: ' . date_diff(new DateTime(), new DateTime($start_time))->format('%d days, %h hours, %i minutes') . '.' ;
+                        } elseif (new DateTime() >= new DateTime($start_time) && new DateTime() <= new DateTime($end_time)) {
+                            $status = 'End in ' . date_diff(new DateTime(), new DateTime($end_time))->format('%d days, %h hours, %i minutes') . '.';
+                        } else {
+                            $status = 'Ended' . date_diff(new DateTime($end_time), new DateTime())->format('%d days, %h hours, %i minutes') . ' ago.';
+                        }
+            ?>
             <div class="col-md-6 col-sm-11" style="padding-left: 3rem" ;>
-                <p class="fs-1 fw-light">Decorative Minerals Auction (Spheres & Carvings)</p>
+                <p class="fs-1 fw-light"><?php echo htmlspecialchars($product_name); ?></p>
                 <div class="row mt-3">
-                    <p class="fw-light color666 fs-6">Start from August 28 - 2024</p>
+                    <p class="fw-light color666 fs-6">Start from <?php echo htmlspecialchars($formatted_start_time); ?></p>
                 </div>
                 <div class="row mt-3">
                     <div class=""><a href="#" class="border text-decoration-none follow"><i
@@ -47,19 +73,24 @@
                     </div>
                 </div>
                 <div class="mt-4">
-                    <p class="fs-2 fw-light color0028BA">Ends tomorrow 01:00</p>
+                    <p class="fs-4 fw-light color0028BA"><?php echo htmlspecialchars($status); ?></p>
                 </div>
             </div>
             <div class="col-md-6 col-sm-12 mt-3">
                 <div class="row">
                     <div class="col p-5">
-                        <img src="images/blankimage2.jpg" alt="blank" class="m-5 img-fluid" />
+                        <img src="<?php echo htmlspecialchars($product_image); ?>" alt="<?php echo htmlspecialchars($product_name); ?>" class="m-5 img-fluid" />
                     </div>
                     <div class="col bg-color p-5">
-                        <p class="fs-3 text-start fw-light">Curated by Luca Esposito</p>
+                        <p class="fs-3 text-start fw-light"><?php echo htmlspecialchars($product_collection) ?></p>
                         <p class="fs-3 text-start color666 fw-lighter">Expert in Minerals & Natural History</p>
                     </div>
                 </div>
+                <?php 
+                } else {
+                    echo "<p>No product found.</p>";
+                }
+                ?>
             </div>
         </div>
 
