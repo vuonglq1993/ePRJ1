@@ -18,8 +18,10 @@
             </div>
             <div class="d-flex col-md-4">
             <div class="input-group ms-3">
-                <span class="input-group-text border-0"><i class="bi bi-search text-muted"></i></span>
-                <input class="form-control border-0" type="search" placeholder="Tìm kiếm..." aria-label="Search">
+                <form action="search.php" method="get" class="d-flex">
+                    <input class="form-control border-0" type="search" name="search" placeholder="Tìm kiếm..." aria-label="Search">
+                    <button class="btn btn-outline-secondary bg-white border-0" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </form>
             </div>
             <button class="header-btn ms-2" type="submit">Sell my Art</button>
         </div>
