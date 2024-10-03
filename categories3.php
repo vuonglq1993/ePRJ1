@@ -50,7 +50,7 @@
                 $product_name = $product_data['product_name'];
                 $product_description = $product_data['description'];
                 $product_image = $product_data['image_url'];
-                $product_collection = $product_data['collection_name'] ? htmlspecialchars($product_data['collection_name']) : 'No collection';
+                $product_collection = $product_data['collection_name'] ? htmlspecialchars($product_data['collection_name']) : 'Not in any collection';
                 $start_time = $product_data['start_time'];
                 $has_auction = isset($start_time) && !empty($start_time);
                 $formatted_start_time = date('F j, Y, g:i a', strtotime($start_time));
@@ -82,12 +82,24 @@
                         <div class="mt-4">
                             <p class="fs-4 fw-light color0028BA"><?php echo htmlspecialchars($status); ?></p>
                         </div>
+                        <!-- Dropdown for product description -->
+                        <div class="my-4 ">
+                            <button class="no-border bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#productDescription" aria-expanded="false" aria-controls="productDescription">
+                                View Detail
+                            </button>
+                            <div class="collapse" id="productDescription">
+                                <div class="card card-body">
+                                    <p>lol</p>
+                                </div>
+                            </div>
+                            <div class="mt-3"><?php echo htmlspecialchars($product_description); ?></div>
+                        </div>
                     </div>
                 <?php else: ?>
                     <div class="col-md-6 col-sm-11" style="padding-left: 3rem" ;>
                         <p class="fs-1 fw-light"><?php echo htmlspecialchars($product_name); ?></p>
                         <div class="row mt-3">
-                            <p class="fw-light color666 fs-6">No auction available ?></p>
+                            <p class="fw-light color666 fs-6">No auction available</p>
                         </div>
                         <div class="row mt-3">
                             <div class="">
@@ -97,6 +109,18 @@
                                     </i>
                                     <span class="mx-3">Following for similar objects</span>
                                 </a>
+                            </div>
+                            <!-- Dropdown for product description -->
+                            <div class="my-4 ">
+                                <button class="no-border bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#productDescription" aria-expanded="false" aria-controls="productDescription">
+                                    View Detail
+                                </button>
+                                <div class="collapse" id="productDescription">
+                                    <div class="card card-body">
+                                        <p>lol</p>
+                                    </div>
+                                </div>
+                                <div class="mt-3"><?php echo htmlspecialchars($product_description); ?></div>
                             </div>
                         </div>
                     </div>
