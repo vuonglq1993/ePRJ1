@@ -51,8 +51,8 @@ function select($sql, $params = [])
     return $data; // Trả về mảng dữ liệu
 }
 
-function findById($sql){
-    $data = select($sql);
+function findById($sql,$params = []){
+    $data = select($sql, $params);
     if(count($data) > 0){
         return $data[0];
     }else{
