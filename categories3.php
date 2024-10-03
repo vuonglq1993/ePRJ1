@@ -39,59 +39,84 @@
 
 <body>
     <!-- Header -->
-        <?php include 'Components/header.php'; ?>
+    <?php include 'Components/header.php'; ?>
 
 
     <main>
         <!-- Name of the collection -->
         <div class="row collectionname mt-5 mb-5">
-            <?php 
-                if($product_data){
-                        $product_name = $product_data['product_name'];
-                        $product_description = $product_data['description'];
-                        $product_image = $product_data['image_url'];
-                        $product_collection = $product_data['collection_name'];
-                        $start_time = $product_data['start_time'];
-                        $formatted_start_time = date('F j, Y, g:i a', strtotime($start_time));
-                        $end_time = $product_data['end_time'];
-                        if (new DateTime() < new DateTime($start_time)) {
-                            $status = 'Upcoming in: ' . date_diff(new DateTime(), new DateTime($start_time))->format('%d days, %h hours, %i minutes') . '.' ;
-                        } elseif (new DateTime() >= new DateTime($start_time) && new DateTime() <= new DateTime($end_time)) {
-                            $status = 'End in ' . date_diff(new DateTime(), new DateTime($end_time))->format('%d days, %h hours, %i minutes') . '.';
-                        } else {
-                            $status = 'Ended' . date_diff(new DateTime($end_time), new DateTime())->format('%d days, %h hours, %i minutes') . ' ago.';
-                        }
-            ?>
-            <div class="col-md-6 col-sm-11" style="padding-left: 3rem" ;>
-                <p class="fs-1 fw-light"><?php echo htmlspecialchars($product_name); ?></p>
-                <div class="row mt-3">
-                    <p class="fw-light color666 fs-6">Start from <?php echo htmlspecialchars($formatted_start_time); ?></p>
-                </div>
-                <div class="row mt-3">
-                    <div class=""><a href="#" class="border text-decoration-none follow"><i
-                                class="bi bi-heart"></i><span class="mx-3">Following for similar objects</span></a>
-                    </div>
-                </div>
-                <div class="mt-4">
-                    <p class="fs-4 fw-light color0028BA"><?php echo htmlspecialchars($status); ?></p>
-                </div>
-            </div>
-            <div class="col-md-6 col-sm-12 mt-3">
-                <div class="row">
-                    <div class="col p-5">
-                        <img src="<?php echo htmlspecialchars($product_image); ?>" alt="<?php echo htmlspecialchars($product_name); ?>" class="m-5 img-fluid" />
-                    </div>
-                    <div class="col bg-color p-5">
-                        <p class="fs-3 text-start fw-light"><?php echo htmlspecialchars($product_collection) ?></p>
-                        <p class="fs-3 text-start color666 fw-lighter">Expert in Minerals & Natural History</p>
-                    </div>
-                </div>
-                <?php 
+            <?php
+            if ($product_data) {
+                $product_name = $product_data['product_name'];
+                $product_description = $product_data['description'];
+                $product_image = $product_data['image_url'];
+                $product_collection = $product_data['collection_name'] ? htmlspecialchars($product_data['collection_name']) : 'No collection';
+                $start_time = $product_data['start_time'];
+                $has_auction = isset($start_time) && !empty($start_time);
+                $formatted_start_time = date('F j, Y, g:i a', strtotime($start_time));
+                $end_time = $product_data['end_time'];
+                if (new DateTime() < new DateTime($start_time)) {
+                    $status = 'Upcoming in: ' . date_diff(new DateTime(), new DateTime($start_time))->format('%d days, %h hours, %i minutes') . '.';
+                } elseif (new DateTime() >= new DateTime($start_time) && new DateTime() <= new DateTime($end_time)) {
+                    $status = 'End in ' . date_diff(new DateTime(), new DateTime($end_time))->format('%d days, %h hours, %i minutes') . '.';
                 } else {
-                    echo "<p>No product found.</p>";
+                    $status = 'Ended' . date_diff(new DateTime($end_time), new DateTime())->format('%d days, %h hours, %i minutes') . ' ago.';
                 }
+            ?>
+                <?php if ($has_auction): ?>
+                    <div class="col-md-6 col-sm-11" style="padding-left: 3rem" ;>
+                        <p class="fs-1 fw-light"><?php echo htmlspecialchars($product_name); ?></p>
+                        <div class="row mt-3">
+                            <p class="fw-light color666 fs-6">Start from <?php echo htmlspecialchars($formatted_start_time); ?></p>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="">
+                                <a href="#" class="border text-decoration-none follow">
+                                    <i
+                                        class="bi bi-heart">
+                                    </i>
+                                    <span class="mx-3">Following for similar objects</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <p class="fs-4 fw-light color0028BA"><?php echo htmlspecialchars($status); ?></p>
+                        </div>
+                    </div>
+                <?php else: ?>
+                    <div class="col-md-6 col-sm-11" style="padding-left: 3rem" ;>
+                        <p class="fs-1 fw-light"><?php echo htmlspecialchars($product_name); ?></p>
+                        <div class="row mt-3">
+                            <p class="fw-light color666 fs-6">No auction available ?></p>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="">
+                                <a href="#" class="border text-decoration-none follow">
+                                    <i
+                                        class="bi bi-heart">
+                                    </i>
+                                    <span class="mx-3">Following for similar objects</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                <?php endif; ?>
+                <div class="col-md-6 col-sm-12 mt-3">
+                    <div class="row">
+                        <div class="col p-5">
+                            <img src="<?php echo htmlspecialchars($product_image); ?>" alt="<?php echo htmlspecialchars($product_name); ?>" class="m-5 img-fluid" />
+                        </div>
+                        <div class="col bg-color p-5">
+                            <p class="fs-3 text-start fw-light"><?php echo htmlspecialchars($product_collection) ?></p>
+                            <p class="fs-3 text-start color666 fw-lighter">Expert in Minerals & Natural History</p>
+                        </div>
+                    </div>
+                <?php
+            } else {
+                echo "<p>No product found.</p>";
+            }
                 ?>
-            </div>
+                </div>
         </div>
 
         <!-- Collection items -->
