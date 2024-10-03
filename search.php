@@ -6,7 +6,7 @@
     include 'functions/fsearch.php';
     include 'functions/auction.php';
     $search = isset($_GET['search']) ? $_GET['search'] : '';
-    $search_data = search($search);
+    $search_data = search($search,$user_id);
     ?>
 
     <meta charset="UTF-8">
@@ -66,10 +66,10 @@
                                                         <div class="p-2"><?php echo $days_left ?>
                                                         </div>
                                                         <div class="p-2">
-                                                            <a href="#" class="no-action"
+                                                            <a href="#" class="no-action" data-product-id="<?php echo $product_id; ?>"
                                                                 method="post"
                                                                 onclick="toggleLike(this)">
-                                                                <i class="bi bi-heart"></i>
+                                                                <i class="bi <?php echo $auction['liked'] ? 'bi-heart-fill' : 'bi-heart'; ?>"></i>
                                                             </a>
                                                         </div>
                                                     </div>

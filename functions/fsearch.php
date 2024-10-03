@@ -1,23 +1,30 @@
 <?php
     include_once 'db.php';
-function search($searchTerm){
+function search($searchTerm, $user_id){
     $conn = connect();
-    $sql = "SELECT a.product_id, a.current_bid, a.start_time, a.end_time, p.product_name, p.image_url
+    $sql = "SELECT a.product_id, a.current_bid, a.start_time, a.end_time, p.product_name, p.image_url, ul.id AS liked
             FROM auctions a
             JOIN products p ON a.product_id = p.product_id
+            LEFT JOIN user_likes ul ON p.product_id = ul.product_id AND ul.user_id = ?
             WHERE p.product_name LIKE ? 
             ORDER BY a.start_time ASC";
     $stmt = $conn->prepare($sql);
     if ($stmt === false) {
         die("Error preparing statement: " . $conn->error);
     }
-    $searchTerm = "%$searchTerm%";
-    $stmt->bind_param("s", $searchTerm);
+    $searchTerm = '%' . $searchTerm . '%';
+    $stmt->bind_param("is",$user_id, $searchTerm);
     $stmt->execute();
     $result = $stmt->get_result();
+    $data = [];
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $data[] = $row;
+        }
+    }
     $stmt->close();
     $conn->close();
-    return $result;
+    return $data;
 }
 function format_price_search($price)
 {
