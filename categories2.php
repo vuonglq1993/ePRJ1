@@ -347,7 +347,7 @@
 
                                                         <p class="m-2">Interesting?</p>
                                                         <a href="#" class="btn bidbutton me-2">Bid now</a>
-                                                        <a href="product-detail(test).php?product_id=<?php echo htmlspecialchars($auction['product_id']) ?>" class="btn bidbutton me-2">Details</a>
+                                                        <a href="categories3.php?product_id=<?php echo htmlspecialchars($auction['product_id']) ?>" class="btn bidbutton me-2">Details</a>
 
                                                     </div>
                                                 </div>
