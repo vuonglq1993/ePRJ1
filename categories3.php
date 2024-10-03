@@ -50,7 +50,7 @@
                 $product_name = $product_data['product_name'];
                 $product_description = $product_data['description'];
                 $product_image = $product_data['image_url'];
-                $product_collection = $product_data['collection_name'] ? htmlspecialchars($product_data['collection_name']) : 'No collection';
+                $product_collection = $product_data['collection_name'] ? htmlspecialchars($product_data['collection_name']) : 'Not in any collection';
                 $start_time = $product_data['start_time'];
                 $has_auction = isset($start_time) && !empty($start_time);
                 $formatted_start_time = date('F j, Y, g:i a', strtotime($start_time));
