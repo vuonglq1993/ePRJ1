@@ -1,100 +1,77 @@
-.headerr {
-    background-color: #000022;
+
+
+.bg-000022 {
+    background-color: #000022 !important;
 }
 
-.logo-img {
-    max-width: 100%;
-    height: auto;
+.fc-ffffff {
+    color: #FFFFFF !important;
 }
 
-.header-links-list {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    list-style-type: none;
-    margin: 0;
-    width: 100%;
-    padding: 0;
+.bg-31D3FF {
+    background-color: #31D3FF !important;
 }
 
-.header-links-list li {
-    flex-grow: 1;
-    /* Chiếm hết không gian có sẵn */
-    text-align: center;
-    /* Căn giữa nội dung */
+.logo {
+    margin-top: -20px !important;
+    margin-bottom: -20px !important;
 }
 
-.header-links-list li a {
-    text-decoration: none;
-    color: #fff;
+.search-config {
+    border: none !important;
+    background-color: transparent !important;
+    position: relative !important;
+    left: 14% !important;
+    border-top-left-radius: 50% !important;
+    border-bottom-left-radius: 50% !important;
 }
 
-.header-links-list li a:hover {
-    text-decoration: underline;
+.form-config {
+    margin-top: 8px !important;
 }
 
-.input-group
-{
-    border-radius: 50%;
-    /* Thay đổi giá trị này để điều chỉnh độ bo tròn */
+.sell-config {
+    margin-top: 8px !important;
+    border-radius: 2rem !important;
+    padding: 10px 20px auto  20px !important;
+    height: 2rem !important;
+    white-space: nowrap !important;
 }
 
-.input-group {
-    height: 50px;
-    /* Thay đổi giá trị này để điều chỉnh chiều cao */
+
+
+.search-config:hover {
+    background-color: #FFFFFF !important;
 }
 
-.input-group .form-control {
-    height: 100%;
-    /* Đảm bảo input chiếm toàn bộ chiều cao của group */
-    padding: 10px;
-    /* Điều chỉnh padding bên trong nếu cần */
-    border-radius: 50px;
-    /* Giữ độ bo tròn */
+.input-config {
+    border-radius: 2rem !important;
+    width: 18rem !important;
+    height: 2rem !important;
 }
 
-.input-group .input-group-text {
-    height: 100%;
-    /* Đảm bảo icon cũng chiếm toàn bộ chiều cao */
-    border-radius: 50px;
-    /* Giữ độ bo tròn */
+.countposition {
+    position: relative !important;
 }
 
-.header-btn {
-    width: 200px;
-    /* Điều chỉnh chiều rộng nút bấm */
-    padding: 10px;
-    /* Điều chỉnh padding nếu cần */
-    height: 100%;
-    /* Đảm bảo nút bấm có chiều cao bằng nhóm input */
-    border-radius: 50px;
-    /* Giữ độ bo tròn */
-    border: none;
-    /* Bỏ viền nút bấm nếu cần */
-    background-color: #31D3FF;
-    /* Màu nền của nút bấm */
-    color: white;
-    /* Màu chữ nút bấm */
+@media (min-width: 376px)and (max-width: 990px) {
+    .search-config {
+        margin-left: -1.2rem !important;
+    }
+
+    .sell-config {
+        width: 150px;
+        margin-left: 1.3rem !important;
+        margin-right: 1rem !important;
+    }
+
+    .margin-1rem {
+        margin-left: 1.3rem ;
+    }
 }
 
-.header-icon-list {
-    display: flex;
-    justify-content: space-between;
-}
-
-.header-icon-list ul {
-    display: flex;
-    align-items: center;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    flex-grow: 1;
-}
-
-.header-icon-list li {
-    margin-right: 30px;
-}
-
-.header-icon-list li a {
-    color: #fff;
+@media(min-width: 991px) {
+    .navheight {
+        max-height: 3.5rem !important;
+    }
 }

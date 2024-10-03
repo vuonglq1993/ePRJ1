@@ -5,11 +5,7 @@
     <?php
     session_start();
     $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 0;
-    if (isset($_SESSION['username'])) {
-        echo "Welcome, " . htmlspecialchars($_SESSION['username']) . "!";
-    } else {
-        echo "Welcome, guest!";
-    }
+
     include 'functions/db.php';
     include 'functions/auction.php';
     include 'functions/collection.php';
@@ -39,11 +35,7 @@
     <link rel="stylesheet" href="style/index.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="Components/header.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
-    <link rel="stylesheet" href="Components/header.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
     <link rel="stylesheet" href="Components/footer.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
@@ -60,12 +52,19 @@
             noActionLink(); // Initialize noActionLink
         });
     </script>
+
     <title>Home</title>
 </head>
 
 <body>
     <?php include 'Components/header.php'; ?>
     <main>
+        <?php
+    if (isset($_SESSION['username'])) {
+        echo "Welcome, " . htmlspecialchars($_SESSION['username']) . "!";
+    } else {
+        echo "Welcome, guest!";
+    } ?>
         <!-- Featured content -->
 
         <div id="carouselExampleIndicators" class="carousel slide">
