@@ -26,7 +26,7 @@
     $trendin_data = get_trendin_data($user_id);
     $collection_data = get_collection_data();
     $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
-    $pagination = paginate_auctions($auction_data, 3, $current_page);
+    $pagination = paginate_auctions($auction_data, 3, 1);
     $current_auction_data = $pagination['data'];
     $total_pages = $pagination['total_pages'];
     ?>
@@ -61,58 +61,14 @@
 <body>
     <?php include 'Components/header.php'; ?>
     <main>
-        <!-- <?php
-                if (isset($_SESSION['username'])) {
-                    echo "Welcome, " . htmlspecialchars($_SESSION['username']) . "!";
-                } else {
-                    echo "Welcome, guest!";
-                } ?> -->
         <!-- Featured content -->
 
         <div id="carouselExampleIndicators" class="carousel slide">
-            <!-- 
-            <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
-                    aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
-                    aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
-                    aria-label="Slide 3"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3"
-                    aria-label="Slide 4"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4"
-                    aria-label="Slide 5"></button>
-            </div> -->
-            <?php if ($products) {
-                $first_item1 = true;
-                foreach ($products as $product) {
-                    $image_url = $product['image_url'];
-                    $active_class1 = $first_item1 ? 'active' : '';
-                    $first_item1 = false;
-
-            ?>
-                    <div class="carousel-inner">
-                        <div class="carousel-item <?php echo $active_class1; ?>">
-                            <!-- <img src="<?php echo $image_url; ?>" class="d-block img-fluid w-100 " alt="..."> -->
-                            <img src="images/Banner.jpg" class="d-block img-fluid w-100 " alt="...">
-
-                        </div>
-                    </div>
-            <?php
-                }
-            }
-            ?>
-            <!-- <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
-                data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
-                data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
-            </button>
-        </div> -->
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="images/Banner.jpg" class="d-block img-fluid w-100 " alt="...">
+                </div>
+            </div>
             <!-- Trending -->
             <div class="container mt-5">
                 <div class="row justify-content-center">
