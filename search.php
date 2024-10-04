@@ -54,6 +54,8 @@
                                     $bid_display = "Buyout Price: ";
                                 } elseif (new DateTime() < new DateTime($start_time)) {
                                     $bid_display = "Starting Price: ";
+                                } elseif (new DateTime() > new DateTime($end_time)) {
+                                    $bid_display = "Winning price: ";
                                 } else {
                                     $bid_display = "Current Bid: ";
                                 }

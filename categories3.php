@@ -57,7 +57,7 @@
                     $status = 'Ends in ' . date_diff(new DateTime(), new DateTime($end_time))->format('%d days, %h hours, %i minutes') . '.';
                     $status_end = 'On ' . date('F j, Y g:i a', strtotime($end_time));
                 } else {
-                    $status = 'Ended' . date_diff(new DateTime($end_time), new DateTime())->format('%d days, %h hours, %i minutes') . ' ago.';
+                    $status = 'Ended ' . date_diff(new DateTime($end_time), new DateTime())->format('%d days, %h hours, %i minutes') . ' ago.';
                     $status_end = 'Ended on ' . date('F j, Y g:i a', strtotime($end_time));
                 }
             ?>
@@ -93,7 +93,7 @@
                             <!-- Dropdown for product description -->
                             <div class="my-4 ">
                                 <button class="no-border bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#productDescription" aria-expanded="false" aria-controls="productDescription">
-                                    View Detail <i class="bi bi-caret-down-fill"></i>
+                                    View Detail <i class="bi bi-caret-down-fill" style="font-size: smaller;"></i>
                                 </button>
                                 <div class="collapse" id="productDescription">
                                     <div class="card card-body">
