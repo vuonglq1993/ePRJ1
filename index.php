@@ -59,16 +59,16 @@
 <body>
     <?php include 'Components/header.php'; ?>
     <main>
-        <?php
+        <!-- <?php
     if (isset($_SESSION['username'])) {
         echo "Welcome, " . htmlspecialchars($_SESSION['username']) . "!";
     } else {
         echo "Welcome, guest!";
-    } ?>
+    } ?> -->
         <!-- Featured content -->
 
         <div id="carouselExampleIndicators" class="carousel slide">
-
+<!-- 
             <div class="carousel-indicators">
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
                     aria-current="true" aria-label="Slide 1"></button>
@@ -80,7 +80,7 @@
                     aria-label="Slide 4"></button>
                 <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4"
                     aria-label="Slide 5"></button>
-            </div>
+            </div> -->
             <?php if ($products) {
                 $first_item1 = true;
                 foreach ($products as $product) {
@@ -91,14 +91,16 @@
             ?>
                     <div class="carousel-inner">
                         <div class="carousel-item <?php echo $active_class1; ?>">
-                            <img src="<?php echo $image_url; ?>" class="d-block img-fluid w-100 " alt="...">
+                            <!-- <img src="<?php echo $image_url; ?>" class="d-block img-fluid w-100 " alt="..."> -->
+                            <img src="images/Banner.jpg" class="d-block img-fluid w-100 " alt="...">
+
                         </div>
                     </div>
             <?php
                 }
             }
             ?>
-            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+            <!-- <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
                 data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
@@ -108,7 +110,7 @@
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
             </button>
-        </div>
+        </div> -->
         <!-- Trending -->
         <div class="container mt-5">
             <div class="row justify-content-center">

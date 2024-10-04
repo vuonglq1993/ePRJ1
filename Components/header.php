@@ -16,13 +16,13 @@
             <div class="collapse bg-000022 navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link margin-1rem fc-ffffff ms-1 mt-1" href="categories1.php">Categories</a>
+                        <a class="nav-link margin-1rem fc-ffffff mt-1" href="categories1.php">Categories</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link margin-1rem fc-ffffff ms-1 mt-1" href="#">Popular Artists</a>
+                        <a class="nav-link margin-1rem fc-ffffff mt-1" href="#">Popular Artists</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link margin-1rem fc-ffffff ms-1 mt-1" href="inspire_me.php">Inspire me</a>
+                        <a class="nav-link margin-1rem fc-ffffff mt-1" href="inspire_me.php">Inspire me</a>
                     </li>
                     <li class="nav-item">
                     <form class="d-flex form-config" role="search">
