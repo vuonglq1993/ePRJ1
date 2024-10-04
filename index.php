@@ -722,8 +722,7 @@
                                 </div>
                             </div>
                             <div class="row mt-2">
-
-                                <div class="col-md-6 sm-12">
+                            <div class="col-md-6 sm-12">
                                     <img src="./images/aboutus.jpg" class="img-fluid" alt="" />
 
                                 </div>
@@ -735,6 +734,7 @@
                                     prestige and high responsibility in this intermediary auction work.
                                     </p>
                                 </div>
+
                             </div>
                         </div>
                     </div>
