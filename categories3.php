@@ -38,7 +38,7 @@
 
     <main>
         <!-- Name of the collection -->
-        <div class="row collectionname mt-5 mb-5">
+        <div class="row  collectionname mt-5 mb-5">
             <?php
             if ($product_data) {
                 $product_name = $product_data['product_name'];
@@ -74,7 +74,7 @@
                         <!-- Dropdown for product description -->
                         <div class="my-4 ">
                             <button class="no-border bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#productDescription" aria-expanded="false" aria-controls="productDescription">
-                                View Detail
+                                View Detail <i class="bi bi-caret-down-fill"></i>
                             </button>
                             <div class="collapse" id="productDescription">
                                 <div class="card card-body">
