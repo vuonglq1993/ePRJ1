@@ -56,11 +56,11 @@
                     </li>
                     <?php if(isset($_SESSION['username'])): ?>
                     <li class="nav-item">
-                        <a class="nav-link margin-1rem fc-ffffff ms-1" href="categories1.php"> Hello, <?php echo htmlspecialchars($_SESSION['username']) ?></a>
+                        <a class="nav-link margin-1rem fc-ffffff ms-1" href="categories1.php"> Wellcome, <?php echo htmlspecialchars($_SESSION['username']) ?></a>
                     </li>
                     <?php else: ?>
                     <li class="nav-item">
-                        <a class="nav-link margin-1rem fc-ffffff m-1" href="login.php">Hello, Guest(Log in)</a>
+                        <a class="nav-link margin-1rem fc-ffffff m-1" href="login.php">Wellcome, Guest(Log in)</a>
                     </li>
                     <?php endif; ?>
                     </div>
