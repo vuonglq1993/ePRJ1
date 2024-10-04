@@ -42,7 +42,7 @@
             <?php
             if ($product_data) {
                 $product_name = $product_data['product_name'];
-                $product_description = $product_data['description'];
+                $product_description = $product_data['description'] ? htmlspecialchars($product_data['description']): 'No description available for this product.';
                 $product_image = $product_data['image_url'];
                 $product_detail = $product_data['product_detail']  ? htmlspecialchars($product_data['product_detail']) : 'No details are available for this product.';
                 $product_collection = $product_data['collection_name'] ? htmlspecialchars($product_data['collection_name']) : 'Not in any collection';
