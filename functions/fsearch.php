@@ -2,7 +2,7 @@
     include_once 'db.php';
 function search($searchTerm, $user_id){
     $conn = connect();
-    $sql = "SELECT a.product_id, a.current_bid, a.start_time, a.end_time, p.product_name, p.buyout_price, p.image_url, ul.id AS liked
+    $sql = "SELECT a.product_id, a.current_bid, a.start_time, a.end_time, p.product_id, p.product_name, p.buyout_price, p.image_url, ul.id AS liked
             FROM auctions a
             RIGHT JOIN products p ON a.product_id = p.product_id
             LEFT JOIN user_likes ul ON p.product_id = ul.product_id AND ul.user_id = ?

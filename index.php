@@ -31,7 +31,6 @@
     $current_auction_data = $pagination['data'];
     $total_pages = $pagination['total_pages'];
     ?>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -49,13 +48,12 @@
         crossorigin="anonymous"></script>
     <script src="javascript/index.js"></script>
     <script src="javascript/fav.js"></script>
-    <script src="javascript/norefreshcat.js"></script>  <script>
+    <script>
         // Ensure noActionLink runs after the DOM is fully loaded
         document.addEventListener('DOMContentLoaded', function() {
             noActionLink(); // Initialize noActionLink
         });
     </script>
-
     <title>Home</title>
 </head>
 
@@ -63,7 +61,6 @@
     <?php include 'Components/header.php'; ?>
     <main>
         <!-- Banner -->
-
         <div id="carouselExampleIndicators" class="carousel slide">
             <div class="carousel-inner">
                 <div class="carousel-item active">
@@ -107,8 +104,12 @@
                                             $image_url = $auction['image_url'];
                                             $start_time = $auction['start_time'];
                                             $days_left = caculate_days_left($start_time, $end_time);
-                                            if (new DateTime() < new DateTime($start_time)) {
+                                            if (empty($start_time)) {
+                                                $bid_display = "Buyout Price: ";
+                                            } elseif (new DateTime() < new DateTime($start_time)) {
                                                 $bid_display = "Starting Price: ";
+                                            } elseif (new DateTime() > new DateTime($end_time)) {
+                                                $bid_display = "Highest price: ";
                                             } else {
                                                 $bid_display = "Current Bid: ";
                                             }
@@ -328,7 +329,6 @@
                                                                     d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />
                                                             </svg>
                                                         </a>
-
                                                     </div>
                                                 </div>
                                             </div>
@@ -361,12 +361,10 @@
                                                                     d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />
                                                             </svg>
                                                         </a>
-
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-
                                         <button
                                             class="carousel-control-prev collection-carousel-control-prev"
                                             type="button" data-bs-target="#testimonialCarousel"
@@ -431,6 +429,8 @@
                                                 $bid_display = "Buyout Price: ";
                                             } elseif (new DateTime() < new DateTime($start_time)) {
                                                 $bid_display = "Starting Price: ";
+                                            } elseif (new DateTime() > new DateTime($end_time)) {
+                                                $bid_display = "Highest price: ";
                                             } else {
                                                 $bid_display = "Current Bid: ";
                                             }
@@ -453,8 +453,8 @@
                                                                     </div>
                                                                 </div>
                                                                 <div>
-                                                                    <img src="<?php echo htmlspecialchars($image_url) ?>"
-                                                                        alt="" class="img-fluid">
+                                                                    <a href="categories3.php?product_id=<?php echo htmlspecialchars($product_id) ?>"><img src="<?php echo $image_url ?>" alt="<?php echo htmlspecialchars($product_name) ?>"
+                                                                            class="img-fluid"></a>
                                                                     <div class="row">
                                                                         <div class="col-5 text-start text-dark"
                                                                             style="--bs-text-opacity: .5; font-size: 14px; margin: 4px;">
@@ -464,7 +464,6 @@
                                                                             style="font-size: 16px; margin: 2px;">
                                                                             <?php echo format_price($current_bid) ?>
                                                                         </div>
-
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -504,9 +503,9 @@
                                         <div class="text-center">
                                             <?php
                                             // Hiển thị các nút phân trang
-                                            if ($category_id > 0){
+                                            if ($category_id > 0) {
                                                 for ($i = 1; $i <= $total_pages; $i++) {
-                                                    echo '<a class="text-decoration-none p-1" href="index.php?cat_id=' . htmlspecialchars($category_id) .'&page=' . $i . '" class="btn btn-link">' . $i . '</a> ';
+                                                    echo '<a class="text-decoration-none p-1" href="index.php?cat_id=' . htmlspecialchars($category_id) . '&page=' . $i . '" class="btn btn-link">' . $i . '</a> ';
                                                 }
                                             } else {
                                                 for ($i = 1; $i <= $total_pages; $i++) {
@@ -519,20 +518,10 @@
                                     <div class="row justify-content-center">
                                         <div class="text-center">
                                             <a href="<?php echo $link; ?> " class="btn seeall">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                    height="16" fill="currentColor"
-                                                    class="bi bi-caret-right-fill" viewBox="0 0 16 16">
-                                                    <path
-                                                        d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
-                                                </svg>
+                                                <i class="bi bi-caret-right-fill"></i>
                                                 See
-                                                "<strong><?php echo htmlspecialchars($category_name) ?></strong>"
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                    height="16" fill="currentColor"
-                                                    class="bi bi-caret-left-fill" viewBox="0 0 16 16">
-                                                    <path
-                                                        d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />
-                                                </svg>
+                                                "<strong><?php echo $category_name ?></strong>"
+                                                <i class="bi bi-caret-left-fill"></i>
                                             </a>
                                         </div>
                                     </div>

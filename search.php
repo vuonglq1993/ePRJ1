@@ -6,7 +6,7 @@
     include 'functions/fsearch.php';
     include 'functions/auction.php';
     $search = isset($_GET['search']) ? $_GET['search'] : '';
-    $search_data = search($search,$user_id);
+    $search_data = search($search, $user_id);
     ?>
 
     <meta charset="UTF-8">
@@ -76,8 +76,8 @@
                                                         </div>
                                                     </div>
                                                     <div>
-                                                        <img src="<?php echo $image_url ?>" alt=""
-                                                            class="img-fluid">
+                                                        <a href="categories3.php?product_id=<?php echo htmlspecialchars($product_id) ?>"><img src="<?php echo $image_url ?>" alt="<?php echo htmlspecialchars($product_name) ?>"
+                                                                class="img-fluid"></a>
                                                         <div class="row">
                                                             <div class="col-5 text-start text-dark"
                                                                 style="--bs-text-opacity: .5; font-size: 14px; margin: 4px;">
