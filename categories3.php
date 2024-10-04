@@ -68,20 +68,11 @@
                             <p class="fw-light color666 fs-6">Start from <?php echo htmlspecialchars($formatted_start_time); ?></p>
                         </div>
                         <div class="row">
-                            <p class="fs-4 fw-light color0028BA"><?php echo htmlspecialchars($status); ?></p>
                             <p class="fs-6 fw-light color0028BA"><?php echo htmlspecialchars($status_end); ?></p>
+                            <p class="fs-4 fw-light color0028BA"><?php echo htmlspecialchars($status); ?></p>
                         </div>
-                        <!-- Dropdown for product description -->
                         <div class="my-4 ">
-                            <button class="no-border bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#productDescription" aria-expanded="false" aria-controls="productDescription">
-                                View Detail <i class="bi bi-caret-down-fill"></i>
-                            </button>
-                            <div class="collapse" id="productDescription">
-                                <div class="card card-body">
-                                    <p><?php echo htmlspecialchars($product_detail); ?></p>
-                                </div>
-                            </div>
-                            <div class="mt-3"><?php echo htmlspecialchars($product_description); ?></div>
+                            <div class="mt-3"><?php echo $product_description ?></div>
                         </div>
                     </div>
                 <?php else: ?>
@@ -92,15 +83,7 @@
                         </div>
                             <!-- Dropdown for product description -->
                             <div class="my-4 ">
-                                <button class="no-border bg-white" type="button" data-bs-toggle="collapse" data-bs-target="#productDescription" aria-expanded="false" aria-controls="productDescription">
-                                    View Detail <i class="bi bi-caret-down-fill" style="font-size: smaller;"></i>
-                                </button>
-                                <div class="collapse" id="productDescription">
-                                    <div class="card card-body">
-                                        <p><?php echo htmlspecialchars($product_detail); ?></p>
-                                    </div>
-                                </div>
-                                <div class="mt-3"><?php echo htmlspecialchars($product_description); ?></div>
+                                <div class="mt-3"><?php echo $product_description ?></div>
                             </div>
                     </div>
                 <?php endif; ?>
@@ -110,8 +93,7 @@
                             <img src="<?php echo htmlspecialchars($product_image); ?>" alt="<?php echo htmlspecialchars($product_name); ?>" class="m-5 img-fluid" />
                         </div>
                         <div class="col bg-color p-5">
-                            <p class="fs-3 text-start fw-light"><?php echo htmlspecialchars($product_collection) ?></p>
-                            <p class="fs-3 text-start color666 fw-lighter">Expert in Minerals & Natural History</p>
+                            <p class="fs-3 text-start fw-light"><?php echo htmlspecialchars($product_detail); ?></p>
                         </div>
                     </div>
                 <?php
