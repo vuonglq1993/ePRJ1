@@ -192,7 +192,9 @@
                                 </button>
                             </div>
                         </div>
+                    
                     </div>
+                </div>
                 </div>
                 <!-- Collections -->
                 <div class="container mt-5">
