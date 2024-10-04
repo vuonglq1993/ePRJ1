@@ -25,9 +25,9 @@
                         <a class="nav-link margin-1rem fc-ffffff mt-1" href="inspire_me.php">Inspire me</a>
                     </li>
                     <li class="nav-item">
-                    <form class="d-flex form-config" role="search">
+                    <form action="search.php" method="GET" class="d-flex form-config" role="search">
                         <button class="btn btn-light search-config" type="submit"><i class="bi bi-search"></i></button>
-                        <input class="form-control p-0 me-3 ps-5 input-config" type="search" placeholder="What are you looking for?"
+                        <input class="form-control p-0 me-4 ps-5 input-config" name="search" type="search" placeholder="What are you looking for?"
                             aria-label="Search">
                     </form>
                     </li>
