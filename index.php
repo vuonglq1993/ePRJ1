@@ -522,7 +522,7 @@
                 </div>
             </div>
 
-            <!-- Get insipred section -->
+            <!-- About us section -->
             <div class="container mt-5">
                 <div class="getinspired">
                     <div class="row justify-content-center">
@@ -533,16 +533,17 @@
                                 </div>
                             </div>
                             <div class="row mt-2">
-                            <div class="col-md-6 sm-12">
+                                <div class="col-md-6 sm-12">
                                     <img src="./images/aboutus.jpg" class="img-fluid" alt="" />
 
                                 </div>
                                 <div class="col-md-6 sm-12 border px-5 text-center">
                                     <p class="fs-6 mt-5 pt-5 ">
-                                        BIDSPIRT is an independent auction house with no external shareholders, established
-                                    in 2000 and developed into a professional auction company starting in 2022.</p>
+                                        BIDSPIRT is an independent auction house with no external shareholders,
+                                        established
+                                        in 2000 and developed into a professional auction company starting in 2022.</p>
                                     <p>Aware of customers' trust in us, we are determined to uphold the tradition of
-                                    prestige and high responsibility in this intermediary auction work.
+                                        prestige and high responsibility in this intermediary auction work.
                                     </p>
                                 </div>
 
@@ -607,85 +608,74 @@
             </div> -->
 
             <!-- Email Section -->
-            <div class="row emailsection">
-                <div class="emailform col-md-5 col-sm-11">
-                    <p class="fs-3">Let us inspire you</p>
-                    <p class="fw-lighter">Want to receive exciting antique and lifestyle content,
-                        directly to your inbox?
-                    </p>
-                    <form>
-                        <div class="mb-3 row">
-                            <div class="col-8">
-                                <div class="container">
-                                    <div class="row inputemail">
-                                        <div class="col-1">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
-                                                <path
-                                                    d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1zm13 2.383-4.708 2.825L15 11.105zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741M1 11.105l4.708-2.897L1 5.383z" />
-                                            </svg>
-                                        </div>
-                                        <div class="col-10">
-                                            <input type="email" class="no-border" id="exampleInputEmail1"
-                                                placeholder='Email address'>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-1">
-                                <button type="submit" class="btn btn-primary"><svg xmlns="http://www.w3.org/2000/svg"
-                                        width="21" height="21" fill="currentColor" class="bi bi-caret-right-fill"
-                                        viewBox="0 0 16 16">
-                                        <path
-                                            d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
-                                    </svg></button>
-
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="col-md-7 col-sm-12">
-                    <img src="./images/Inspireme.jpg" class="img-fluid" alt="" />
-                </div>
-            </div>
-
-            <!-- Iconic Brand Section -->
             <div class="container mt-5">
                 <div class="row justify-content-center">
                     <div class="col-11">
                         <div class="row">
-                            <p class="fs-3" style="margin-bottom: 5px;">Sponsored by</p>
+                            <p class="fs-3">Let us inspire you</p>
                         </div>
-                        <div class="row">
-                            <?php foreach ($brands as $brand): ?>
-                                <div class="col-md-2 mt-3 sm-4">
-                                    <img src="<?php echo htmlspecialchars($brand["brand_image"]); ?>" class="img-fluid"
-                                        alt="" />
-                                </div>
-                            <?php endforeach; ?>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                        <div class="row pt-4 pb-3 bg-f5f5f5">
+                            <div class="col-md-6 col-sm-12">
+                                <p class="fs-3 ms-5">Đây là slogan cực mạnh</p>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <form>
+                                    <div class="d-flex mt-1">
+                                        <div class="">
+                                            <div class="mb-3">
+                                                <input type="email" class="form-control email-config"
+                                                    id="exampleFormControlInput1" placeholder="Your email">
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <button type="button"
+                                                class="btn btn-dark ms-2 text-uppercase px-5">Subscribe</button>
 
-            <!-- Download app section  -->
-            <div class="row downloadsection mt-5 mb-5">
-                <div class="downloadapp col-md-5 col-sm-11" style="padding: 3rem" ;>
-                    <p class="fs-2 mt-5">Download the <strong>BIDSPIRIT</strong> app</p>
-                    <p class="fs-5">and discover special object anytime, anywhere</p>
-                    <div class="row mt-5">
-                        <div class="col-md-6 col-sm-12 mb-3">
-                            <a href="#"><img src="./images/Appstore.png" class="img-fluid" alt="" /></a>
-                        </div>
-                        <div class="col-md-6 col-sm-12  mb-3">
-                            <a href="#"><img src="./images/CHplay.png" class="img-fluid" alt="" /></a>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-7 col-sm-12">
-                    <img src="./images/bitspiriticon.jpg" class="img-fluid" alt="" />
+
+                <!-- Iconic Brand Section -->
+                <div class="container mt-5">
+                    <div class="row justify-content-center">
+                        <div class="col-11">
+                            <div class="row">
+                                <p class="fs-3" style="margin-bottom: 5px;">Sponsored by</p>
+                            </div>
+                            <div class="row">
+                                <?php foreach ($brands as $brand): ?>
+                                    <div class="col-md-2 mt-3 sm-4">
+                                        <img src="<?php echo htmlspecialchars($brand["brand_image"]); ?>" class="img-fluid"
+                                            alt="" />
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
+
+                <!-- Download app section  -->
+                <div class="row downloadsection mt-5 mb-5">
+                    <div class="downloadapp col-md-5 col-sm-11" style="padding: 3rem" ;>
+                        <p class="fs-2 mt-5">Download the <strong>BIDSPIRIT</strong> app</p>
+                        <p class="fs-5">and discover special object anytime, anywhere</p>
+                        <div class="row mt-5">
+                            <div class="col-md-6 col-sm-12 mb-3">
+                                <a href="#"><img src="./images/Appstore.png" class="img-fluid" alt="" /></a>
+                            </div>
+                            <div class="col-md-6 col-sm-12  mb-3">
+                                <a href="#"><img src="./images/CHplay.png" class="img-fluid" alt="" /></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-7 col-sm-12">
+                        <img src="./images/bitspiriticon.jpg" class="img-fluid" alt="" />
+                    </div>
+                </div>
     </main>
     <?php include 'Components/footer.php'; ?>
 </body>
