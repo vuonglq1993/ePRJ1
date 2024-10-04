@@ -50,7 +50,7 @@
     <script src="javascript/fav.js"></script>
     <script>
         // Ensure noActionLink runs after the DOM is fully loaded
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             noActionLink(); // Initialize noActionLink
         });
     </script>
@@ -116,7 +116,7 @@
                                             }
                                             $active_class = $first_item ? 'active' : '';
                                             $first_item = false;
-                                            ?>
+                                    ?>
                                             <div class="trending-carousel-item carousel-item <?php echo $active_class ?>">
                                                 <div class="row">
                                                     <div class="col">
@@ -169,15 +169,13 @@
                                                     </div>
                                                     <div class="col-6 text-end">
                                                         <div class="text-dark" style="--bs-text-opacity: .5;">
-
                                                             <p class="m-2">Interesting?</p>
-                                                            <a href="#" class="btn bidbutton me-2">Bid now</a>
-
+                                                            <a href="" class="btn bidbutton me-2">Bid now</a>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <?php
+                                    <?php
                                         }
                                     } else {
                                         echo "<p>No trending items available.</p>";
@@ -424,7 +422,7 @@
                                                 $product_count = $collection['product_count'];
                                                 $active_class = $first_item ? 'active' : '';
                                                 $first_item = false;
-                                                ?>
+                                        ?>
                                                 <div
                                                     class="carousel-item collection-carousel-item ms-1 <?php echo $active_class; ?>">
                                                     <div class="row">
@@ -485,7 +483,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <?php
+                                        <?php
                                             }
                                         } else {
                                             echo "<p>No collections available.</p>";
@@ -577,63 +575,58 @@
                                     jouney!
                                 </p>
                             </div>
-                            <div class="col-9">
-                                <div class="row">
-                                    <?php
-                                    if ($current_auction_data) {
-                                        foreach ($current_auction_data as $auction) {
-                                            $product_id = $auction['product_id'];
-                                            $product_name = $auction['product_name'];
-                                            $current_bid = $auction['current_bid'] ? htmlspecialchars($auction['current_bid']) : htmlspecialchars($auction['buyout_price']);
-                                            $end_time = $auction['end_time'];
-                                            $image_url = $auction['image_url'];
-                                            $start_time = $auction['start_time'];
-                                            $days_left = caculate_days_left($start_time, $end_time);
-                                            if (empty($start_time)) {
-                                                $bid_display = "Buyout Price: ";
-                                            } elseif (new DateTime() < new DateTime($start_time)) {
-                                                $bid_display = "Starting Price: ";
-                                            } elseif (new DateTime() > new DateTime($end_time)) {
-                                                $bid_display = "Highest price: ";
-                                            } else {
-                                                $bid_display = "Current Bid: ";
-                                            }
-                                    ?>
-                                            <div class="col-sm-12 col-md-6 col-lg-4">
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <div class="card p-2">
-                                                            <div class="card-body">
-                                                                <div class="d-flex justify-content-between">
-                                                                    <div class="p-2"></div>
-                                                                    <div class="p-2"><?php echo $days_left ?>
-                                                                    </div>
-                                                                    <div class="p-2">
-                                                                        <a href="#" class="no-action" data-product-id="<?php echo $product_id; ?>"
-                                                                            method="post"
-                                                                            onclick="toggleLike(this)">
-                                                                            <i class="bi <?php echo $auction['liked'] ? 'bi-heart-fill' : 'bi-heart'; ?>"></i>
-                                                                        </a>
-                                                                    </div>
+                        </div>
+                    </div>
+                    <div class="row  justify-content-center">
+                        <div class="col-2">
+                            <?php foreach ($categories as $category): ?>
+                                <p class="ms-2 mb-3"><a href="index.php?cat_id=<?php echo $category['category_id'] ?>"
+                                        class="link-body-emphasis link-offset-2 link-underline-opacity-0 link-opacity-25 link-underline-opacity-0-hover">
+                                        <?php echo htmlspecialchars($category['category_name']) ?>
+                                    </a></p>
+                            <?php endforeach; ?>
+                        </div>
+                        <div class="col-9">
+                            <div class="row">
+                                <?php
+                                if ($current_auction_data) {
+                                    foreach ($current_auction_data as $auction) {
+                                        $product_id = $auction['product_id'];
+                                        $product_name = $auction['product_name'];
+                                        $current_bid = $auction['current_bid'] ? htmlspecialchars($auction['current_bid']) : htmlspecialchars($auction['buyout_price']);
+                                        $end_time = $auction['end_time'];
+                                        $image_url = $auction['image_url'];
+                                        $start_time = $auction['start_time'];
+                                        $days_left = caculate_days_left($start_time, $end_time);
+                                        if (empty($start_time)) {
+                                            $bid_display = "Buyout Price: ";
+                                        } elseif (new DateTime() < new DateTime($start_time)) {
+                                            $bid_display = "Starting Price: ";
+                                        } else {
+                                            $bid_display = "Current Bid: ";
+                                        }
+                                ?>
+                                        <div class="col-sm-12 col-md-6 col-lg-4">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="card p-2">
+                                                        <div class="card-body">
+                                                            <div class="d-flex justify-content-between">
+                                                                <div class="p-2"></div>
+                                                                <div class="p-2"><?php echo $days_left ?>
                                                                 </div>
-                                                                <div>
-                                                                    <a href="categories3.php?product_id=<?php echo htmlspecialchars($product_id) ?>"><img src="<?php echo $image_url ?>" alt="<?php echo htmlspecialchars($product_name) ?>"
-                                                                            class="img-fluid"></a>
-                                                                    <div class="row">
-                                                                        <div class="col-5 text-start text-dark"
-                                                                            style="--bs-text-opacity: .5; font-size: 14px; margin: 4px;">
-                                                                            <?php echo $bid_display ?>
-                                                                        </div>
-                                                                        <div class="col-4 text-start"
-                                                                            style="font-size: 16px; margin: 2px;">
-                                                                            <?php echo format_price($current_bid) ?>
-                                                                        </div>
-                                                                    </div>
+                                                                <div class="p-2">
+                                                                    <a href="#" class="no-action"
+                                                                        data-product-id="<?php echo $product_id; ?>"
+                                                                        method="post" onclick="toggleLike(this)">
+                                                                        <i
+                                                                            class="bi <?php echo $auction['liked'] ? 'bi-heart-fill' : 'bi-heart'; ?>"></i>
+                                                                    </a>
                                                                 </div>
                                                             </div>
                                                             <div>
-                                                                <img src="<?php echo htmlspecialchars($image_url) ?>" alt=""
-                                                                    class="img-fluid">
+                                                                <a href="categories3.php?product_id=<?php echo htmlspecialchars($product_id) ?>"><img src="<?php echo $image_url ?>" alt="<?php echo htmlspecialchars($product_name) ?>"
+                                                                        class="img-fluid"></a>
                                                                 <div class="row">
                                                                     <div class="col-5 text-start text-dark"
                                                                         style="--bs-text-opacity: .5; font-size: 14px; margin: 4px;">
@@ -661,7 +654,6 @@
                                                     </div>
                                                     <div class="col-6 text-end">
                                                         <div class="text-dark" style="--bs-text-opacity: .5;">
-
                                                             <p class="m-2">Interesting?</p>
                                                             <a href="#" class="btn bidbutton me-2">Bid
                                                                 now</a>
@@ -671,21 +663,19 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <?php
+                                <?php
                                     }
-                                    ?>
-                                    <div class="row mb-3">
-                                        <div class="text-center">
-                                            <?php
-                                            // Hiển thị các nút phân trang
-                                            if ($category_id > 0) {
-                                                for ($i = 1; $i <= $total_pages; $i++) {
-                                                    echo '<a class="text-decoration-none p-1" href="index.php?cat_id=' . htmlspecialchars($category_id) . '&page=' . $i . '" class="btn btn-link">' . $i . '</a> ';
-                                                }
-                                            } else {
-                                                for ($i = 1; $i <= $total_pages; $i++) {
-                                                    echo '<a class="text-decoration-none p-1" href="?page=' . $i . '" class="btn btn-link">' . $i . '</a> ';
-                                                }
+                                } else {
+                                    echo "<p>No auction items available.</p>";
+                                }
+                                ?>
+                                <div class="row mb-3">
+                                    <div class="text-center">
+                                        <?php
+                                        // Hiển thị các nút phân trang
+                                        if ($category_id > 0) {
+                                            for ($i = 1; $i <= $total_pages; $i++) {
+                                                echo '<a class="text-decoration-none p-1" href="index.php?cat_id=' . htmlspecialchars($category_id) . '&page=' . $i . '" class="btn btn-link">' . $i . '</a> ';
                                             }
                                         } else {
                                             for ($i = 1; $i <= $total_pages; $i++) {
@@ -694,15 +684,15 @@
                                         }
                                         ?>
                                     </div>
-                                    <div class="row justify-content-center">
-                                        <div class="text-center">
-                                            <a href="<?php echo $link; ?> " class="btn seeall">
-                                                <i class="bi bi-caret-right-fill"></i>
-                                                See
-                                                "<strong><?php echo $category_name ?></strong>"
-                                                <i class="bi bi-caret-left-fill"></i>
-                                            </a>
-                                        </div>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <div class="text-center">
+                                        <a href="<?php echo $link; ?> " class="btn seeall">
+                                            <i class="bi bi-caret-right-fill"></i>
+                                            See
+                                            "<strong><?php echo $category_name ?></strong>"
+                                            <i class="bi bi-caret-left-fill"></i>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -722,16 +712,16 @@
                                 </div>
                             </div>
                             <div class="row mt-2">
-                            <div class="col-md-6 sm-12">
+                                <div class="col-md-6 sm-12">
                                     <img src="./images/aboutus.jpg" class="img-fluid" alt="" />
 
                                 </div>
                                 <div class="col-md-6 sm-12 border px-5 text-center">
                                     <p class="fs-6 mt-5 pt-5 ">
                                         BIDSPIRT is an independent auction house with no external shareholders, established
-                                    in 2000 and developed into a professional auction company starting in 2022.</p>
+                                        in 2000 and developed into a professional auction company starting in 2022.</p>
                                     <p>Aware of customers' trust in us, we are determined to uphold the tradition of
-                                    prestige and high responsibility in this intermediary auction work.
+                                        prestige and high responsibility in this intermediary auction work.
                                     </p>
                                 </div>
 
