@@ -49,7 +49,7 @@
         crossorigin="anonymous"></script>
     <script src="javascript/index.js"></script>
     <script src="javascript/fav.js"></script>
-    <script>
+    <script src="javascript/norefreshcat.js"></script>  <script>
         // Ensure noActionLink runs after the DOM is fully loaded
         document.addEventListener('DOMContentLoaded', function() {
             noActionLink(); // Initialize noActionLink
@@ -135,7 +135,7 @@
                                                                 </div>
                                                                 <div>
                                                                     <a href="categories3.php?product_id=<?php echo htmlspecialchars($product_id) ?>"><img src="<?php echo $image_url ?>" alt="<?php echo htmlspecialchars($product_name) ?>"
-                                                                    class="img-fluid"></a>
+                                                                            class="img-fluid"></a>
                                                                     <div class="row">
                                                                         <div class="col-5 text-start text-dark"
                                                                             style="--bs-text-opacity: .5; font-size: 14px; margin: 4px;">
@@ -504,8 +504,14 @@
                                         <div class="text-center">
                                             <?php
                                             // Hiển thị các nút phân trang
-                                            for ($i = 1; $i <= $total_pages; $i++) {
-                                                echo '<a class="text-decoration-none p-1" href="?page=' . $i . '" class="btn btn-link">' . $i . '</a> ';
+                                            if ($category_id > 0){
+                                                for ($i = 1; $i <= $total_pages; $i++) {
+                                                    echo '<a class="text-decoration-none p-1" href="index.php?cat_id=' . htmlspecialchars($category_id) .'&page=' . $i . '" class="btn btn-link">' . $i . '</a> ';
+                                                }
+                                            } else {
+                                                for ($i = 1; $i <= $total_pages; $i++) {
+                                                    echo '<a class="text-decoration-none p-1" href="?page=' . $i . '" class="btn btn-link">' . $i . '</a> ';
+                                                }
                                             }
                                             ?>
                                         </div>
