@@ -62,12 +62,12 @@
 <body>
     <?php include 'Components/header.php'; ?>
     <main>
-        <!-- Featured content -->
+        <!-- Banner -->
 
         <div id="carouselExampleIndicators" class="carousel slide">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img src="images/Banner.jpg" class="d-block img-fluid w-100 " alt="...">
+                    <img src="images/2.jpg" class="d-block img-fluid w-100 " alt="...">
                 </div>
             </div>
             <!-- Trending -->
@@ -84,8 +84,8 @@
                                         all trending</a></p>
                             </div>
                         </div>
-                        <div class="text-dark ps-4" style="--bs-text-opacity: .5;">
-                            <p class="fs-6">Our online gallery favorites. Don't miss your chance - <strong>Shop
+                        <div class="ps-2">
+                            <p class="fc-c7c7c7 fs-6">Our online gallery favorites. Don't miss your chance - <strong>Shop
                                     now!</strong>
                             </p>
                         </div>
@@ -675,7 +675,7 @@
                         </form>
                     </div>
                     <div class="col-md-7 col-sm-12">
-                        <img src="./images/1.jpg" class="img-fluid" alt="" />
+                        <img src="./images/Inspireme.jpg" class="img-fluid" alt="" />
                     </div>
                 </div>
 

@@ -5,8 +5,11 @@ main{
   overflow: hidden;
 }
 
+.fc-c7c7c7{
+  color: #C7C7C7;
+}
 .trending .bidbutton, .navigating .bidbutton{
-    background-color: rgb(0, 162, 255);
+    background-color: #31D3FF !important;
     border-radius: 2rem;
     color: white;
     margin-top: 1px;

@@ -27,13 +27,13 @@
                     <li class="nav-item">
                     <form class="d-flex form-config" role="search">
                         <button class="btn btn-light search-config" type="submit"><i class="bi bi-search"></i></button>
-                        <input class="form-control p-0 me-4 ps-5 input-config" type="search" placeholder="What are you looking for?"
+                        <input class="form-control p-0 me-3 ps-5 input-config" type="search" placeholder="What are you looking for?"
                             aria-label="Search">
                     </form>
                     </li>
                     <div class="d-flex">
 
-                    <a class="btn btn-primary pt-0 pb-1 bg-31D3FF me-3 sell-config" href="#" role="button">Sell my Art</a>
+                    <a class="btn btn-primary py-1 px-4 bg-31D3FF me-3 sell-config" href="#" role="button">Sell my Art</a>
                     <li class="nav-item  ms-1">
                         <div>
                             
@@ -60,7 +60,7 @@
                     </li>
                     <?php else: ?>
                     <li class="nav-item">
-                        <a class="nav-link margin-1rem fc-ffffff ms-1" href="login.php">Hello, Guest(Log in)</a>
+                        <a class="nav-link margin-1rem fc-ffffff m-1" href="login.php">Hello, Guest(Log in)</a>
                     </li>
                     <?php endif; ?>
                     </div>
