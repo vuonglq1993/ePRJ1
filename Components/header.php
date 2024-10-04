@@ -1,9 +1,9 @@
-<!-- <?php 
+<?php 
     $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : '';
     include_once 'functions/db.php';
     include_once 'functions/fav_collectf.php';
     $fav_count = count_fav_data($user_id);  
-?> -->
+?>
 <header>
 <nav class="navbar navheight navbar-expand-lg bg-000022">
         <div class="container-fluid mt-1">
@@ -36,12 +36,14 @@
                     <a class="btn btn-primary pt-0 pb-1 bg-31D3FF me-3 sell-config" href="#" role="button">Sell my Art</a>
                     <li class="nav-item  ms-1">
                         <div>
+                            
                         <a class="nav-link d-flex fc-ffffff"  href="fav_obj.php">
                             <i class="bi bi-heart-fill" style="font-size: 1.5rem;"></i>
-                            <span class="badge countposition bg-31D3FF rounded-pill" style="width: 40%; font-size: 0.5rem; height: 40%;">1</span>
+                            <span class="badge countposition bg-31D3FF rounded-pill" style="width: 40%; font-size: 0.5rem; height: 40%;"><?php echo htmlspecialchars($fav_count) ?></span>
 
 
                     </a>
+                    
                     </div>
                     </li>
 
@@ -52,9 +54,15 @@
 
                         </a>
                     </li>
+                    <?php if(isset($_SESSION['username'])): ?>
                     <li class="nav-item">
-                        <a class="nav-link margin-1rem fc-ffffff ms-1" href="categories1.php">Welcome, guest!(log in)</a>
+                        <a class="nav-link margin-1rem fc-ffffff ms-1" href="categories1.php"> Hello, <?php echo htmlspecialchars($_SESSION['username']) ?></a>
                     </li>
+                    <?php else: ?>
+                    <li class="nav-item">
+                        <a class="nav-link margin-1rem fc-ffffff ms-1" href="login.php">Hello, Guest(Log in)</a>
+                    </li>
+                    <?php endif; ?>
                     </div>
                 </ul>
 

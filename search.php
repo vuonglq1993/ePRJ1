@@ -45,12 +45,14 @@
                             foreach ($search_data as $auction) {
                                 $product_id = $auction['product_id'];
                                 $image_url = $auction['image_url'];
-                                $current_bid = $auction['current_bid'];
+                                $current_bid = $auction['current_bid'] ? htmlspecialchars($auction['current_bid']) : htmlspecialchars($auction['buyout_price']);
                                 $start_time = $auction['start_time'];
                                 $end_time = $auction['end_time'];
                                 $days_left = caculate_days_left_search($start_time, $end_time);
                                 $product_name = $auction['product_name'];
-                                if (new DateTime() < new DateTime($start_time)) {
+                                if (empty($start_time)) {
+                                    $bid_display = "Buyout Price: ";
+                                } elseif (new DateTime() < new DateTime($start_time)) {
                                     $bid_display = "Starting Price: ";
                                 } else {
                                     $bid_display = "Current Bid: ";
