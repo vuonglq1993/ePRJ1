@@ -49,9 +49,10 @@
         crossorigin="anonymous"></script>
     <script src="javascript/index.js"></script>
     <script src="javascript/fav.js"></script>
-    <script src="javascript/norefreshcat.js"></script>  <script>
+    <script src="javascript/norefreshcat.js"></script>
+    <script>
         // Ensure noActionLink runs after the DOM is fully loaded
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             noActionLink(); // Initialize noActionLink
         });
     </script>
@@ -85,7 +86,8 @@
                             </div>
                         </div>
                         <div class="ps-2">
-                            <p class="fc-c7c7c7 fs-6">Our online gallery favorites. Don't miss your chance - <strong>Shop
+                            <p class="fc-c7c7c7 fs-6">Our online gallery favorites. Don't miss your chance -
+                                <strong>Shop
                                     now!</strong>
                             </p>
                         </div>
@@ -114,9 +116,8 @@
                                             }
                                             $active_class = $first_item ? 'active' : '';
                                             $first_item = false;
-                                    ?>
-                                            <div
-                                                class="trending-carousel-item carousel-item <?php echo $active_class ?>">
+                                            ?>
+                                            <div class="trending-carousel-item carousel-item <?php echo $active_class ?>">
                                                 <div class="row">
                                                     <div class="col">
                                                         <div class="card p-2">
@@ -126,15 +127,19 @@
                                                                     <div class="p-2"><?php echo $days_left ?>
                                                                     </div>
                                                                     <div class="p-2">
-                                                                        <a href="#" class="no-action" data-product-id="<?php echo $product_id; ?>"
-                                                                            method="post"
-                                                                            onclick="toggleLike(this)">
-                                                                            <i class="bi <?php echo $auction['liked'] ? 'bi-heart-fill' : 'bi-heart'; ?>"></i>
+                                                                        <a href="#" class="no-action"
+                                                                            data-product-id="<?php echo $product_id; ?>"
+                                                                            method="post" onclick="toggleLike(this)">
+                                                                            <i
+                                                                                class="bi <?php echo $auction['liked'] ? 'bi-heart-fill' : 'bi-heart'; ?>"></i>
                                                                         </a>
                                                                     </div>
                                                                 </div>
                                                                 <div>
-                                                                    <a href="categories3.php?product_id=<?php echo htmlspecialchars($product_id) ?>"><img src="<?php echo $image_url ?>" alt="<?php echo htmlspecialchars($product_name) ?>"
+                                                                    <a
+                                                                        href="categories3.php?product_id=<?php echo htmlspecialchars($product_id) ?>"><img
+                                                                            src="<?php echo $image_url ?>"
+                                                                            alt="<?php echo htmlspecialchars($product_name) ?>"
                                                                             class="img-fluid"></a>
                                                                     <div class="row">
                                                                         <div class="col-5 text-start text-dark"
@@ -155,7 +160,8 @@
                                                 <div class="row">
                                                     <div class="col-6 text-start">
                                                         <p class="m-2">
-                                                            <?php echo htmlspecialchars($product_name) ?></p>
+                                                            <?php echo htmlspecialchars($product_name) ?>
+                                                        </p>
                                                         <div class="text-dark" style="--bs-text-opacity: .5;">
                                                             <p class="m-2">Acrilyc, Sand on Canvas</p>
                                                             <p class="m-2">90x70cm</p>
@@ -171,558 +177,523 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                    <?php
+                                            <?php
                                         }
                                     } else {
                                         echo "<p>No trending items available.</p>";
                                     }
                                     ?>
                                 </div>
-                                <button class="carousel-control-prev trending-carousel-control-prev"
-                                    type="button" data-bs-target="#testimonialCarousel"
-                                    data-bs-slide="prev">
+                                <button class="carousel-control-prev trending-carousel-control-prev" type="button"
+                                    data-bs-target="#testimonialCarousel" data-bs-slide="prev">
                                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                     <span class="visually-hidden">Previous</span>
                                 </button>
-                                <button class="carousel-control-next trending-carousel-control-next"
-                                    type="button" data-bs-target="#testimonialCarousel"
-                                    data-bs-slide="next">
+                                <button class="carousel-control-next trending-carousel-control-next" type="button"
+                                    data-bs-target="#testimonialCarousel" data-bs-slide="next">
                                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                     <span class="visually-hidden">Next</span>
                                 </button>
                             </div>
                         </div>
-                    
+
                     </div>
                 </div>
-                </div>
-                <!-- Collections -->
-                <div class="container mt-5">
-                    <div class="row justify-content-center">
-                        <div class="col-11">
-                            <div class="row justify-content-center">
-                                <div class="d-flex flex-row">
-                                    <div class="p-2">
-                                        <p class="fs-3">Buy anything that matches your style</p>
-                                    </div>
-                                    <div class="p-2 mt-3">
-                                        <p><a href="#"
-                                                class="link-body-emphasis link-offset-2 link-underline-opacity-25 link-opacity-25 link-underline-opacity-75-hover">See
-                                                all collections</a></p>
-                                    </div>
-                                </div>
-                                <div class="text-dark ps-4" style="--bs-text-opacity: .5;">
-                                    <p class="fs-6 ">Discover our curation for sale
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="row mt-5">
-                                <div class="collections">
-                                    <div id="carouselExampleIndicators" class="carousel">
-                                        <div class="carousel-inner collection-carousel-inner">
-                                            <?php
-                                            if ($collection_data) {
-                                                $first_item = true;
-                                                foreach ($collection_data as $collection) {
-                                                    $image_url = $collection['images'];
-                                                    $collection_name = $collection['collection_name'];
-                                                    $collection_desc = $collection['collection_desc'];
-                                                    $product_count = $collection['product_count'];
-                                                    $active_class = $first_item ? 'active' : '';
-                                                    $first_item = false;
-                                            ?>
-                                                    <div
-                                                        class="carousel-item collection-carousel-item ms-1 <?php echo $active_class; ?>">
-                                                        <div class="row">
-                                                            <img src="images/1.jpg" alt="" class="img-fluid"
-                                                                class="img-fluid" />
-                                                            <div class="col-6 text-start text-dark">
-                                                                <p style="font-size: 13px;"><strong><?php echo strtoupper(htmlspecialchars($collection_name)) ?></strong><br><?php echo htmlspecialchars($product_count) ?> Objects</p>
-                                                            </div>
-                                                            <div class="row text-center">
-                                                                <a href="#" class="text-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
-                                                                    style="font-size: 14px;" href="#">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                                                        width="16" height="16"
-                                                                        fill="currentColor"
-                                                                        class="bi bi-caret-right-fill"
-                                                                        viewBox="0 0 16 16">
-                                                                        <path
-                                                                            d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
-                                                                    </svg> Discover all <svg
-                                                                        xmlns="http://www.w3.org/2000/svg"
-                                                                        width="16" height="16"
-                                                                        fill="currentColor"
-                                                                        class="bi bi-caret-left-fill"
-                                                                        viewBox="0 0 16 16">
-                                                                        <path
-                                                                            d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />
-                                                                    </svg>
-                                                                </a>
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div
-                                                        class="carousel-item collection-carousel-item ms-1 <?php echo $active_class; ?>">
-                                                        <div class="row">
-                                                            <img src="images/1.jpg" alt="" class="img-fluid"
-                                                                class="img-fluid" />
-                                                            <div class="col-6 text-start text-dark">
-                                                                <p style="font-size: 13px;"><strong><?php echo strtoupper(htmlspecialchars($collection_name)) ?></strong><br><?php echo htmlspecialchars($product_count) ?> Objects</p>
-                                                            </div>
-                                                            <div class="row text-center">
-                                                                <a href="#" class="text-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
-                                                                    style="font-size: 14px;" href="#">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                                                        width="16" height="16"
-                                                                        fill="currentColor"
-                                                                        class="bi bi-caret-right-fill"
-                                                                        viewBox="0 0 16 16">
-                                                                        <path
-                                                                            d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
-                                                                    </svg> Discover all <svg
-                                                                        xmlns="http://www.w3.org/2000/svg"
-                                                                        width="16" height="16"
-                                                                        fill="currentColor"
-                                                                        class="bi bi-caret-left-fill"
-                                                                        viewBox="0 0 16 16">
-                                                                        <path
-                                                                            d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />
-                                                                    </svg>
-                                                                </a>
-
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                            <?php
-                                                }
-                                            } else {
-                                                echo "<p>No collections available.</p>";
-                                            }
-                                            ?>
-                                            <div class="carousel-item collection-carousel-item ms-1">
-                                                <div class="row">
-                                                    <img src="images/1.jpg" alt="" class="img-fluid"
-                                                        class="img-fluid" />
-                                                    <div class="col-6 text-start text-dark">
-                                                        <p style="font-size: 13px;"><strong>ARTWORKS NEW
-                                                                COLLECTIONS
-                                                                2024</strong><br>35 Objects</p>
-                                                    </div>
-                                                    <div class="row text-center">
-                                                        <a class="text-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
-                                                            style="font-size: 14px;" href="#">
-                                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                                width="16" height="16"
-                                                                fill="currentColor"
-                                                                class="bi bi-caret-right-fill"
-                                                                viewBox="0 0 16 16">
-                                                                <path
-                                                                    d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
-                                                            </svg> Discover all <svg
-                                                                xmlns="http://www.w3.org/2000/svg"
-                                                                width="16" height="16"
-                                                                fill="currentColor"
-                                                                class="bi bi-caret-left-fill"
-                                                                viewBox="0 0 16 16">
-                                                                <path
-                                                                    d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />
-                                                            </svg>
-                                                        </a>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="carousel-item collection-carousel-item ms-1">
-                                                <div class="row">
-                                                    <img src="images/1.jpg" alt="" class="img-fluid"
-                                                        class="img-fluid" />
-                                                    <div class="col-6 text-start text-dark">
-                                                        <p style="font-size: 13px;"><strong>ARTWORKS NEW
-                                                                COLLECTIONS
-                                                                2024</strong><br>35 Objects</p>
-                                                    </div>
-                                                    <div class="row text-center">
-                                                        <a class="text-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
-                                                            style="font-size: 14px;" href="#">
-                                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                                width="16" height="16"
-                                                                fill="currentColor"
-                                                                class="bi bi-caret-right-fill"
-                                                                viewBox="0 0 16 16">
-                                                                <path
-                                                                    d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
-                                                            </svg> Discover all <svg
-                                                                xmlns="http://www.w3.org/2000/svg"
-                                                                width="16" height="16"
-                                                                fill="currentColor"
-                                                                class="bi bi-caret-left-fill"
-                                                                viewBox="0 0 16 16">
-                                                                <path
-                                                                    d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />
-                                                            </svg>
-                                                        </a>
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <button
-                                            class="carousel-control-prev collection-carousel-control-prev"
-                                            type="button" data-bs-target="#testimonialCarousel"
-                                            data-bs-slide="prev">
-                                            <span class="carousel-control-prev-icon"
-                                                aria-hidden="true"></span>
-                                            <span class="visually-hidden">Previous</span>
-                                        </button>
-                                        <button
-                                            class="carousel-control-next collection-carousel-control-next"
-                                            type="button" data-bs-target="#testimonialCarousel"
-                                            data-bs-slide="next">
-                                            <span class="carousel-control-next-icon"
-                                                aria-hidden="true"></span>
-                                            <span class="visually-hidden">Next</span>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Navigate -->
-                <div class="container mt-5">
-                    <div class="navigating">
+            </div>
+            <!-- Collections -->
+            <div class="container mt-5">
+                <div class="row justify-content-center">
+                    <div class="col-11">
                         <div class="row justify-content-center">
-                            <div class="col-11">
-                                <p class="fs-3" style="margin-bottom: 1px;">What are you looking for?
+                            <div class="d-flex flex-row">
+                                <div class="p-2">
+                                    <p class="fs-3">Buy anything that matches your style</p>
+                                </div>
+                                <div class="p-2 mt-3">
+                                    <p><a href="#"
+                                            class="link-body-emphasis link-offset-2 link-underline-opacity-25 link-opacity-25 link-underline-opacity-75-hover">See
+                                            all collections</a></p>
+                                </div>
+                            </div>
+                            <div class="text-dark ps-4" style="--bs-text-opacity: .5;">
+                                <p class="fs-6 ">Discover our curation for sale
                                 </p>
-                                <div class="text-dark" style="--bs-text-opacity: .5;">
-                                    <p class="fs-6">Navigate through our most searched topics in our
-                                        online gallery to start
-                                        your
-                                        jouney!
-                                    </p>
+                            </div>
+                        </div>
+                        <div class="row mt-5">
+                            <div class="collections">
+                                <div id="carouselExampleIndicators" class="carousel">
+                                    <div class="carousel-inner collection-carousel-inner">
+                                        <?php
+                                        if ($collection_data) {
+                                            $first_item = true;
+                                            foreach ($collection_data as $collection) {
+                                                $image_url = $collection['images'];
+                                                $collection_name = $collection['collection_name'];
+                                                $collection_desc = $collection['collection_desc'];
+                                                $product_count = $collection['product_count'];
+                                                $active_class = $first_item ? 'active' : '';
+                                                $first_item = false;
+                                                ?>
+                                                <div
+                                                    class="carousel-item collection-carousel-item ms-1 <?php echo $active_class; ?>">
+                                                    <div class="row">
+                                                        <img src="images/1.jpg" alt="" class="img-fluid" class="img-fluid" />
+                                                        <div class="col-6 text-start text-dark">
+                                                            <p style="font-size: 13px;">
+                                                                <strong><?php echo strtoupper(htmlspecialchars($collection_name)) ?></strong><br><?php echo htmlspecialchars($product_count) ?>
+                                                                Objects</p>
+                                                        </div>
+                                                        <div class="row text-center">
+                                                            <a href="#"
+                                                                class="text-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
+                                                                style="font-size: 14px;" href="#">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                                    fill="currentColor" class="bi bi-caret-right-fill"
+                                                                    viewBox="0 0 16 16">
+                                                                    <path
+                                                                        d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
+                                                                </svg> Discover all <svg xmlns="http://www.w3.org/2000/svg"
+                                                                    width="16" height="16" fill="currentColor"
+                                                                    class="bi bi-caret-left-fill" viewBox="0 0 16 16">
+                                                                    <path
+                                                                        d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />
+                                                                </svg>
+                                                            </a>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div
+                                                    class="carousel-item collection-carousel-item ms-1 <?php echo $active_class; ?>">
+                                                    <div class="row">
+                                                        <img src="images/1.jpg" alt="" class="img-fluid" class="img-fluid" />
+                                                        <div class="col-6 text-start text-dark">
+                                                            <p style="font-size: 13px;">
+                                                                <strong><?php echo strtoupper(htmlspecialchars($collection_name)) ?></strong><br><?php echo htmlspecialchars($product_count) ?>
+                                                                Objects</p>
+                                                        </div>
+                                                        <div class="row text-center">
+                                                            <a href="#"
+                                                                class="text-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
+                                                                style="font-size: 14px;" href="#">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                                    fill="currentColor" class="bi bi-caret-right-fill"
+                                                                    viewBox="0 0 16 16">
+                                                                    <path
+                                                                        d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
+                                                                </svg> Discover all <svg xmlns="http://www.w3.org/2000/svg"
+                                                                    width="16" height="16" fill="currentColor"
+                                                                    class="bi bi-caret-left-fill" viewBox="0 0 16 16">
+                                                                    <path
+                                                                        d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />
+                                                                </svg>
+                                                            </a>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <?php
+                                            }
+                                        } else {
+                                            echo "<p>No collections available.</p>";
+                                        }
+                                        ?>
+                                        <div class="carousel-item collection-carousel-item ms-1">
+                                            <div class="row">
+                                                <img src="images/1.jpg" alt="" class="img-fluid" class="img-fluid" />
+                                                <div class="col-6 text-start text-dark">
+                                                    <p style="font-size: 13px;"><strong>ARTWORKS NEW
+                                                            COLLECTIONS
+                                                            2024</strong><br>35 Objects</p>
+                                                </div>
+                                                <div class="row text-center">
+                                                    <a class="text-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
+                                                        style="font-size: 14px;" href="#">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                            fill="currentColor" class="bi bi-caret-right-fill"
+                                                            viewBox="0 0 16 16">
+                                                            <path
+                                                                d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
+                                                        </svg> Discover all <svg xmlns="http://www.w3.org/2000/svg"
+                                                            width="16" height="16" fill="currentColor"
+                                                            class="bi bi-caret-left-fill" viewBox="0 0 16 16">
+                                                            <path
+                                                                d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />
+                                                        </svg>
+                                                    </a>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="carousel-item collection-carousel-item ms-1">
+                                            <div class="row">
+                                                <img src="images/1.jpg" alt="" class="img-fluid" class="img-fluid" />
+                                                <div class="col-6 text-start text-dark">
+                                                    <p style="font-size: 13px;"><strong>ARTWORKS NEW
+                                                            COLLECTIONS
+                                                            2024</strong><br>35 Objects</p>
+                                                </div>
+                                                <div class="row text-center">
+                                                    <a class="text-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
+                                                        style="font-size: 14px;" href="#">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                            fill="currentColor" class="bi bi-caret-right-fill"
+                                                            viewBox="0 0 16 16">
+                                                            <path
+                                                                d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
+                                                        </svg> Discover all <svg xmlns="http://www.w3.org/2000/svg"
+                                                            width="16" height="16" fill="currentColor"
+                                                            class="bi bi-caret-left-fill" viewBox="0 0 16 16">
+                                                            <path
+                                                                d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />
+                                                        </svg>
+                                                    </a>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <button class="carousel-control-prev collection-carousel-control-prev" type="button"
+                                        data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Previous</span>
+                                    </button>
+                                    <button class="carousel-control-next collection-carousel-control-next" type="button"
+                                        data-bs-target="#testimonialCarousel" data-bs-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Next</span>
+                                    </button>
                                 </div>
                             </div>
                         </div>
-                        <div class="row  justify-content-center">
-                            <div class="col-2">
-                                <?php foreach ($categories as $category): ?>
-                                    <p class="ms-2 mb-3"><a
-                                            href="index.php?cat_id=<?php echo $category['category_id'] ?>"
-                                            class="link-body-emphasis link-offset-2 link-underline-opacity-0 link-opacity-25 link-underline-opacity-0-hover">
-                                            <?php echo htmlspecialchars($category['category_name']) ?>
-                                        </a></p>
-                                <?php endforeach; ?>
+                    </div>
+                </div>
+            </div>
+            <!-- Navigate -->
+            <div class="container mt-5">
+                <div class="navigating">
+                    <div class="row justify-content-center">
+                        <div class="col-11">
+                            <p class="fs-3" style="margin-bottom: 1px;">What are you looking for?
+                            </p>
+                            <div class="text-dark" style="--bs-text-opacity: .5;">
+                                <p class="fs-6">Navigate through our most searched topics in our
+                                    online gallery to start
+                                    your
+                                    jouney!
+                                </p>
                             </div>
-                            <div class="col-9">
-                                <div class="row">
-                                    <?php
-                                    if ($current_auction_data) {
-                                        foreach ($current_auction_data as $auction) {
-                                            $product_id = $auction['product_id'];
-                                            $product_name = $auction['product_name'];
-                                            $current_bid = $auction['current_bid'] ? htmlspecialchars($auction['current_bid']) : htmlspecialchars($auction['buyout_price']);
-                                            $end_time = $auction['end_time'];
-                                            $image_url = $auction['image_url'];
-                                            $start_time = $auction['start_time'];
-                                            $days_left = caculate_days_left($start_time, $end_time);
-                                            if (empty($start_time)) {
-                                                $bid_display = "Buyout Price: ";
-                                            } elseif (new DateTime() < new DateTime($start_time)) {
-                                                $bid_display = "Starting Price: ";
-                                            } else {
-                                                $bid_display = "Current Bid: ";
-                                            }
-                                    ?>
-                                            <div class="col-sm-12 col-md-6 col-lg-4">
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <div class="card p-2">
-                                                            <div class="card-body">
-                                                                <div class="d-flex justify-content-between">
-                                                                    <div class="p-2"></div>
-                                                                    <div class="p-2"><?php echo $days_left ?>
-                                                                    </div>
-                                                                    <div class="p-2">
-                                                                        <a href="#" class="no-action" data-product-id="<?php echo $product_id; ?>"
-                                                                            method="post"
-                                                                            onclick="toggleLike(this)">
-                                                                            <i class="bi <?php echo $auction['liked'] ? 'bi-heart-fill' : 'bi-heart'; ?>"></i>
-                                                                        </a>
-                                                                    </div>
+                        </div>
+                    </div>
+                    <div class="row  justify-content-center">
+                        <div class="col-2">
+                            <?php foreach ($categories as $category): ?>
+                                <p class="ms-2 mb-3"><a href="index.php?cat_id=<?php echo $category['category_id'] ?>"
+                                        class="link-body-emphasis link-offset-2 link-underline-opacity-0 link-opacity-25 link-underline-opacity-0-hover">
+                                        <?php echo htmlspecialchars($category['category_name']) ?>
+                                    </a></p>
+                            <?php endforeach; ?>
+                        </div>
+                        <div class="col-9">
+                            <div class="row">
+                                <?php
+                                if ($current_auction_data) {
+                                    foreach ($current_auction_data as $auction) {
+                                        $product_id = $auction['product_id'];
+                                        $product_name = $auction['product_name'];
+                                        $current_bid = $auction['current_bid'] ? htmlspecialchars($auction['current_bid']) : htmlspecialchars($auction['buyout_price']);
+                                        $end_time = $auction['end_time'];
+                                        $image_url = $auction['image_url'];
+                                        $start_time = $auction['start_time'];
+                                        $days_left = caculate_days_left($start_time, $end_time);
+                                        if (empty($start_time)) {
+                                            $bid_display = "Buyout Price: ";
+                                        } elseif (new DateTime() < new DateTime($start_time)) {
+                                            $bid_display = "Starting Price: ";
+                                        } else {
+                                            $bid_display = "Current Bid: ";
+                                        }
+                                        ?>
+                                        <div class="col-sm-12 col-md-6 col-lg-4">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="card p-2">
+                                                        <div class="card-body">
+                                                            <div class="d-flex justify-content-between">
+                                                                <div class="p-2"></div>
+                                                                <div class="p-2"><?php echo $days_left ?>
                                                                 </div>
-                                                                <div>
-                                                                    <img src="<?php echo htmlspecialchars($image_url) ?>"
-                                                                        alt="" class="img-fluid">
-                                                                    <div class="row">
-                                                                        <div class="col-5 text-start text-dark"
-                                                                            style="--bs-text-opacity: .5; font-size: 14px; margin: 4px;">
-                                                                            <?php echo $bid_display ?>
-                                                                        </div>
-                                                                        <div class="col-4 text-start"
-                                                                            style="font-size: 16px; margin: 2px;">
-                                                                            <?php echo format_price($current_bid) ?>
-                                                                        </div>
-
-                                                                    </div>
+                                                                <div class="p-2">
+                                                                    <a href="#" class="no-action"
+                                                                        data-product-id="<?php echo $product_id; ?>"
+                                                                        method="post" onclick="toggleLike(this)">
+                                                                        <i
+                                                                            class="bi <?php echo $auction['liked'] ? 'bi-heart-fill' : 'bi-heart'; ?>"></i>
+                                                                    </a>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row">
-                                                        <div class="col-6 text-start">
-                                                            <p class="m-2">
-                                                                <?php echo htmlspecialchars($product_name) ?>
-                                                            </p>
-                                                            <div class="text-dark"
-                                                                style="--bs-text-opacity: .5;">
-                                                                <p class="m-2">Acrilyc, Sand on Canvas</p>
-                                                                <p class="m-2">90x70cm</p>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-6 text-end">
-                                                            <div class="text-dark"
-                                                                style="--bs-text-opacity: .5;">
+                                                            <div>
+                                                                <img src="<?php echo htmlspecialchars($image_url) ?>" alt=""
+                                                                    class="img-fluid">
+                                                                <div class="row">
+                                                                    <div class="col-5 text-start text-dark"
+                                                                        style="--bs-text-opacity: .5; font-size: 14px; margin: 4px;">
+                                                                        <?php echo $bid_display ?>
+                                                                    </div>
+                                                                    <div class="col-4 text-start"
+                                                                        style="font-size: 16px; margin: 2px;">
+                                                                        <?php echo format_price($current_bid) ?>
+                                                                    </div>
 
-                                                                <p class="m-2">Interesting?</p>
-                                                                <a href="#" class="btn bidbutton me-2">Bid
-                                                                    now</a>
-
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div class="row">
+                                                    <div class="col-6 text-start">
+                                                        <p class="m-2">
+                                                            <?php echo htmlspecialchars($product_name) ?>
+                                                        </p>
+                                                        <div class="text-dark" style="--bs-text-opacity: .5;">
+                                                            <p class="m-2">Acrilyc, Sand on Canvas</p>
+                                                            <p class="m-2">90x70cm</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6 text-end">
+                                                        <div class="text-dark" style="--bs-text-opacity: .5;">
+
+                                                            <p class="m-2">Interesting?</p>
+                                                            <a href="#" class="btn bidbutton me-2">Bid
+                                                                now</a>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
-                                    <?php
-                                        }
-                                    } else {
-                                        echo "<p>No auction items available.</p>";
+                                        </div>
+                                        <?php
                                     }
-                                    ?>
-                                    <div class="row mb-3">
-                                        <div class="text-center">
-                                            <?php
-                                            // Hiển thị các nút phân trang
-                                            if ($category_id > 0){
-                                                for ($i = 1; $i <= $total_pages; $i++) {
-                                                    echo '<a class="text-decoration-none p-1" href="index.php?cat_id=' . htmlspecialchars($category_id) .'&page=' . $i . '" class="btn btn-link">' . $i . '</a> ';
-                                                }
-                                            } else {
-                                                for ($i = 1; $i <= $total_pages; $i++) {
-                                                    echo '<a class="text-decoration-none p-1" href="?page=' . $i . '" class="btn btn-link">' . $i . '</a> ';
-                                                }
+                                } else {
+                                    echo "<p>No auction items available.</p>";
+                                }
+                                ?>
+                                <div class="row mb-3">
+                                    <div class="text-center">
+                                        <?php
+                                        // Hiển thị các nút phân trang
+                                        if ($category_id > 0) {
+                                            for ($i = 1; $i <= $total_pages; $i++) {
+                                                echo '<a class="text-decoration-none p-1" href="index.php?cat_id=' . htmlspecialchars($category_id) . '&page=' . $i . '" class="btn btn-link">' . $i . '</a> ';
                                             }
-                                            ?>
-                                        </div>
+                                        } else {
+                                            for ($i = 1; $i <= $total_pages; $i++) {
+                                                echo '<a class="text-decoration-none p-1" href="?page=' . $i . '" class="btn btn-link">' . $i . '</a> ';
+                                            }
+                                        }
+                                        ?>
                                     </div>
-                                    <div class="row justify-content-center">
-                                        <div class="text-center">
-                                            <a href="<?php echo $link; ?> " class="btn seeall">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                    height="16" fill="currentColor"
-                                                    class="bi bi-caret-right-fill" viewBox="0 0 16 16">
-                                                    <path
-                                                        d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
-                                                </svg>
-                                                See
-                                                "<strong><?php echo htmlspecialchars($category_name) ?></strong>"
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                    height="16" fill="currentColor"
-                                                    class="bi bi-caret-left-fill" viewBox="0 0 16 16">
-                                                    <path
-                                                        d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />
-                                                </svg>
-                                            </a>
-                                        </div>
+                                </div>
+                                <div class="row justify-content-center">
+                                    <div class="text-center">
+                                        <a href="<?php echo $link; ?> " class="btn seeall">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+                                                <path
+                                                    d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
+                                            </svg>
+                                            See
+                                            "<strong><?php echo htmlspecialchars($category_name) ?></strong>"
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                fill="currentColor" class="bi bi-caret-left-fill" viewBox="0 0 16 16">
+                                                <path
+                                                    d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />
+                                            </svg>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- Get insipred section -->
-                <div class="container mt-5">
-                    <div class="getinspired">
-                        <div class="row justify-content-center">
-                            <div class="col-11">
-                                <div class="d-flex flex-row">
-                                    <div class="p-2">
-                                        <p class="fs-3 text-start">Get inspired</p>
-                                    </div>
-                                    <div class="p-2 mt-3">
-                                        <p><a href="#"
-                                                class="link-body-emphasis link-offset-2 link-underline-opacity-25 link-opacity-25 link-underline-opacity-75-hover">Explore
-                                                all</a></p>
-                                    </div>
-                                </div>
-                                <div class="row mt-2">
-                                    <div class="col-md-6 sm-12">
-                                        <img src="./images/1.jpg" class="img-fluid" alt="" />
-                                        <p class="fs-5 text-start mt-3">Adriano Tawin</p>
-                                        <p class="fs-6 text-start">Inside the Cologne Apartment of a
-                                            Trendsetting Content
-                                            Creator Jewellery buyer and interior design content creator
-                                            Jenny Brucherseifer
-                                            shows
-                                            us her art collection (and gives us serious room envy) in her...
-                                        </p>
-                                        <div class="text-start "><a href="#" class="btn readmore">Read
-                                                more<svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                    height="16" fill="currentColor"
-                                                    class="bi bi-caret-right-fill" viewBox="0 0 16 16">
-                                                    <path
-                                                        d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
-                                                </svg> </a>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6 sm-12">
-                                        <img src="./images/1.jpg" class="img-fluid" alt="" />
-                                        <p class="fs-5 text-start mt-3">Adriano Tawin</p>
-                                        <p class="fs-6 text-start">Inside the Cologne Apartment of a
-                                            Trendsetting Content
-                                            Creator Jewellery buyer and interior design content creator
-                                            Jenny Brucherseifer
-                                            shows
-                                            us her art collection (and gives us serious room envy) in her...
-                                        </p>
-                                        <div class="text-start"><a href="#" class="btn readmore">Read
-                                                more<svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                    height="16" fill="currentColor"
-                                                    class="bi bi-caret-right-fill" viewBox="0 0 16 16">
-                                                    <path
-                                                        d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
-                                                </svg> </a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Popular Categories section -->
-                <div class="container mt-5">
+            <!-- Get insipred section -->
+            <div class="container mt-5">
+                <div class="getinspired">
                     <div class="row justify-content-center">
                         <div class="col-11">
-                            <div class="row">
-                                <p class="fs-3" style="margin-bottom: 5px;">Popular Categories</p>
-
+                            <div class="d-flex flex-row">
+                                <div class="p-2">
+                                    <p class="fs-3 text-start">About us </p>
+                                </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-3 col-sm-6">
-                                    <a href="categories2.php?cat_id=16"><img src="<?php echo htmlspecialchars($categories_image[15]['image_url']) ?>" class="img-fluid mt-2" alt="" /></a>
+                            <div class="row mt-2">
+                                <div class="col-md-6 sm-12">
+                                    BIDSPIRT is an independent auction house with no external shareholders, established
+                                    in 2000 and developed into a professional auction company starting in 2022.
+
+                                    Learning from the experience of organizing at internationally standard auction
+                                    floors, we aim to develop the auction market in Vietnam to be on par with
+                                    international standards. Our development is based on essential values of
+                                    transparency in intermediaries, caution, rigor, and groundbreaking international
+                                    vision. Established in Hanoi since 2000 and operating in the art sector, family-run
+                                    with a quality team. With an international auction room located in the west of Hanoi
+                                    and representative offices in Ho Chi Minh City, Paris, and the USA, BIDSPIRT stands
+                                    out with personalized service and professional responsiveness. Internal experts
+                                    across 5 departments allow for the enhancement and sale of large collections,
+                                    paintings, antiques, high-end furniture, and valuable items. With strengths in
+                                    expertise and good communication, we will develop international buyers, aiming to
+                                    regularly set world records. Aware of the trust that customers place in us, we are
+                                    determined to uphold the tradition of prestige and high responsibility in this
+                                    intermediary auction work.
                                 </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <a href="categories2.php?cat_id=4"><img src="<?php echo htmlspecialchars($categories_image[3]['image_url']) ?>" class="img-fluid mt-2" alt="" /></a>
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <a href="categories2.php?cat_id=11"><img src="<?php echo htmlspecialchars($categories_image[10]['image_url']) ?>" class="img-fluid mt-2" alt="" /></a>
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <a href="categories2.php?cat_id=14"><img src="<?php echo htmlspecialchars($categories_image[13]['image_url']) ?>" class="img-fluid mt-2" alt="" /></a>
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <a href="categories2.php?cat_id=6"><img src="<?php echo htmlspecialchars($categories_image[7]['image_url']) ?>" class="img-fluid mt-2" alt="" /></a>
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <a href="categories2.php?cat_id=10"><img src="<?php echo htmlspecialchars($categories_image[9]['image_url']) ?>" class="img-fluid mt-2" alt="" /></a>
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <a href="categories2.php?cat_id=1"><img src="<?php echo htmlspecialchars($categories_image[0]['image_url']) ?>" class="img-fluid mt-2" alt="" /></a>
-                                </div>
-                                <div class="col-md-3 col-sm-6">
-                                    <a href="categories2.php?cat_id=5"><img src="<?php echo htmlspecialchars($categories_image[4]['image_url']) ?>" class="img-fluid mt-2" alt="" /></a>
+                                <div class="col-md-6 sm-12">
+                                    <img src="./images/aboutus.jpg" class="img-fluid" alt="" />
+
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- Email Section -->
-                <div class="row emailsection">
-                    <div class="emailform col-md-5 col-sm-11">
-                        <p class="fs-3">Let us inspire you</p>
-                        <p class="fw-lighter">Want to receive exciting antique and lifestyle content,
-                            directly to your inbox?
-                        </p>
-                        <form>
-                            <div class="mb-3 row">
-                                <div class="col-8">
-                                    <div class="container">
-                                        <div class="row inputemail">
-                                            <div class="col-1">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                                    height="16" fill="currentColor" class="bi bi-envelope"
-                                                    viewBox="0 0 16 16">
-                                                    <path
-                                                        d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1zm13 2.383-4.708 2.825L15 11.105zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741M1 11.105l4.708-2.897L1 5.383z" />
-                                                </svg>
-                                            </div>
-                                            <div class="col-10">
-                                                <input type="email" class="no-border"
-                                                    id="exampleInputEmail1" placeholder='Email address'>
-                                            </div>
+            <!-- Popular Categories section -->
+            <div class="container mt-5">
+                <div class="row justify-content-center">
+                    <div class="col-11">
+                        <div class="row">
+                            <p class="fs-3" style="margin-bottom: 5px;">Popular Categories</p>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3 col-sm-6">
+                                <a href="categories2.php?cat_id=16"><img
+                                        src="<?php echo htmlspecialchars($categories_image[15]['image_url']) ?>"
+                                        class="img-fluid mt-2" alt="" /></a>
+                            </div>
+                            <div class="col-md-3 col-sm-6">
+                                <a href="categories2.php?cat_id=4"><img
+                                        src="<?php echo htmlspecialchars($categories_image[3]['image_url']) ?>"
+                                        class="img-fluid mt-2" alt="" /></a>
+                            </div>
+                            <div class="col-md-3 col-sm-6">
+                                <a href="categories2.php?cat_id=11"><img
+                                        src="<?php echo htmlspecialchars($categories_image[10]['image_url']) ?>"
+                                        class="img-fluid mt-2" alt="" /></a>
+                            </div>
+                            <div class="col-md-3 col-sm-6">
+                                <a href="categories2.php?cat_id=14"><img
+                                        src="<?php echo htmlspecialchars($categories_image[13]['image_url']) ?>"
+                                        class="img-fluid mt-2" alt="" /></a>
+                            </div>
+                            <div class="col-md-3 col-sm-6">
+                                <a href="categories2.php?cat_id=6"><img
+                                        src="<?php echo htmlspecialchars($categories_image[7]['image_url']) ?>"
+                                        class="img-fluid mt-2" alt="" /></a>
+                            </div>
+                            <div class="col-md-3 col-sm-6">
+                                <a href="categories2.php?cat_id=10"><img
+                                        src="<?php echo htmlspecialchars($categories_image[9]['image_url']) ?>"
+                                        class="img-fluid mt-2" alt="" /></a>
+                            </div>
+                            <div class="col-md-3 col-sm-6">
+                                <a href="categories2.php?cat_id=1"><img
+                                        src="<?php echo htmlspecialchars($categories_image[0]['image_url']) ?>"
+                                        class="img-fluid mt-2" alt="" /></a>
+                            </div>
+                            <div class="col-md-3 col-sm-6">
+                                <a href="categories2.php?cat_id=5"><img
+                                        src="<?php echo htmlspecialchars($categories_image[4]['image_url']) ?>"
+                                        class="img-fluid mt-2" alt="" /></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Email Section -->
+            <div class="row emailsection">
+                <div class="emailform col-md-5 col-sm-11">
+                    <p class="fs-3">Let us inspire you</p>
+                    <p class="fw-lighter">Want to receive exciting antique and lifestyle content,
+                        directly to your inbox?
+                    </p>
+                    <form>
+                        <div class="mb-3 row">
+                            <div class="col-8">
+                                <div class="container">
+                                    <div class="row inputemail">
+                                        <div class="col-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1zm13 2.383-4.708 2.825L15 11.105zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741M1 11.105l4.708-2.897L1 5.383z" />
+                                            </svg>
+                                        </div>
+                                        <div class="col-10">
+                                            <input type="email" class="no-border" id="exampleInputEmail1"
+                                                placeholder='Email address'>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-1">
-                                    <button type="submit" class="btn btn-primary"><svg
-                                            xmlns="http://www.w3.org/2000/svg" width="21" height="21"
-                                            fill="currentColor" class="bi bi-caret-right-fill"
-                                            viewBox="0 0 16 16">
-                                            <path
-                                                d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
-                                        </svg></button>
+                            </div>
+                            <div class="col-1">
+                                <button type="submit" class="btn btn-primary"><svg xmlns="http://www.w3.org/2000/svg"
+                                        width="21" height="21" fill="currentColor" class="bi bi-caret-right-fill"
+                                        viewBox="0 0 16 16">
+                                        <path
+                                            d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
+                                    </svg></button>
 
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-7 col-sm-12">
+                    <img src="./images/Inspireme.jpg" class="img-fluid" alt="" />
+                </div>
+            </div>
+
+            <!-- Iconic Brand Section -->
+            <div class="container mt-5">
+                <div class="row justify-content-center">
+                    <div class="col-11">
+                        <div class="row">
+                            <p class="fs-3" style="margin-bottom: 5px;">Sponsored by</p>
+                        </div>
+                        <div class="row">
+                            <?php foreach ($brands as $brand): ?>
+                                <div class="col-md-2 mt-3 sm-4">
+                                    <img src="<?php echo htmlspecialchars($brand["brand_image"]); ?>" class="img-fluid"
+                                        alt="" />
                                 </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="col-md-7 col-sm-12">
-                        <img src="./images/Inspireme.jpg" class="img-fluid" alt="" />
-                    </div>
-                </div>
-
-                <!-- Iconic Brand Section -->
-                <div class="container mt-5">
-                    <div class="row justify-content-center">
-                        <div class="col-11">
-                            <div class="row">
-                                <p class="fs-3" style="margin-bottom: 5px;">Iconic Brands</p>
-                            </div>
-                            <div class="row">
-                                <?php foreach ($brands as $brand): ?>
-                                    <div class="col-md-2 mt-3 sm-4">
-                                        <img src="<?php echo htmlspecialchars($brand["brand_image"]); ?>" class="img-fluid" alt="" />
-                                    </div>
-                                <?php endforeach; ?>
-                            </div>
+                            <?php endforeach; ?>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- Download app section  -->
-                <div class="row downloadsection mt-5 mb-5">
-                    <div class="downloadapp col-md-5 col-sm-11" style="padding: 3rem" ;>
-                        <p class="fs-2 mt-5">Download the <strong>BIDSPIRIT</strong> app</p>
-                        <p class="fs-5">and discover special object anytime, anywhere</p>
-                        <div class="row mt-5">
-                            <div class="col-md-6 col-sm-12 mb-3">
-                                <a href="#"><img src="./images/Appstore.png" class="img-fluid" alt="" /></a>
-                            </div>
-                            <div class="col-md-6 col-sm-12  mb-3">
-                                <a href="#"><img src="./images/CHplay.png" class="img-fluid" alt="" /></a>
-                            </div>
+            <!-- Download app section  -->
+            <div class="row downloadsection mt-5 mb-5">
+                <div class="downloadapp col-md-5 col-sm-11" style="padding: 3rem" ;>
+                    <p class="fs-2 mt-5">Download the <strong>BIDSPIRIT</strong> app</p>
+                    <p class="fs-5">and discover special object anytime, anywhere</p>
+                    <div class="row mt-5">
+                        <div class="col-md-6 col-sm-12 mb-3">
+                            <a href="#"><img src="./images/Appstore.png" class="img-fluid" alt="" /></a>
+                        </div>
+                        <div class="col-md-6 col-sm-12  mb-3">
+                            <a href="#"><img src="./images/CHplay.png" class="img-fluid" alt="" /></a>
                         </div>
                     </div>
-                    <div class="col-md-7 col-sm-12">
-                        <img src="./images/footerapp.png" class="img-fluid" alt="" />
-                    </div>
                 </div>
+                <div class="col-md-7 col-sm-12">
+                    <img src="./images/bitspiriticon.jpg" class="img-fluid" alt="" />
+                </div>
+            </div>
     </main>
     <?php include 'Components/footer.php'; ?>
 </body>
