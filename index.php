@@ -26,7 +26,8 @@
     $trendin_data = get_trendin_data($user_id);
     $collection_data = get_collection_data();
     $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
-    $pagination = paginate_auctions($auction_data, 3, 1);
+    $current_page = $page > 0 ? $page : 1;
+    $pagination = paginate_auctions($auction_data, 3, $current_page);
     $current_auction_data = $pagination['data'];
     $total_pages = $pagination['total_pages'];
     ?>
