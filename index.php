@@ -242,7 +242,8 @@
                                                         <div class="col-6 text-start text-dark">
                                                             <p style="font-size: 13px;">
                                                                 <strong><?php echo strtoupper(htmlspecialchars($collection_name)) ?></strong><br><?php echo htmlspecialchars($product_count) ?>
-                                                                Objects</p>
+                                                                Objects
+                                                            </p>
                                                         </div>
                                                         <div class="row text-center">
                                                             <a href="#"
@@ -271,7 +272,8 @@
                                                         <div class="col-6 text-start text-dark">
                                                             <p style="font-size: 13px;">
                                                                 <strong><?php echo strtoupper(htmlspecialchars($collection_name)) ?></strong><br><?php echo htmlspecialchars($product_count) ?>
-                                                                Objects</p>
+                                                                Objects
+                                                            </p>
                                                         </div>
                                                         <div class="row text-center">
                                                             <a href="#"
@@ -531,28 +533,18 @@
                                 </div>
                             </div>
                             <div class="row mt-2">
-                                <div class="col-md-6 sm-12">
-                                    BIDSPIRT is an independent auction house with no external shareholders, established
-                                    in 2000 and developed into a professional auction company starting in 2022.
 
-                                    Learning from the experience of organizing at internationally standard auction
-                                    floors, we aim to develop the auction market in Vietnam to be on par with
-                                    international standards. Our development is based on essential values of
-                                    transparency in intermediaries, caution, rigor, and groundbreaking international
-                                    vision. Established in Hanoi since 2000 and operating in the art sector, family-run
-                                    with a quality team. With an international auction room located in the west of Hanoi
-                                    and representative offices in Ho Chi Minh City, Paris, and the USA, BIDSPIRT stands
-                                    out with personalized service and professional responsiveness. Internal experts
-                                    across 5 departments allow for the enhancement and sale of large collections,
-                                    paintings, antiques, high-end furniture, and valuable items. With strengths in
-                                    expertise and good communication, we will develop international buyers, aiming to
-                                    regularly set world records. Aware of the trust that customers place in us, we are
-                                    determined to uphold the tradition of prestige and high responsibility in this
-                                    intermediary auction work.
-                                </div>
                                 <div class="col-md-6 sm-12">
                                     <img src="./images/aboutus.jpg" class="img-fluid" alt="" />
 
+                                </div>
+                                <div class="col-md-6 sm-12 border px-5 text-center">
+                                    <p class="fs-6 mt-5 pt-5 ">
+                                        BIDSPIRT is an independent auction house with no external shareholders, established
+                                    in 2000 and developed into a professional auction company starting in 2022.</p>
+                                    <p>Aware of customers' trust in us, we are determined to uphold the tradition of
+                                    prestige and high responsibility in this intermediary auction work.
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -561,7 +553,7 @@
             </div>
 
             <!-- Popular Categories section -->
-            <div class="container mt-5">
+            <!-- <div class="container mt-5">
                 <div class="row justify-content-center">
                     <div class="col-11">
                         <div class="row">
@@ -612,7 +604,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <!-- Email Section -->
             <div class="row emailsection">
