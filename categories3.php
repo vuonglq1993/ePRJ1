@@ -4,12 +4,6 @@
 <head>
     <?php
     session_start();
-    // $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 0;
-    if (isset($_SESSION['username'])) {
-        echo "Welcome, " . htmlspecialchars($_SESSION['username']) . "!";
-    } else {
-        echo "Welcome, guest!";
-    }
     include 'functions/db.php';
     include 'functions/auction.php';
     $product_id = isset($_GET['product_id']) ? intval($_GET['product_id']) : 0;
@@ -50,17 +44,21 @@
                 $product_name = $product_data['product_name'];
                 $product_description = $product_data['description'];
                 $product_image = $product_data['image_url'];
+                $product_detail = $product_data['product_detail']  ? htmlspecialchars($product_data['product_detail']) : 'No details are available for this product.';
                 $product_collection = $product_data['collection_name'] ? htmlspecialchars($product_data['collection_name']) : 'Not in any collection';
                 $start_time = $product_data['start_time'];
-                $has_auction = isset($start_time) && !empty($start_time);
-                $formatted_start_time = date('F j, Y, g:i a', strtotime($start_time));
                 $end_time = $product_data['end_time'];
+                $has_auction = isset($start_time) && !empty($start_time);
+                $formatted_start_time = date('F j, Y g:i a', strtotime($start_time));
                 if (new DateTime() < new DateTime($start_time)) {
                     $status = 'Upcoming in: ' . date_diff(new DateTime(), new DateTime($start_time))->format('%d days, %h hours, %i minutes') . '.';
+                    $status_end = 'Ends on ' . date('F j, Y g:i a', strtotime($end_time));
                 } elseif (new DateTime() >= new DateTime($start_time) && new DateTime() <= new DateTime($end_time)) {
-                    $status = 'End in ' . date_diff(new DateTime(), new DateTime($end_time))->format('%d days, %h hours, %i minutes') . '.';
+                    $status = 'Ends in ' . date_diff(new DateTime(), new DateTime($end_time))->format('%d days, %h hours, %i minutes') . '.';
+                    $status_end = 'On ' . date('F j, Y g:i a', strtotime($end_time));
                 } else {
                     $status = 'Ended' . date_diff(new DateTime($end_time), new DateTime())->format('%d days, %h hours, %i minutes') . ' ago.';
+                    $status_end = 'Ended on ' . date('F j, Y g:i a', strtotime($end_time));
                 }
             ?>
                 <?php if ($has_auction): ?>
@@ -81,6 +79,7 @@
                         </div>
                         <div class="mt-4">
                             <p class="fs-4 fw-light color0028BA"><?php echo htmlspecialchars($status); ?></p>
+                            <p class="fs-6 fw-light color0028BA"><?php echo htmlspecialchars($status_end); ?></p>
                         </div>
                         <!-- Dropdown for product description -->
                         <div class="my-4 ">
@@ -89,7 +88,7 @@
                             </button>
                             <div class="collapse" id="productDescription">
                                 <div class="card card-body">
-                                    <p>lol</p>
+                                    <p><?php echo htmlspecialchars($product_detail); ?></p>
                                 </div>
                             </div>
                             <div class="mt-3"><?php echo htmlspecialchars($product_description); ?></div>
@@ -117,7 +116,7 @@
                                 </button>
                                 <div class="collapse" id="productDescription">
                                     <div class="card card-body">
-                                        <p>lol</p>
+                                        <p><?php echo htmlspecialchars($product_detail); ?></p>
                                     </div>
                                 </div>
                                 <div class="mt-3"><?php echo htmlspecialchars($product_description); ?></div>
