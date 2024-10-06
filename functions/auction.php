@@ -31,11 +31,31 @@ function caculate_days_left($start_time, $end_time)
     if (empty($start_time)) {
         return "The auction has not started.";
     } else if ($now < $start_date_time) {
-        return "Auction starts in " . $start_date_time->diff($now)->format('%a days.');
+        $time_left = $start_date_time->diff($now);
+        $days = $time_left->days;
+        if ($days > 0) {
+            return "Auction start in " . $days . " days";
+        } else {
+            return "Auction starts in " . $time_left->h . " hours.";
+        }
     } elseif ($now > $end_date_time) {
-        return "Auction ended " . $now->diff($end_date_time)->format('%a days ago.');
+        $time_left = $now->diff($end_date_time);
+        $days = $time_left->days;
+        if ($days > 0) {
+            return "Auction ended " . $days . " days ago";
+        } else {
+            return "Auction ended " . $time_left->h . " hours ago.";
+        }
     } else {
-        return "Auction ends in " . $now->diff($end_date_time)->format('%a days.');
+        $time_left = $now ->diff($end_date_time);
+        $days = $time_left->days;
+        if ($days > 0) {
+            return "Auction ends in " . $days . " days";
+        } elseif ($time_left->h > 0) {
+            return "Auction ends in " . $time_left->h . " hours.";
+        } else {
+            return "Auction ends in " . $time_left->i . " minutes.";
+        }
     }
     
 }
@@ -45,7 +65,18 @@ function get_trendin_data($user_id)
             FROM auctions a
             JOIN products p ON a.product_id = p.product_id
             LEFT JOIN user_likes ul ON a.product_id = ul.product_id AND ul.user_id = ?
-            ORDER BY a.start_time ASC";
+            ORDER BY 
+                CASE
+                    WHEN NOW() > a.end_time THEN 3      -- Sản phẩm đã kết thúc
+                    WHEN NOW() < a.start_time THEN 2    -- Sản phẩm chưa bắt đầu
+                    ELSE 1                              -- Sản phẩm đang diễn ra
+                END,
+                CASE
+                    WHEN NOW() > a.end_time THEN TIMESTAMPDIFF(SECOND, a.end_time, NOW()) -- Sắp xếp theo thời gian đã kết thúc
+                    WHEN NOW() <= a.end_time THEN TIMESTAMPDIFF(SECOND, NOW(), a.end_time) -- Sắp xếp theo thời gian còn lại
+                    ELSE 0
+                END ASC,
+                a.start_time ASC"; //Sắp xếp theo thời gian bắt đầu
     $result = select($sql, [$user_id]);
     return $result;
 }
