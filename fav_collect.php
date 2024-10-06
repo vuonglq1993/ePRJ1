@@ -179,7 +179,7 @@
             </div>
         </div>
     </main>
-        <?php include 'Components/footer.php'; ?>
+        <?php include 'Components/footer2.php'; ?>
 </body>
 
 </html>

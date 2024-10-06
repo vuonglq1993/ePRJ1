@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="style/index.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="Components/header2.css">
-    <link rel="stylesheet" href="Components/foote2r.css">
+    <link rel="stylesheet" href="Components/footer2.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
@@ -25,8 +25,8 @@
 <body>
     <?php include 'Components/header.php'; ?>
     <main>
-        <!-- Banner -->
-        <div id="carouselExampleIndicators" class="carousel slide">
+                <!-- Banner -->
+                <div id="carouselExampleIndicators" class="carousel slide">
             <div class="carousel-inner">
                 <div class="carousel-item active">
                     <img src="images/2.jpg" class="d-block img-fluid w-100 " alt="...">
@@ -38,17 +38,13 @@
                 <div class="col-11">
                     <div class="row">
                         <div class="p-2">
-                            <p class="fs-3 ps-3">Trending auctions</p>
+                            <p class="fs-3 ps-3">Incoming auctions</p>
                             <nav class="nav">
-                                <a class="nav-link fw-bold active" href="#" aria-current="page" style="color: #666666"
-                                    ;>Trending auctions</a>
-
-                                <a class="nav-link fw-bold" href="sponsored_auction.php" style="color: #666666"
-                                    ;>Sponsored
+                            <a class="nav-link fw-bold" href="trending_auctions.php" style="color: #666666" ;>Trending Auctions</a>
+                                <a class="nav-link fw-bold" href="sponsored_auctions.php" style="color: #666666" ;>Sponsored
                                     auction</a>
-                                <a class="nav-link  fw-bold" href="incoming_auction.php">Incoming auction</a>
-                                <a class="nav-link fw-bold" href="completed_auction.php" style="color: #666666"
-                                    ;>Completed
+                                <a class="nav-link  fw-bold active" aria-current="page" href="#">Incoming auction</a>
+                                <a class="nav-link fw-bold" href="completed_auctions.php" style="color: #666666" ;>Completed
                                     auction</a>
                             </nav>
                         </div>

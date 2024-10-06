@@ -22,11 +22,11 @@ $fav_count = count_fav_data($user_id);
                             Auction
                         </a>
                         <ul class="dropdown-menu bg-000022">
-                        <li><a class="dropdown-item navbar-brand  mt-1 fc-ffffff" href="trending_auction.php">Trending auction</a>
+                        <li><a class="dropdown-item navbar-brand  mt-1 fc-ffffff" href="trending_auctions.php">Trending auction</a>
 
-                            <li><a class="dropdown-item navbar-brand mt-1 fc-ffffff" href="sponsored_auction.php">Sponsored auction</a></li>
-                            <li><a class="dropdown-item navbar-brand mt-1 fc-ffffff" href="incoming_auction.php">Incoming auction</a></li>
-                            <li><a class="dropdown-item navbar-brand  mt-1 fc-ffffff" href="completed_auction.php">Completed auction</a>
+                            <li><a class="dropdown-item navbar-brand mt-1 fc-ffffff" href="sponsored_auctions.php">Sponsored auction</a></li>
+                            <li><a class="dropdown-item navbar-brand mt-1 fc-ffffff" href="incoming_auctions.php">Incoming auction</a></li>
+                            <li><a class="dropdown-item navbar-brand  mt-1 fc-ffffff" href="completed_auctions.php">Completed auction</a>
                             </li>
                         </ul>
                     </li>

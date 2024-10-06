@@ -10,11 +10,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="style/index.css">
-    <link rel="stylesheet" href="Components/footer.css">
-    <link rel="stylesheet" href="Components/header.css">
+    <link rel="stylesheet" href="Components/footer2.css">
+    <link rel="stylesheet" href="Components/header2.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="Components/header.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -26,7 +25,7 @@
         integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
         crossorigin="anonymous"></script>
     <script src="javascript/index.js"></script>
-    <title>Home</title>
+    <title>Categories</title>
 </head>
 
 <body>
@@ -40,7 +39,7 @@
         </div> -->
         <!-- <hr> -->
         <!-- Popular Categories section -->
-        <div class="container mt-4">
+        <div class="container my-4">
             <div class="row justify-content-center">
                 <div class="col-11">
                     <div class="row text-center">
@@ -62,7 +61,7 @@
         </div>
     </main>
     <!-- footer -->
-    <?php include 'Components/footer.php'; ?>
+    <?php include 'Components/footer2.php'; ?>
 
 </body>
 
