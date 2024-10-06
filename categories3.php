@@ -8,13 +8,13 @@
     include 'functions/auction.php';
     $product_id = isset($_GET['product_id']) ? intval($_GET['product_id']) : 0;
     $product_data = get_product_data($product_id);
-    
+
     ?>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link rel="stylesheet" href="Components/footer.css">
+    <link rel="stylesheet" href="Components/footer2.css">
 
     <link rel="stylesheet" href="style/categories3.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
@@ -42,8 +42,9 @@
         <div class="row  collectionname mt-5 mb-5">
             <?php
             if ($product_data) {
+                $auction_id = $product_data['auction_id'];
                 $product_name = $product_data['product_name'];
-                $product_description = $product_data['description'] ? htmlspecialchars($product_data['description']): 'No description available for this product.';
+                $product_description = $product_data['description'] ? htmlspecialchars($product_data['description']) : 'No description available for this product.';
                 $product_image = $product_data['image_url'];
                 $product_detail = $product_data['product_detail']  ? htmlspecialchars($product_data['product_detail']) : 'No details are available for this product.';
                 $product_collection = $product_data['collection_name'] ? htmlspecialchars($product_data['collection_name']) : 'Not in any collection';
@@ -73,7 +74,10 @@
                             <p class="fs-4 fw-light color0028BA"><?php echo htmlspecialchars($status); ?></p>
                         </div>
                         <div class="my-4 ">
-                            <div class="mt-3"><?php echo $product_description ?></div>
+                            <div class="my-3"><?php echo $product_description ?></div>
+                            <a href="bid_details.php?auction_id=<?php echo htmlspecialchars($auction_id) ?>"
+                                class="btn bidbutton me-2">Bid
+                                now</a>
                         </div>
                     </div>
                 <?php else: ?>
@@ -82,10 +86,12 @@
                         <div class="row mt-3">
                             <p class="fw-light color666 fs-6">No auction available</p>
                         </div>
-                            <!-- Dropdown for product description -->
-                            <div class="my-4 ">
-                                <div class="mt-3"><?php echo $product_description ?></div>
-                            </div>
+                        <div class="my-4 ">
+                            <div class="my-3"><?php echo $product_description ?></div>
+                            <a href="bid_details.php?auction_id=<?php echo htmlspecialchars($auction_id) ?>"
+                                class="btn bidbutton me-2">Bid
+                                now</a>
+                        </div>
                     </div>
                 <?php endif; ?>
                 <div class="col-md-6 col-sm-12 mt-3">
@@ -106,7 +112,7 @@
         </div>
     </main>
     <!-- footer  -->
-    <?php include 'Components/footer.php'; ?>
+    <?php include 'Components/footer2.php'; ?>
 </body>
 
 </html>

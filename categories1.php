@@ -3,6 +3,7 @@
 
 <head>
     <?php
+    session_start();
     include './functions/db.php';
     $categories = select("SELECT * FROM categories");
     ?>
@@ -10,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="style/index.css">
-    <link rel="stylesheet" href="Components/footer.css">
+    <link rel="stylesheet" href="Components/footer2.css">
     <link rel="stylesheet" href="Components/header.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
@@ -40,7 +41,7 @@
         </div> -->
         <!-- <hr> -->
         <!-- Popular Categories section -->
-        <div class="container mt-4">
+        <div class="container my-4 pb-5">
             <div class="row justify-content-center">
                 <div class="col-11">
                     <div class="row text-center">
@@ -60,9 +61,10 @@
                 </div>
             </div>
         </div>
+        <span class="my-5 "></span>
     </main>
     <!-- footer -->
-    <?php include 'Components/footer.php'; ?>
+    <?php include 'Components/footer2.php'; ?>
 
 </body>
 
