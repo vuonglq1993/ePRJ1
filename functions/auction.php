@@ -9,13 +9,37 @@ function get_auction_data($user_id, $category_id = 0)
                 RIGHT JOIN products p ON a.product_id = p.product_id
                 LEFT JOIN user_likes ul ON a.product_id = ul.product_id AND ul.user_id = ?
                 WHERE p.category_id = $category_id
-                ORDER BY CASE WHEN a.start_time IS NULL THEN 1 ELSE 0 END, a.start_time ASC";
+                ORDER BY 
+                CASE
+                    WHEN a.auction_id IS NULL THEN 4    -- Sản phẩm chưa được đấu giá
+                    WHEN NOW() > a.end_time THEN 3      -- Sản phẩm đã kết thúc
+                    WHEN NOW() < a.start_time THEN 2    -- Sản phẩm chưa bắt đầu
+                    ELSE 1                              -- Sản phẩm đang diễn ra
+                END,
+                CASE
+                    WHEN NOW() > a.end_time THEN TIMESTAMPDIFF(SECOND, a.end_time, NOW()) -- Sắp xếp theo thời gian đã kết thúc
+                    WHEN NOW() <= a.end_time THEN TIMESTAMPDIFF(SECOND, NOW(), a.end_time) -- Sắp xếp theo thời gian còn lại
+                    ELSE 0
+                END ASC,
+                a.start_time ASC"; //Sắp xếp theo thời gian bắt đầu
     } else {
         $sql = "SELECT a.product_id, a.current_bid, a.start_time, a.end_time, p.product_id, p.product_name, p.buyout_price, p.image_url, ul.id AS liked
                 FROM auctions a
                 RIGHT JOIN products p ON a.product_id = p.product_id
                 LEFT JOIN user_likes ul ON a.product_id = ul.product_id AND ul.user_id = ?
-                ORDER BY CASE WHEN a.start_time IS NULL THEN 1 ELSE 0 END, a.start_time ASC";
+                ORDER BY 
+                CASE
+                    WHEN a.auction_id IS NULL THEN 4    -- Sản phẩm chưa được đấu giá
+                    WHEN NOW() > a.end_time THEN 3      -- Sản phẩm đã kết thúc
+                    WHEN NOW() < a.start_time THEN 2    -- Sản phẩm chưa bắt đầu
+                    ELSE 1                              -- Sản phẩm đang diễn ra
+                END,
+                CASE
+                    WHEN NOW() > a.end_time THEN TIMESTAMPDIFF(SECOND, a.end_time, NOW()) -- Sắp xếp theo thời gian đã kết thúc
+                    WHEN NOW() <= a.end_time THEN TIMESTAMPDIFF(SECOND, NOW(), a.end_time) -- Sắp xếp theo thời gian còn lại
+                    ELSE 0
+                END ASC,
+                a.start_time ASC"; //Sắp xếp theo thời gian bắt đầu
     }
     return select($sql, [$user_id]);
 }
@@ -67,6 +91,7 @@ function get_trendin_data($user_id)
             LEFT JOIN user_likes ul ON a.product_id = ul.product_id AND ul.user_id = ?
             ORDER BY 
                 CASE
+                    WHEN a.auction_id IS NULL THEN 4    -- Sản phẩm chưa được đấu giá
                     WHEN NOW() > a.end_time THEN 3      -- Sản phẩm đã kết thúc
                     WHEN NOW() < a.start_time THEN 2    -- Sản phẩm chưa bắt đầu
                     ELSE 1                              -- Sản phẩm đang diễn ra

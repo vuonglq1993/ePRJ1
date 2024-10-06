@@ -1,7 +1,7 @@
 <footer class="bg-000022">
     <div class="row">
         <div class="col-md-3 col-sm-6">
-            <img src="../images/header/logo.png" class="img-fluid mt-1 mb-5" />
+            <img src="./images/header/logo.png" class="img-fluid mt-1 mb-5" />
             <i class="bi text-white bisize ms-5 me-3 bi-facebook"></i>
             <i class="bi text-white bisize m-3 bi-instagram"></i>
             <i class="bi text-white bisize m-3 bi-threads"></i>

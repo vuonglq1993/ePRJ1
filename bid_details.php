@@ -100,14 +100,14 @@
                                     $product_image = $bid['image_url'];
                                     $product_description = $bid['description'] ? htmlspecialchars($bid['description']) : 'No description available for this product.';
                                     $product_detail = $bid['product_detail'] ? htmlspecialchars($bid_data['product_detail']) : 'No details are available for this product.';
-                                    if (!empty($bid['bid_amount'])) {
-                                        $current_bid = $bid['bid_amount'];
-                                        $bidder_username = $bid['username']; // Lấy tên người đấu giá
-                                    } else {
-                                        $current_bid = $bid['starting_price']; // Sử dụng giá khởi điểm từ bảng products
-                                        $bidder_username = 'No bids yet'; // Hoặc bạn có thể để lại thông báo thích hợp
-                                    }
-                                    // $current_bid = $bid['current_bid'];
+                                    // if (!empty($bid['bid_amount'])) {
+                                    //     $current_bid = $bid['bid_amount'];
+                                    //     $bidder_username = $bid['username']; // Lấy tên người đấu giá
+                                    // } else {
+                                    //     $current_bid = $bid['starting_price']; // Sử dụng giá khởi điểm từ bảng products
+                                    //     $bidder_username = 'No bids yet'; // Hoặc bạn có thể để lại thông báo thích hợp
+                                    // }
+                                    $current_bid = $bid['current_bid'];
                                     $bid_time = $bid['bid_time'];
                                     $end_time = $bid['end_time'];
                                     $start_time = $bid['start_time'];
@@ -169,8 +169,8 @@
                                             <div class="row border shadow-sm p-4 mb-5 bg-body-tertiary rounded">
                                                 <p class="fs-5 fc-666666 text-uppercase"><?php echo htmlspecialchars($bid_display) ?></p>
                                                 <p class="mb-0 fc-0053b8 fw-bolder" style="font-size: 4rem;">$ <?php echo htmlspecialchars($current_bid) ?></p>
-                                                <!-- <p class="fs-6 mb-1 fc-666666 text-uppercase fw-light">reserve price</p>
-                                        <p class="fs-2 fw-light">$ 720</p> -->
+                                                <p class="fs-6 mb-1 fc-666666 text-uppercase fw-light">Step price</p>
+                                        <p class="fs-2 fw-light">$ 1000</p>
                                                 <div class="row">
                                                     <select class="form-select" id="bid_amount" aria-label="Default select example">
                                                         <option selected>Choose your bid</option>
@@ -181,8 +181,8 @@
                                                         }
                                                         ?>
                                                     </select>
-                                                    <p class="fs-6 fc-999999">Last bid placed by: <?php echo $bidder_username; ?></p>
-                                                    <p class="fs-6 fc-999999">Bid Time: <?php echo $bid_time ? date('F j, Y g:i a', strtotime($bid_time)) : 'No bids yet'; ?></p>
+                                                    <!-- <p class="fs-6 fc-999999">Last bid placed by: <?php echo $bidder_username; ?></p>
+                                                    <p class="fs-6 fc-999999">Bid Time: <?php echo $bid_time ? date('F j, Y g:i a', strtotime($bid_time)) : 'No bids yet'; ?></p> -->
                                                 </div>
                                                 <div class="row mt-2">
                                                     <div class="col">
