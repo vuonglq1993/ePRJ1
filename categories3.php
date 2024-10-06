@@ -8,6 +8,7 @@
     include 'functions/auction.php';
     $product_id = isset($_GET['product_id']) ? intval($_GET['product_id']) : 0;
     $product_data = get_product_data($product_id);
+    
     ?>
 
     <meta charset="UTF-8">
