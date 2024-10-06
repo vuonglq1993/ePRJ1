@@ -6,6 +6,8 @@ function connect(){
     $user = $config->user;
     $pass = $config->pass;
     $db = $config->db;
+    date_default_timezone_set("Asia/Ho_Chi_Minh");
+    mysqli_set_charset($conn, "utf8mb4_general_ci");
     $conn = new mysqli($host,$user,$pass,$db);
     if($conn->error){
         die("Connect refused!");
@@ -49,6 +51,46 @@ function select($sql, $params = [])
     $conn->close();
 
     return $data; // Trả về mảng dữ liệu
+}
+
+function insert($sql, $params = [])
+{
+    $conn = connect(); 
+    if (!$conn) {
+        die("Connection failed: " . mysqli_connect_error());
+    }
+
+    $stmt = $conn->prepare($sql);
+    if ($stmt === false) {
+        die("Error preparing statement: " . $conn->error);
+    }
+
+    // Kiểm tra và gán tham số
+    if (!empty($params)) {
+        $types = '';
+        foreach ($params as $param) {
+            if (is_int($param)) {
+                $types .= 'i'; // integer
+            } elseif (is_float($param)) {
+                $types .= 'd'; // double (số thập phân)
+            } elseif (is_string($param)) {
+                $types .= 's'; // string
+            } else {
+                $types .= 'b'; // blob
+            }
+        }
+        $stmt->bind_param($types, ...$params);
+    }
+
+    if (!$stmt->execute()) {
+        die("Error executing statement: " . $stmt->error);
+    }
+    $insertedId = $conn->insert_id;
+
+    $stmt->close();
+    $conn->close();
+
+    return $insertedId;
 }
 
 function findById($sql,$params = []){
