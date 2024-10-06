@@ -8,7 +8,7 @@ function get_fav_data($user_id, $sort_by = 'start_time')
         if (!in_array($sort_by, $valid_sort_options)) {
             $sort_by = 'start_time';
         }
-        $sql = "SELECT ul.user_id, ul.product_id, p.product_id, p.product_name, p.image_url, a.product_id, a.start_time, a.end_time, a.current_bid
+        $sql = "SELECT ul.user_id, ul.product_id, p.product_id, p.product_name, p.image_url, a.product_id, a.auction_id, a.start_time, a.end_time, a.current_bid
                 FROM user_likes ul
                 JOIN products p ON ul.product_id = p.product_id
                 JOIN auctions a ON a.product_id = p.product_id
