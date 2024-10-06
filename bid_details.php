@@ -2,7 +2,14 @@
 <html lang="en">
 
 <head>
-
+    <?php
+    session_start();
+    $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 0;
+    include 'functions/db.php';
+    include 'functions/bidf.php';
+    $auction_id = isset($_GET['auction_id']) ? intval($_GET['auction_id']) : '';
+    $bid_data = get_bid_data($auction_id);
+    ?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -21,6 +28,7 @@
         integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
         crossorigin="anonymous"></script>
     <script src="javascript/index.js"></script>
+    <script src="javascript/placebid.js"></script>
     <title>Bid_details</title>
     <style>
         .fc-999999 {
@@ -83,82 +91,136 @@
             <div class="row justify-content-center mt-5">
                 <div class="col-11">
                     <div class="row">
-                        <div class="col-md-6 col-sm-12">
-                            <div class="row">
-                                <p class="fs-1 fw-light">Decorative Minerals (Sapphire collections)</p>
-                                <p class="fs-6 fc-999999">Start from 28 August - 2024</p>
+                        <?php
+                        if ($user_id) {
+                            if ($bid_data) {
+                                foreach ($bid_data as $bid) {
+                                    $auction_id = $bid['auction_id'];
+                                    $product_name = $bid['product_name'];
+                                    $product_image = $bid['image_url'];
+                                    $product_description = $bid['description'] ? htmlspecialchars($bid['description']) : 'No description available for this product.';
+                                    $product_detail = $bid['product_detail'] ? htmlspecialchars($bid_data['product_detail']) : 'No details are available for this product.';
+                                    if (!empty($bid['bid_amount'])) {
+                                        $current_bid = $bid['bid_amount'];
+                                        $bidder_username = $bid['username']; // Lấy tên người đấu giá
+                                    } else {
+                                        $current_bid = $bid['starting_price']; // Sử dụng giá khởi điểm từ bảng products
+                                        $bidder_username = 'No bids yet'; // Hoặc bạn có thể để lại thông báo thích hợp
+                                    }
+                                    // $current_bid = $bid['current_bid'];
+                                    $bid_time = $bid['bid_time'];
+                                    $end_time = $bid['end_time'];
+                                    $start_time = $bid['start_time'];
+                                    $formatted_start_time = date('F j, Y g:i a', strtotime($start_time));
+                                    $days_left = caculate_days_left_bid($start_time, $end_time);
+                                    if (empty($start_time)) {
+                                        $bid_display = "Buyout Price ";
+                                    } elseif (new DateTime() < new DateTime($start_time)) {
+                                        $bid_display = "Starting Price: ";
+                                    } elseif (new DateTime() > new DateTime($end_time)) {
+                                        $bid_display = "Winning price ";
+                                        $status = 'Ended ' . date_diff(new DateTime($end_time), new DateTime())->format('%d days, %h hours, %i minutes') . ' ago.';
+                                        $status_end = 'Ended on ' . date('F j, Y g:i a', strtotime($end_time));
+                                    } else {
+                                        $bid_display = "Current Bid ";
+                                        $status = 'Ends in ' . date_diff(new DateTime(), new DateTime($end_time))->format('%d days, %h hours, %i minutes') . '.';
+                                        $status_end = 'Close on ' . date('F j, Y g:i a', strtotime($end_time));
+                                    }
+                                    
 
-                            </div>
-                            <div class="row mt-3">
-                                <div class="">
-                                    <a href="#" class="border text-decoration-none follow">
-                                        <i class="bi bi-heart">
-                                        </i>
-                                        <span class="mx-3">Following for similar objects</span>
-                                    </a>
+                        
+                        ?>
+                                <div class="col-md-6 col-sm-12">
+                                    <div class="row">
+                                        <p class="fs-1 fw-light"><?php echo htmlspecialchars($product_name) ?></p>
+                                        <p class="fs-6 fc-999999">Start from <?php echo htmlspecialchars($formatted_start_time) ?></p>
+                                    </div>
+                                    <div class="row mt-3">
+                                        <div class="">
+                                            <a href="#" class="border text-decoration-none follow">
+                                                <i class="bi bi-heart">
+                                                </i>
+                                                <span class="mx-3">Following for similar objects</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="mt-4">
+                                        <p class="fs-4 fw-light color0028BA"><?php echo htmlspecialchars($status) ?></p>
+                                    </div>
+                                    <img src="<?php echo htmlspecialchars($product_image) ?>" alt="sanpham" class="img-fluid mt-3" />
+                                    <p class="fs-4 mt-5">RARE SIGNED Kaiser Chiefs – Kaiser Chiefs’ Easy Album
+                                        Copy is signed by all 5 band members!</p>
+                                    <p class="fs-6 fc-999999"><?php echo $product_detail ?></p>
+                                    <hr />
+                                    <p class="fs-4 fw-light">Shipping</p>
+                                    <p class="fs-6">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam venenatis,
+                                        ligula id scelerisque cursus, nulla mi ullamcorper felis, sit amet sollicitudin metus
+                                        elit non est. Aenean cursus lectus sed justo fringilla, ut vestibulum odio viverra.
+                                        Vivamus accumsan convallis sem, sit amet facilisis felis sagittis at. Phasellus
+                                        ultricies, sapien id tristique convallis, risus ligula fringilla justo, at vehicula dui
+                                        orci ut purus. Morbi efficitur, massa sit amet tincidunt gravida, nunc orci maximus
+                                        velit, in congue velit magna a lectus. Integer vel orci nec risus pretium suscipit non
+                                        id magna. Aliquam erat volutpat. Sed scelerisque vulputate metus, ac fermentum elit
+                                        faucibus ac.</p>
                                 </div>
-                            </div>
-                            <div class="mt-4">
-                                <p class="fs-4 fw-light color0028BA">Ends tomorrows 01:00</p>
-                            </div>
-                            <img src="images/blankimage2.jpg" alt="sanpham" class="img-fluid mt-3" />
-                            <p class="fs-4 mt-5">RARE SIGNED Kaiser Chiefs – Kaiser Chiefs’ Easy Album
-                                Copy is signed by all 5 band members!</p>
-                            <p class="fs-6 fc-999999">Thằng Thái tự bịa ra đê product-details</p>
-                            <hr />
-                            <p class="fs-4 fw-light">Shipping</p>
-                            <p class="fs-6">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam venenatis,
-                                ligula id scelerisque cursus, nulla mi ullamcorper felis, sit amet sollicitudin metus
-                                elit non est. Aenean cursus lectus sed justo fringilla, ut vestibulum odio viverra.
-                                Vivamus accumsan convallis sem, sit amet facilisis felis sagittis at. Phasellus
-                                ultricies, sapien id tristique convallis, risus ligula fringilla justo, at vehicula dui
-                                orci ut purus. Morbi efficitur, massa sit amet tincidunt gravida, nunc orci maximus
-                                velit, in congue velit magna a lectus. Integer vel orci nec risus pretium suscipit non
-                                id magna. Aliquam erat volutpat. Sed scelerisque vulputate metus, ac fermentum elit
-                                faucibus ac.</p>
-                        </div>
-                        <div class="col-md-6 col-sm-12">
-                            <!-- Bid section  -->
-                            <div class="row border shadow-sm p-4 mb-5 bg-body-tertiary rounded">
-                                <p class="fs-5 fc-666666 text-uppercase">current bid</p>
-                                <p class="mb-0 fc-0053b8 fw-bolder" style="font-size: 4rem;">$ 80</p>
-                                <p class="fs-6 mb-1 fc-666666 text-uppercase fw-light">reserve price</p>
-                                <p class="fs-2 fw-light">$ 720</p>
-                                <div class="row">
-                                    <select class="form-select" aria-label="Default select example">
-                                        <option selected>Choose your bid</option>
-                                        <option value="1">One</option>
-                                        <option value="2">Two</option>
-                                        <option value="3">Three</option>
-                                    </select>
-                                </div>
-                                <div class="row mt-2">
-                                    <div class="col">
-                                        <a class="btn btn-outline-primary bid-size">
-                                            <p class="fs-4 mx-3 my-2">Place bid</p>
-                                        </a>
-                                    </div>
-                                    <div class="col">
-                                        <a class="btn btn-primary bid-size">
-                                            <p class="fs-4 mx-3 my-2">Buy out</p>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="row mt-5 span">
-                                    <div>
-                                        <img src="images/smallicon.jpg" class="me-4" />Buy confidently with our
-                                        <strong>Buyer Protection</strong>
-                                    </div>
-                                    <div class="mt-2">
-                                        <img src="images/smallicon2.jpg" class="me-3" /> Buyer Protection fee: 9% +
-                                        $3
-                                    </div>
-                                    <div class="mt-2">
-                                        <img src="images/smallicon1.jpg" class="me-3" /> Closes: Thằng Thái tự bịa
-                                    </div>
-                                </div>
-                            </div>
 
+                                <div class="col-md-6 col-sm-12">
+                                    <!-- Bid section  -->
+                                            <div class="row border shadow-sm p-4 mb-5 bg-body-tertiary rounded">
+                                                <p class="fs-5 fc-666666 text-uppercase"><?php echo htmlspecialchars($bid_display) ?></p>
+                                                <p class="mb-0 fc-0053b8 fw-bolder" style="font-size: 4rem;">$ <?php echo htmlspecialchars($current_bid) ?></p>
+                                                <!-- <p class="fs-6 mb-1 fc-666666 text-uppercase fw-light">reserve price</p>
+                                        <p class="fs-2 fw-light">$ 720</p> -->
+                                                <div class="row">
+                                                    <select class="form-select" id="bid_amount" aria-label="Default select example">
+                                                        <option selected>Choose your bid</option>
+                                                        <?php
+                                                        $max_bid = 1000000;
+                                                        for ($bid = $current_bid + 1000; $bid <= $max_bid; $bid += 1000) {
+                                                            echo '<option value="' . $bid . '">$' . htmlspecialchars($bid) . '</option>';
+                                                        }
+                                                        ?>
+                                                    </select>
+                                                    <p class="fs-6 fc-999999">Last bid placed by: <?php echo $bidder_username; ?></p>
+                                                    <p class="fs-6 fc-999999">Bid Time: <?php echo $bid_time ? date('F j, Y g:i a', strtotime($bid_time)) : 'No bids yet'; ?></p>
+                                                </div>
+                                                <div class="row mt-2">
+                                                    <div class="col">
+                                                        <a class="btn btn-outline-primary bid-size" id="place-bid">
+                                                            <p class="fs-4 mx-3 my-2">Place bid</p>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col">
+                                                        <a class="btn btn-primary bid-size">
+                                                            <p class="fs-4 mx-3 my-2">Buy out</p>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <!-- Hidden input to store auction_id -->
+                                                <input type="hidden" id="auction-id" value="<?php echo $auction_id; ?>">
+                                                <div class="row mt-5 span">
+                                                    <div>
+                                                        <img src="images/smallicon.jpg" class="me-4" />Buy confidently with our
+                                                        <strong>Buyer Protection</strong>
+                                                    </div>
+                                                    <div class="mt-2">
+                                                        <img src="images/smallicon2.jpg" class="me-3" /> Buyer Protection fee: 9% +
+                                                        $3
+                                                    </div>
+                                                    <div class="mt-2">
+                                                        <img src="images/smallicon1.jpg" class="me-3" /> <?php echo htmlspecialchars($status_end) ?>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    <?php
+                                        }
+                                    } else {
+                                        echo '<p>No bids found for this product.</p>';
+                                    }
+                                } else {
+                                    echo '<p>User not found.</p>';
+                                }
+                                    ?>
                             <!-- Buyer Protection -->
                             <div class="row border shadow-sm p-4 mb-5 bg-body-tertiary rounded">
                                 <p class="fs-2 fc-17b100 text-uppercase">bitspirit Buyer Protection</p>
@@ -182,12 +244,12 @@
                                 </div>
 
                             </div>
-                        </div>
+                                </div>
                     </div>
                 </div>
             </div>
         </div>
-        <?php include 'Components/footer.php';?>
+        <?php include 'Components/footer2.php'; ?>
     </main>
 
 

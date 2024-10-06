@@ -43,12 +43,6 @@
                     <div class="row">
                         <div class="p-2">
                             <p class="fs-3 ps-3">My favourites</p>
-                            <nav class="nav">
-                                <a class="nav-link fw-bold" aria-current="page" href="#" ;>Objects</a>
-                                <a class="nav-link  fw-bold active" href="fav_collect.php"
-                                    style="color: #666666">Collections</a>
-                                <a class="nav-link fw-bold" href="fav_seller.php" style="color: #666666" ;>Seller</a>
-                            </nav>
                         </div>
                     </div>
                     <div class="row">
@@ -89,12 +83,14 @@
                                 $start_time = $fav['start_time'];
                                 $image_url = $fav['image_url'];
                                 $days_left = caculate_days_left1($start_time, $end_time);
-                                if (new DateTime() < new DateTime($start_time)) {
-                                    $bid_display = "Starting price: ";
-                                } else if (new DateTime() > new DateTime($start_time) && new DateTime() < new DateTime($end_time)) {
-                                    $bid_display = "Current Bid: ";
+                                if (empty($start_time)) {
+                                    $bid_display = "Buyout Price: ";
+                                } elseif (new DateTime() < new DateTime($start_time)) {
+                                    $bid_display = "Starting Price: ";
+                                } elseif (new DateTime() > new DateTime($end_time)) {
+                                    $bid_display = "Winning price: ";
                                 } else {
-                                    $bid_display = "Winning Price: ";
+                                    $bid_display = "Current Bid: ";
                                 }
                         ?>
                                 <div class="col-md-4 col-sm-12 mt-5">
