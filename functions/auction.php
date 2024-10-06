@@ -39,9 +39,9 @@ function caculate_days_left($start_time, $end_time)
     }
     
 }
-function get_trendin_data( $user_id)
+function get_trendin_data($user_id)
 {
-    $sql = "SELECT a.product_id, a.current_bid, a.start_time, a.end_time, p.product_name, p.image_url, ul.id AS liked
+    $sql = "SELECT a.*, p.product_name, p.starting_price, p.image_url, ul.id AS liked
             FROM auctions a
             JOIN products p ON a.product_id = p.product_id
             LEFT JOIN user_likes ul ON a.product_id = ul.product_id AND ul.user_id = ?

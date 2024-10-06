@@ -100,6 +100,7 @@
                                 if ($trendin_data) {
                                     $first_item = true;
                                     foreach ($trendin_data as $auction) {
+                                        $auction_id = $auction['auction_id'];
                                         $product_id = $auction['product_id'];
                                         $product_name = $auction['product_name'];
                                         $current_bid = $auction['current_bid'];
@@ -167,7 +168,7 @@
                                                     <div class="col-6 text-end">
                                                         <div class="text-dark" style="--bs-text-opacity: .5;">
                                                             <p class="m-2">Interesting?</p>
-                                                            <a href="#" class="btn bidbutton me-2">Bid
+                                                            <a href="bid_details.php?auction_id=<?php echo htmlspecialchars($auction_id) ?>" class="btn bidbutton me-2">Bid
                                                                 now</a>
 
                                                     </div>
@@ -411,19 +412,19 @@
                                     class="bi bi-caret-up-fill"></i></button>
                         <?php endif; ?>
                         <script>
-                            document.addEventListener('DOMContentLoaded', function () {
-                                // Chọn tất cả các thẻ <a> có class 'no-action-link'
-                                const noActionLinks = document.querySelectorAll('.no-action-link');
+                            // document.addEventListener('DOMContentLoaded', function () {
+                            //     // Chọn tất cả các thẻ <a> có class 'no-action-link'
+                            //     const noActionLinks = document.querySelectorAll('.no-action-link');
 
-                                // Lặp qua mỗi liên kết và thêm sự kiện 'click'
-                                noActionLinks.forEach(function (link) {
-                                    link.addEventListener('click', function (event) {
-                                        event.preventDefault(); // Ngăn hành động mặc định của thẻ <a>
-                                        // Thực hiện thêm các hành động khác nếu cần thiết
-                                        console.log("Link clicked but no action");
-                                    });
-                                });
-                            });
+                            //     // Lặp qua mỗi liên kết và thêm sự kiện 'click'
+                            //     noActionLinks.forEach(function (link) {
+                            //         link.addEventListener('click', function (event) {
+                            //             event.preventDefault(); // Ngăn hành động mặc định của thẻ <a>
+                            //             // Thực hiện thêm các hành động khác nếu cần thiết
+                            //             console.log("Link clicked but no action");
+                            //         });
+                            //     });
+                            // });
 
                         </script>
                         <script>
@@ -473,6 +474,8 @@
                                         $bid_display = "Buyout Price: ";
                                     } elseif (new DateTime() < new DateTime($start_time)) {
                                         $bid_display = "Starting Price: ";
+                                    } elseif (new DateTime() > new DateTime($end_time)) {
+                                        $bid_display = "Winning price: ";
                                     } else {
                                         $bid_display = "Current Bid: ";
                                     }
@@ -566,7 +569,7 @@
                                                 d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
                                         </svg>
                                         See
-                                        "<strong><?php echo htmlspecialchars($category_name) ?></strong>"
+                                        "<strong><?php echo $category_name ?></strong>"
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                             fill="currentColor" class="bi bi-caret-left-fill" viewBox="0 0 16 16">
                                             <path
