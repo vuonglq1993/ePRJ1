@@ -22,9 +22,11 @@ $fav_count = count_fav_data($user_id);
                             Auction
                         </a>
                         <ul class="dropdown-menu bg-000022">
-                            <li><a class="dropdown-item navbar-brand mt-1 fc-ffffff" href="#">Sponsored auction</a></li>
-                            <li><a class="dropdown-item navbar-brand mt-1 fc-ffffff" href="#">Incoming auction</a></li>
-                            <li><a class="dropdown-item navbar-brand  mt-1 fc-ffffff" href="#">Completed auction</a>
+                        <li><a class="dropdown-item navbar-brand  mt-1 fc-ffffff" href="trending_auction.php">Trending auction</a>
+
+                            <li><a class="dropdown-item navbar-brand mt-1 fc-ffffff" href="sponsored_auction.php">Sponsored auction</a></li>
+                            <li><a class="dropdown-item navbar-brand mt-1 fc-ffffff" href="incoming_auction.php">Incoming auction</a></li>
+                            <li><a class="dropdown-item navbar-brand  mt-1 fc-ffffff" href="completed_auction.php">Completed auction</a>
                             </li>
                         </ul>
                     </li>
@@ -41,8 +43,7 @@ $fav_count = count_fav_data($user_id);
                         <form action="search.php" method="GET" class="d-flex form-config" role="search">
                             <button class="btn btn-light search-config" type="submit"><i
                                     class="bi bi-search"></i></button>
-                            <input class="form-control p-0 me-4 ps-5 input-config" name="search" type="search"
-                                placeholder="What are you looking for?" aria-label="Search">
+                            
                         </form>
                     </li>
                     <div class="d-flex">
