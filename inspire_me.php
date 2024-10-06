@@ -7,7 +7,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="style/index.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="Components/footer.css">
+    <link rel="stylesheet" href="Components/footer2.css">
     <link rel="stylesheet" href="Components/header.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -773,48 +773,39 @@
 
 
         <!-- Email Section -->
-        <div class="row emailsection">
-            <div class="emailform col-md-5 col-sm-11">
-                <p class="fs-3">Let us inspire you</p>
-                <p class="fw-lighter">Want to receive exciting antique and lifestyle content, directly to your inbox?
-                </p>
-                <form>
-                    <div class="mb-3 row">
-                        <div class="col-8">
-                            <div class="container">
-                                <div class="row inputemail">
-                                    <div class="col-1">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-                                            fill="currentColor" class="bi bi-envelope mt-1" viewBox="0 0 16 16">
-                                            <path
-                                                d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1zm13 2.383-4.708 2.825L15 11.105zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741M1 11.105l4.708-2.897L1 5.383z" />
-                                        </svg>
+        <div class="container mt-5">
+                <div class="row justify-content-center">
+                    <div class="col-11">
+                        <div class="row">
+                            <p class="fs-3">Let us inspire you</p>
+                        </div>
+                        <div class="row pt-4 pb-3 bg-f5f5f5">
+                            <div class="col-md-6 col-sm-12">
+                                <p class="fs-3 ms-5">Spot the Gem, Seal the Deal!</p>
+                            </div>
+                            <div class="col-md-6 col-sm-12">
+                                <form>
+                                    <div class="d-flex mt-1">
+                                        <div class="">
+                                            <div class="mb-3">
+                                                <input type="email" class="form-control email-config"
+                                                    id="exampleFormControlInput1" placeholder="Your email">
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <button type="button"
+                                                class="btn btn-dark ms-2 text-uppercase px-5">Subscribe</button>
+
+                                        </div>
                                     </div>
-                                    <div class="col-10">
-                                        <input type="email" class="no-border input-group" id="exampleInputEmail1"
-                                            placeholder='Email address'>
-                                    </div>
-                                </div>
+                                </form>
                             </div>
                         </div>
-                        <div class="col-1">
-                            <button type="submit" class="btn btn-primary"><svg xmlns="http://www.w3.org/2000/svg"
-                                    width="21" height="21" fill="currentColor" class="bi bi-caret-right-fill"
-                                    viewBox="0 0 16 16">
-                                    <path
-                                        d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
-                                </svg></button>
-
-                        </div>
                     </div>
-                </form>
-            </div>
-            <div class="col-md-7 col-sm-12">
-                <img src="./images/1.jpg" class="img-fluid" alt="" />
-            </div>
-        </div>
+                </div>
+                </div>
     </main>
-    <?php include 'Components/footer.php'; ?>
+    <?php include 'Components/footer2.php'; ?>
 </body>
 
 </html>

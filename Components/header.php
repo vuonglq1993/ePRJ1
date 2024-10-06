@@ -5,7 +5,7 @@
     $fav_count = count_fav_data($user_id);  
 ?>
 <header>
-<nav class="navbar navheight navbar-expand-lg bg-000022">
+<nav class="navbar navheigh navbar-expand-lg bg-000022">
         <div class="container-fluid mt-1">
             <a class="me-5" href="index.php"><img src="./images/header/logo.png" alt="" style="width: 220px;"class="img-fluid logo"></a>
             <button class="navbar-toggler bg-white" type="button" data-bs-toggle="collapse"
@@ -16,13 +16,13 @@
             <div class="collapse bg-000022 navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav my-1 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link navbar-brand margin-1rem fc-ffffff ms-2 mt-1" href="categories1.php">Categories</a>
+                        <a class="nav-link navbar-brand margin-1rem fc-ffffff mt-1" href="categories1.php">Categories</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link navbar-brand margin-1rem fc-ffffff ms-2 mt-1" href="#">Popular Artists</a>
+                        <a class="nav-link navbar-brand margin-1rem fc-ffffff mt-1" href="about-us.php">About Us</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link navbar-brand margin-1rem fc-ffffff ms-2 mt-1" href="inspire_me.php">Inspire me</a>
+                        <a class="nav-link navbar-brand margin-1rem fc-ffffff mt-1" href="contact.php">Contact us</a>
                     </li>
                     <li class="nav-item">
                     <form action="search.php" method="GET" class="d-flex form-config" role="search">
