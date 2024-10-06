@@ -14,6 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="style/fav.css">
+    <link rel="stylesheet" href="Components/footer2.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="Components/header.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
@@ -37,7 +38,7 @@
 <body>
     <?php include 'Components/header.php'; ?>
     <main>
-        <div class="container mt-5">
+        <div class="container my-5 pb-4">
             <div class="row justify-content-center">
                 <div class="col-11">
                     <div class="row">
@@ -64,18 +65,18 @@
                                 <form method="get" action="fav_obj.php" id="sortForm">
                                     <select class="no-border form-select color0028BA" name="sort_by" onchange="document.getElementById('sortForm').submit();" aria-label="Default select example">
                                         <option value="start_time" <?php echo ($sort_by === 'start_time') ? 'selected' : ''; ?>>Time remaining</option>
-                                        <option value="current_bid"<?php echo ($sort_by === 'current_bid') ? 'selected' : ''; ?>>Current Bid</option>
-                                        <option value="product_name"<?php echo ($sort_by === 'product_name') ? 'selected' : ''; ?>>Product Name</option>
+                                        <option value="current_bid" <?php echo ($sort_by === 'current_bid') ? 'selected' : ''; ?>>Current Bid</option>
+                                        <option value="product_name" <?php echo ($sort_by === 'product_name') ? 'selected' : ''; ?>>Product Name</option>
                                         <option value="3">Three</option>
                                     </select>
                                 </form>
-
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <?php if ($fav_data) {
                             foreach ($fav_data as $fav) {
+                                $auction_id = $fav['auction_id'];
                                 $product_id = $fav['product_id'];
                                 $product_name = $fav['product_name'];
                                 $current_bid = $fav['current_bid'];
@@ -110,14 +111,17 @@
                                                         </div>
                                                     </div>
                                                     <div>
-                                                        <img src="<?php echo $image_url ?>" alt="" class="img-fluid">
+                                                        <a
+                                                            href="categories3.php?product_id=<?php echo htmlspecialchars($product_id) ?>"><img
+                                                                src="<?php echo $image_url ?>"
+                                                                alt="<?php echo htmlspecialchars($product_name) ?>"
+                                                                class="img-fluid"></a>
                                                         <div class="row">
                                                             <div class="col-5 text-start text-dark"
                                                                 style="--bs-text-opacity: .5; font-size: 14px; margin: 4px;">
                                                                 <?php echo $bid_display ?></div>
                                                             <div class="col-4 text-start" style="font-size: 16px; margin: 2px;">
                                                                 <?php echo format_price1($current_bid) ?></div>
-
                                                         </div>
                                                     </div>
                                                 </div>
@@ -127,17 +131,13 @@
                                     <div class="row">
                                         <div class="col-6 text-start">
                                             <p class="m-2"><?php echo $product_name ?></p>
-                                            <div class="text-dark" style="--bs-text-opacity: .5;">
-                                                <p class="m-2">Acrilyc, Sand on Canvas</p>
-                                                <p class="m-2">90x70cm</p>
-                                            </div>
                                         </div>
                                         <div class="col-6 text-end">
                                             <div class="text-dark" style="--bs-text-opacity: .5;">
-
                                                 <p class="m-2">Interesting?</p>
-                                                <a href="#" class="btn bidbutton me-2">Bid now</a>
-
+                                                <a href="bid_details.php?auction_id=<?php echo htmlspecialchars($auction_id) ?>"
+                                                    class="btn bidbutton me-2">Bid
+                                                    now</a>
                                             </div>
                                         </div>
                                     </div>
@@ -156,7 +156,7 @@
             </div>
         </div>
     </main>
-    <?php include 'Components/footer.php'; ?>
+    <?php include 'Components/footer2.php'; ?>
 </body>
 
 </html>
