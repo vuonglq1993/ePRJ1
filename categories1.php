@@ -41,7 +41,7 @@
         </div> -->
         <!-- <hr> -->
         <!-- Popular Categories section -->
-        <div class="container my-4 pb-5">
+        <div class="container my-5">
             <div class="row justify-content-center">
                 <div class="col-11">
                     <div class="row text-center">
