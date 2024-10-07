@@ -7,7 +7,14 @@ $fav_count = count_fav_data($user_id);
 <header>
     <nav class="navbar navheigh navbar-expand-lg bg-000022">
         <div class="container-fluid mt-1">
-            <a class="me-5" href="index.php"><img src="./images/header/logo.png" alt="" style="width: 220px;"
+            <div class="mb-3">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                    class="bi bi-eye-fill mb-3" viewBox="0 0 16 16">
+                    <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0" />
+                    <path
+                        d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7" />
+                </svg> 1234
+            </div> <a class="ms-3" href="index.php"><img src="./images/header/logo.png" alt="" style="width: 220px;"
                     class="img-fluid logo"></a>
             <button class="navbar-toggler bg-white" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -22,15 +29,15 @@ $fav_count = count_fav_data($user_id);
                             Auction
                         </a>
                         <ul class="dropdown-menu bg-000022">
-                            <li><a class="dropdown-item   mt-1 fc-ffffff"
-                                    href="trending_auctions.php">Trending auction</a>
+                            <li><a class="dropdown-item   mt-1 fc-ffffff" href="trending_auctions.php">Trending
+                                    auction</a>
 
-                            <li><a class="dropdown-item  mt-1 fc-ffffff"
-                                    href="sponsored_auctions.php">Sponsored auction</a></li>
-                            <li><a class="dropdown-item  mt-1 fc-ffffff"
-                                    href="incoming_auctions.php">Incoming auction</a></li>
-                            <li><a class="dropdown-item   mt-1 fc-ffffff"
-                                    href="completed_auctions.php">Completed auction</a>
+                            <li><a class="dropdown-item  mt-1 fc-ffffff" href="sponsored_auctions.php">Sponsored
+                                    auction</a></li>
+                            <li><a class="dropdown-item  mt-1 fc-ffffff" href="incoming_auctions.php">Incoming
+                                    auction</a></li>
+                            <li><a class="dropdown-item   mt-1 fc-ffffff" href="completed_auctions.php">Completed
+                                    auction</a>
                             </li>
                         </ul>
                     </li>
