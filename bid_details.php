@@ -185,9 +185,6 @@
                                     <img src="images/largeicon.jpg" class="img-fluid" />
                                 </div>
                             </div>
-                            <div class="col-5">
-                                <img src="images/largeicon.jpg" class="img-fluid" />
-                            </div>
                         </div>
                     </div>
                     <div class="row mb-5">
