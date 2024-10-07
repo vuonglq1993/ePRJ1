@@ -7,7 +7,6 @@ function connect(){
     $pass = $config->pass;
     $db = $config->db;
     date_default_timezone_set("Asia/Ho_Chi_Minh");
-    mysqli_set_charset($conn, "utf8mb4_general_ci");
     $conn = new mysqli($host,$user,$pass,$db);
     if($conn->error){
         die("Connect refused!");

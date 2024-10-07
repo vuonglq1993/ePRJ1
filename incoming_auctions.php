@@ -5,13 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link rel="stylesheet" href="style/fav.css">
+    <link rel="stylesheet" href="style/index.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="Components/header.css">
-    <link rel="stylesheet" href="Components/footer.css">
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
-
+    <link rel="stylesheet" href="Components/header2.css">
+    <link rel="stylesheet" href="Components/footer2.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
@@ -20,23 +17,35 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
         integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
         crossorigin="anonymous"></script>
-    <script src="js/index.js"></script>
-    <title>Home</title>
+    <script src="javascript/index.js"></script>
+    <script src="javascript/fav.js"></script>
+    <title>Sponsored_auction</title>
 </head>
 
 <body>
-        <?php include 'Components/header.php'; ?>
+    <?php include 'Components/header.php'; ?>
     <main>
+                <!-- Banner -->
+                <div id="carouselExampleIndicators" class="carousel slide">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="images/2.jpg" class="d-block img-fluid w-100 " alt="...">
+                </div>
+            </div>
+        </div>
         <div class="container mt-5">
             <div class="row justify-content-center">
                 <div class="col-11">
                     <div class="row">
                         <div class="p-2">
-                            <p class="fs-3 ps-3">My favourites</p>
+                            <p class="fs-3 ps-3">Incoming auctions</p>
                             <nav class="nav">
-                                <a class="nav-link fw-bold" href="fav_obj.php" style="color: #666666" ;>Objects</a>
-                                <a class="nav-link  fw-bold active" aria-current="page" href="#">Collections</a>
-                                <a class="nav-link fw-bold" href="fav_seller.php" style="color: #666666" ;>Seller</a>
+                            <a class="nav-link fw-bold" href="trending_auctions.php" style="color: #666666" ;>Trending Auctions</a>
+                                <a class="nav-link fw-bold" href="sponsored_auctions.php" style="color: #666666" ;>Sponsored
+                                    auction</a>
+                                <a class="nav-link  fw-bold active" aria-current="page" href="#">Incoming auction</a>
+                                <a class="nav-link fw-bold" href="completed_auctions.php" style="color: #666666" ;>Completed
+                                    auction</a>
                             </nav>
                         </div>
                     </div>
@@ -179,7 +188,8 @@
             </div>
         </div>
     </main>
-        <?php include 'Components/footer2.php'; ?>
+    <?php include 'Components/footer2.php'; ?>
+
 </body>
 
 </html>
