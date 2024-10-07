@@ -67,7 +67,6 @@
                                         <option value="start_time" <?php echo ($sort_by === 'start_time') ? 'selected' : ''; ?>>Time remaining</option>
                                         <option value="current_bid" <?php echo ($sort_by === 'current_bid') ? 'selected' : ''; ?>>Current Bid</option>
                                         <option value="product_name" <?php echo ($sort_by === 'product_name') ? 'selected' : ''; ?>>Product Name</option>
-                                        <option value="3">Three</option>
                                     </select>
                                 </form>
                             </div>
