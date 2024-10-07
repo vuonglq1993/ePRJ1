@@ -12,9 +12,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link rel="stylesheet" href="Components/footer2.css">
-
-    <link rel="stylesheet" href="style/categories3.css">
+    <link rel="stylesheet" href="Components/footer.css">
+    <link rel="stylesheet" href="style/categories.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="Components/header.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
@@ -35,7 +34,7 @@
     <!-- Header -->
     <?php include 'Components/header.php'; ?>
     <main>
-        <div class="container mt-2">
+        <div class="container my-5 pb-3">
             <div class="row justify-content-center">
                 <div class="col-11">
                     <h2 class="mt-4">Search Results for "<?php echo htmlspecialchars($search); ?>"</h2>
@@ -43,6 +42,7 @@
                         <?php
                         if (!empty($search_data)) {
                             foreach ($search_data as $auction) {
+                                $auction_id = $auction['auction_id'];
                                 $product_id = $auction['product_id'];
                                 $image_url = $auction['image_url'];
                                 $current_bid = $auction['current_bid'] ? htmlspecialchars($auction['current_bid']) : htmlspecialchars($auction['buyout_price']);
@@ -103,7 +103,7 @@
                                         <div class="col-6 text-end">
                                             <div class="text-dark" style="--bs-text-opacity: .5;">
                                                 <p class="m-2">Interesting?</p>
-                                                <a href="#" class="btn bidbutton me-2">Bid now</a>
+                                                <a href="bid_details.php?auction_id=<?php echo $auction_id ?>" class="btn bidbutton me-2">Bid now</a>
                                             </div>
                                         </div>
                                     </div>
