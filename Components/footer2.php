@@ -1,5 +1,9 @@
-<footer class="bg-000022">
-    <div class="row">
+<footer class="">
+    <div class="pt-3 pb-2 bg-f5f5f5">
+        <h1 class="fs-5 text-center">Bid on over 65,000 special objects every week, selected by 240+ experts</h1>
+    </div>
+    <div class="row bg-000022">
+
         <div class="col-md-3 col-sm-6">
             <img src="./images/header/logo.png" class="img-fluid mt-1 mb-5" />
             <i class="bi text-white bisize ms-5 me-3 bi-facebook"></i>
@@ -63,11 +67,12 @@
                 referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
     </div>
+    <div class="row copyright bg-000022">
     <hr />
-    <div class="row copyright">
 
         <div class="col">
-            <p class="fs-5 text-center">Copyright 2024 <i class="bi bi-c-circle"></i><strong class="mx-2"> Group 1 FPT APTECH HaNoi</strong></p>
+            <p class="fs-5 text-center">Copyright 2024 <i class="bi bi-c-circle"></i><strong class="mx-2"> Group 1 FPT
+                    APTECH HaNoi</strong></p>
         </div>
     </div>
 

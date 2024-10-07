@@ -1,6 +1,6 @@
 <footer>
     <div class="footer-1 mt-5 pt-4 pb-4">
-        <div class="container">
+        <div class="container bg-f5f5f5">
             <h1 class="fs-5 text-center">Bid on over 65,000 special objects every week, selected by 240+ experts</h1>
         </div>
     </div>
