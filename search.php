@@ -28,7 +28,7 @@
         crossorigin="anonymous"></script>
     <script src="javascript/index.js"></script>
     <script src="javascript/fav.js"></script>
-    <title>Categories</title>
+    <title>Serach for <?php echo htmlspecialchars($search); ?></title>
 </head>
 
 <body>
