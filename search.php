@@ -12,7 +12,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link rel="stylesheet" href="Components/footer.css">
+    <link rel="stylesheet" href="Components/footer2.css">
 
     <link rel="stylesheet" href="style/categories3.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
@@ -99,10 +99,6 @@
                                         <div class="col-6 text-start">
                                             <p class="m-2">
                                                 <?php echo htmlspecialchars($product_name) ?></p>
-                                            <div class="text-dark" style="--bs-text-opacity: .5;">
-                                                <p class="m-2">Acrilyc, Sand on Canvas</p>
-                                                <p class="m-2">90x70cm</p>
-                                            </div>
                                         </div>
                                         <div class="col-6 text-end">
                                             <div class="text-dark" style="--bs-text-opacity: .5;">
@@ -124,5 +120,5 @@
         </div>
     </main>
     <!-- footer  -->
-    <?php include 'Components/footer.php'; ?>
+    <?php include 'Components/footer2.php'; ?>
 </body>

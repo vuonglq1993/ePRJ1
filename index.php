@@ -55,6 +55,18 @@
             noActionLink(); // Initialize noActionLink
         });
     </script>
+    <style>
+        .hidden {
+            display: none !important;
+        }
+
+        .seemlbtn {
+            border: none !important;
+            background-color: transparent !important;
+            color: black;
+            opacity: 0.5;
+        }
+    </style>
     <title>Home</title>
 </head>
 
@@ -75,7 +87,7 @@
                 <div class="col-11">
                     <div class="d-flex flex-row">
                         <div class="p-2">
-                            <p class="fs-3">Our trending for sale</p>
+                            <p class="fs-3">Trending auction</p>
                         </div>
                         <div class="p-2 mt-3">
                             <p><a href="#"
@@ -194,19 +206,24 @@
                                 <span class="visually-hidden">Next</span>
                             </button>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
         <!-- Collections -->
         <!-- <div class="container mt-5">
-            <div class="row justify-content-center">
-                <div class="col-11">
-                    <div class="row justify-content-center">
-                        <div class="d-flex flex-row">
-                            <div class="p-2">
-                                <p class="fs-3">Buy anything that matches your style</p>
+                <div class="row justify-content-center">
+                    <div class="col-11">
+                        <div class="row justify-content-center">
+                            <div class="d-flex flex-row">
+                                <div class="p-2">
+                                    <p class="fs-3">Buy anything that matches your style</p>
+                                </div>
+                                <div class="p-2 mt-3">
+                                    <p><a href="#"
+                                            class="link-body-emphasis link-offset-2 link-underline-opacity-25 link-opacity-25 link-underline-opacity-75-hover">See
+                                            all collections</a></p>
+                                </div>
                             </div>
                             <div class="p-2 mt-3">
                                 <p><a href="#"
@@ -322,7 +339,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row  justify-content-center">
+                <div class="row justify-content-center">
                     <div class="col-2">
                         <?php
                         $limit = 9;
@@ -462,7 +479,8 @@
                                                     <div class="text-dark" style="--bs-text-opacity: .5;">
 
                                                         <p class="m-2">Interesting?</p>
-                                                        <a href="#" class="btn bidbutton me-2">Bid
+                                                        <a href="bid_details.php?auction_id=<?php echo htmlspecialchars($auction_id) ?>"
+                                                            class="btn bidbutton me-2">Bid
                                                             now</a>
 
                                                     </div>
@@ -633,7 +651,6 @@
                 </div>
             </div>
         </div>
-
         <!-- Iconic Brand Section -->
         <div class="container mt-5">
             <div class="row justify-content-center">
@@ -670,7 +687,6 @@
             <div class="col-md-7 col-sm-12">
                 <img src="./images/bitspiriticon.jpg" class="img-fluid" alt="" />
             </div>
-
         </div>
     </main>
     <?php include 'Components/footer2.php'; ?>

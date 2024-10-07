@@ -3,6 +3,7 @@
 
 <head>
     <?php
+    session_start();
     // Include the database connection file and fetch categories from the database
     include './functions/db.php';
     $categories = select("SELECT * FROM categories"); // Fetch all categories
@@ -41,7 +42,7 @@
     <!-- Main content section -->
     <main>
         <!-- Popular Categories section -->
-        <div class="container my-4">
+        <div class="container my-5">
             <div class="row justify-content-center">
                 <div class="col-11">
                     <div class="row text-center">
@@ -66,6 +67,7 @@
                 </div>
             </div>
         </div>
+        <span class="my-5 "></span>
     </main>
     
     <!-- Footer section -->

@@ -24,6 +24,7 @@
     
     <!-- External CSS and Bootstrap for styling -->
     <link rel="stylesheet" href="style/fav.css">
+    <link rel="stylesheet" href="Components/footer2.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="Components/header.css">
     <link rel="stylesheet" href="Components/footer.css">
@@ -50,7 +51,7 @@
     <?php include 'Components/header.php'; ?>
     
     <main>
-        <div class="container mt-5">
+        <div class="container my-5 pb-4">
             <div class="row justify-content-center">
                 <div class="col-11">
                     <!-- Page Title -->
@@ -85,8 +86,8 @@
                                     <!-- Sorting dropdown: triggers form submission on change -->
                                     <select class="no-border form-select color0028BA" name="sort_by" onchange="document.getElementById('sortForm').submit();" aria-label="Default select example">
                                         <option value="start_time" <?php echo ($sort_by === 'start_time') ? 'selected' : ''; ?>>Time remaining</option>
-                                        <option value="current_bid"<?php echo ($sort_by === 'current_bid') ? 'selected' : ''; ?>>Current Bid</option>
-                                        <option value="product_name"<?php echo ($sort_by === 'product_name') ? 'selected' : ''; ?>>Product Name</option>
+                                        <option value="current_bid" <?php echo ($sort_by === 'current_bid') ? 'selected' : ''; ?>>Current Bid</option>
+                                        <option value="product_name" <?php echo ($sort_by === 'product_name') ? 'selected' : ''; ?>>Product Name</option>
                                     </select>
                                 </form>
                             </div>
@@ -138,6 +139,11 @@
                                                         </div>
                                                     </div>
                                                     <div>
+                                                        <a
+                                                            href="categories3.php?product_id=<?php echo htmlspecialchars($product_id) ?>"><img
+                                                                src="<?php echo $image_url ?>"
+                                                                alt="<?php echo htmlspecialchars($product_name) ?>"
+                                                                class="img-fluid"></a>
                                                         <!-- Product image and bid information -->
                                                         <img src="<?php echo $image_url ?>" alt="" class="img-fluid">
                                                         <div class="row">
@@ -159,16 +165,13 @@
                                     <div class="row">
                                         <div class="col-6 text-start">
                                             <p class="m-2"><?php echo $product_name ?></p>
-                                            <div class="text-dark" style="--bs-text-opacity: .5;">
-                                                <p class="m-2">Acrilyc, Sand on Canvas</p>
-                                                <p class="m-2">90x70cm</p>
-                                            </div>
                                         </div>
                                         <div class="col-6 text-end">
                                             <div class="text-dark" style="--bs-text-opacity: .5;">
                                                 <p class="m-2">Interesting?</p>
-                                                <!-- Bid now button -->
-                                                <a href="#" class="btn bidbutton me-2">Bid now</a>
+                                                <a href="bid_details.php?auction_id=<?php echo htmlspecialchars($auction_id) ?>"
+                                                    class="btn bidbutton me-2">Bid
+                                                    now</a>
                                             </div>
                                         </div>
                                     </div>

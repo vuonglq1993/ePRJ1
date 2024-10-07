@@ -15,6 +15,7 @@
 
     // Fetch product data using the product ID
     $product_data = get_product_data($product_id);
+
     ?>
 
     <meta charset="UTF-8">
@@ -58,6 +59,7 @@
             <?php
             // Check if the product data is available
             if ($product_data) {
+                $auction_id = $product_data['auction_id'];
                 $product_name = $product_data['product_name'];
                 $product_description = $product_data['description'] ? htmlspecialchars($product_data['description']) : 'No description available for this product.';
                 $product_image = $product_data['image_url'];
@@ -94,8 +96,11 @@
                             <p class="fs-6 fw-light color0028BA"><?php echo htmlspecialchars($status_end); ?></p>
                             <p class="fs-4 fw-light color0028BA"><?php echo htmlspecialchars($status); ?></p>
                         </div>
-                        <div class="my-4">
-                            <div class="mt-3"><?php echo $product_description ?></div>
+                        <div class="my-4 ">
+                            <div class="my-3"><?php echo $product_description ?></div>
+                            <a href="bid_details.php?auction_id=<?php echo htmlspecialchars($auction_id) ?>"
+                                class="btn bidbutton me-2">Bid
+                                now</a>
                         </div>
                     </div>
                     <!-- Display if there is no auction available -->
@@ -105,9 +110,11 @@
                         <div class="row mt-3">
                             <p class="fw-light color666 fs-6">No auction available</p>
                         </div>
-                        <!-- Display product description -->
-                        <div class="my-4">
-                            <div class="mt-3"><?php echo $product_description ?></div>
+                        <div class="my-4 ">
+                            <div class="my-3"><?php echo $product_description ?></div>
+                            <a href="bid_details.php?auction_id=<?php echo htmlspecialchars($auction_id) ?>"
+                                class="btn bidbutton me-2">Bid
+                                now</a>
                         </div>
                     </div>
                 <?php endif; ?>
