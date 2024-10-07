@@ -51,7 +51,7 @@
     <script src="javascript/fav.js"></script>
     <script>
         // Ensure noActionLink runs after the DOM is fully loaded
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             noActionLink(); // Initialize noActionLink
         });
     </script>
@@ -108,14 +108,18 @@
                                         $image_url = $auction['image_url'];
                                         $start_time = $auction['start_time'];
                                         $days_left = caculate_days_left($start_time, $end_time);
-                                        if (new DateTime() < new DateTime($start_time)) {
+                                        if (empty($start_time)) {
+                                            $bid_display = "Buyout Price: ";
+                                        } elseif (new DateTime() < new DateTime($start_time)) {
                                             $bid_display = "Starting Price: ";
+                                        } elseif (new DateTime() > new DateTime($end_time)) {
+                                            $bid_display = "Winning price: ";
                                         } else {
                                             $bid_display = "Current Bid: ";
                                         }
                                         $active_class = $first_item ? 'active' : '';
                                         $first_item = false;
-                                        ?>
+                                ?>
                                         <div class="trending-carousel-item carousel-item <?php echo $active_class ?>">
                                             <div class="row">
                                                 <div class="col">
@@ -172,7 +176,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <?php
+                                <?php
                                     }
                                 } else {
                                     echo "<p>No trending items available.</p>";
@@ -229,7 +233,7 @@
                                             $product_count = $collection['product_count'];
                                             $active_class = $first_item ? 'active' : '';
                                             $first_item = false;
-                                            ?>
+                                    ?>
                                             <div
                                                 class="carousel-item collection-carousel-item ms-1 <?php echo $active_class; ?>">
                                                 <div class="row">
@@ -256,7 +260,7 @@
                                     } else {
                                         echo "<p>No collections available.</p>";
                                     }
-                                    ?>
+                                            ?>
                                     <div class="carousel-item collection-carousel-item ms-1">
                                         <div class="row">
                                             <img src="images/1.jpg" alt="" class="img-fluid" class="img-fluid" />
@@ -360,14 +364,14 @@
 
                         </script> -->
                         <script>
-                            document.addEventListener('DOMContentLoaded', function () {
+                            document.addEventListener('DOMContentLoaded', function() {
                                 const seeMoreBtn = document.getElementById('seeMoreBtn');
                                 const seeLessBtn = document.getElementById('seeLessBtn');
 
                                 // Sự kiện khi nhấn nút See More
-                                seeMoreBtn.addEventListener('click', function () {
+                                seeMoreBtn.addEventListener('click', function() {
                                     const hiddenItems = document.querySelectorAll('.category-item.hidden');
-                                    hiddenItems.forEach(function (item) {
+                                    hiddenItems.forEach(function(item) {
                                         item.classList.remove('hidden');
                                     });
                                     seeMoreBtn.style.display = 'none';
@@ -375,9 +379,9 @@
                                 });
 
                                 // Sự kiện khi nhấn nút See Less
-                                seeLessBtn.addEventListener('click', function () {
+                                seeLessBtn.addEventListener('click', function() {
                                     const allItems = document.querySelectorAll('.category-item');
-                                    allItems.forEach(function (item, index) {
+                                    allItems.forEach(function(item, index) {
                                         if (index >= <?php echo $limit; ?>) {
                                             item.classList.add('hidden');
                                         }
@@ -411,7 +415,7 @@
                                     } else {
                                         $bid_display = "Current Bid: ";
                                     }
-                                    ?>
+                            ?>
                                     <div class="col-sm-12 col-md-6 col-lg-4">
                                         <div class="row">
                                             <div class="col">
@@ -453,10 +457,6 @@
                                                     <p class="m-2">
                                                         <?php echo htmlspecialchars($product_name) ?>
                                                     </p>
-                                                    <div class="text-dark" style="--bs-text-opacity: .5;">
-                                                        <p class="m-2">Acrilyc, Sand on Canvas</p>
-                                                        <p class="m-2">90x70cm</p>
-                                                    </div>
                                                 </div>
                                                 <div class="col-6 text-end">
                                                     <div class="text-dark" style="--bs-text-opacity: .5;">
@@ -470,7 +470,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <?php
+                            <?php
                                 }
                             } else {
                                 echo "<p>No auction items available.</p>";
