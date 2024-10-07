@@ -51,10 +51,22 @@
     <script src="javascript/fav.js"></script>
     <script>
         // Ensure noActionLink runs after the DOM is fully loaded
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             noActionLink(); // Initialize noActionLink
         });
     </script>
+    <style>
+        .hidden {
+            display: none !important;
+        }
+
+        .seemlbtn {
+            border: none !important;
+            background-color: transparent !important;
+            color: black;
+            opacity: 0.5;
+        }
+    </style>
     <title>Home</title>
 </head>
 
@@ -75,7 +87,7 @@
                 <div class="col-11">
                     <div class="d-flex flex-row">
                         <div class="p-2">
-                            <p class="fs-3">Our trending for sale</p>
+                            <p class="fs-3">Trending auction</p>
                         </div>
                         <div class="p-2 mt-3">
                             <p><a href="#"
@@ -115,7 +127,7 @@
                                         }
                                         $active_class = $first_item ? 'active' : '';
                                         $first_item = false;
-                                        ?>
+                                ?>
                                         <div class="trending-carousel-item carousel-item <?php echo $active_class ?>">
                                             <div class="row">
                                                 <div class="col">
@@ -172,7 +184,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <?php
+                                <?php
                                     }
                                 } else {
                                     echo "<p>No trending items available.</p>";
@@ -190,19 +202,24 @@
                                 <span class="visually-hidden">Next</span>
                             </button>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
         <!-- Collections -->
         <!-- <div class="container mt-5">
-            <div class="row justify-content-center">
-                <div class="col-11">
-                    <div class="row justify-content-center">
-                        <div class="d-flex flex-row">
-                            <div class="p-2">
-                                <p class="fs-3">Buy anything that matches your style</p>
+                <div class="row justify-content-center">
+                    <div class="col-11">
+                        <div class="row justify-content-center">
+                            <div class="d-flex flex-row">
+                                <div class="p-2">
+                                    <p class="fs-3">Buy anything that matches your style</p>
+                                </div>
+                                <div class="p-2 mt-3">
+                                    <p><a href="#"
+                                            class="link-body-emphasis link-offset-2 link-underline-opacity-25 link-opacity-25 link-underline-opacity-75-hover">See
+                                            all collections</a></p>
+                                </div>
                             </div>
                             <div class="p-2 mt-3">
                                 <p><a href="#"
@@ -229,7 +246,7 @@
                                             $product_count = $collection['product_count'];
                                             $active_class = $first_item ? 'active' : '';
                                             $first_item = false;
-                                            ?>
+                                    ?>
                                             <div
                                                 class="carousel-item collection-carousel-item ms-1 <?php echo $active_class; ?>">
                                                 <div class="row">
@@ -256,7 +273,7 @@
                                     } else {
                                         echo "<p>No collections available.</p>";
                                     }
-                                    ?>
+                                            ?>
                                     <div class="carousel-item collection-carousel-item ms-1">
                                         <div class="row">
                                             <img src="images/1.jpg" alt="" class="img-fluid" class="img-fluid" />
@@ -318,7 +335,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row  justify-content-center">
+                <div class="row justify-content-center">
                     <div class="col-2">
                         <?php
                         $limit = 9;
@@ -360,14 +377,14 @@
 
                         </script> -->
                         <script>
-                            document.addEventListener('DOMContentLoaded', function () {
+                            document.addEventListener('DOMContentLoaded', function() {
                                 const seeMoreBtn = document.getElementById('seeMoreBtn');
                                 const seeLessBtn = document.getElementById('seeLessBtn');
 
                                 // Sự kiện khi nhấn nút See More
-                                seeMoreBtn.addEventListener('click', function () {
+                                seeMoreBtn.addEventListener('click', function() {
                                     const hiddenItems = document.querySelectorAll('.category-item.hidden');
-                                    hiddenItems.forEach(function (item) {
+                                    hiddenItems.forEach(function(item) {
                                         item.classList.remove('hidden');
                                     });
                                     seeMoreBtn.style.display = 'none';
@@ -375,9 +392,9 @@
                                 });
 
                                 // Sự kiện khi nhấn nút See Less
-                                seeLessBtn.addEventListener('click', function () {
+                                seeLessBtn.addEventListener('click', function() {
                                     const allItems = document.querySelectorAll('.category-item');
-                                    allItems.forEach(function (item, index) {
+                                    allItems.forEach(function(item, index) {
                                         if (index >= <?php echo $limit; ?>) {
                                             item.classList.add('hidden');
                                         }
@@ -411,7 +428,7 @@
                                     } else {
                                         $bid_display = "Current Bid: ";
                                     }
-                                    ?>
+                            ?>
                                     <div class="col-sm-12 col-md-6 col-lg-4">
                                         <div class="row">
                                             <div class="col">
@@ -453,16 +470,13 @@
                                                     <p class="m-2">
                                                         <?php echo htmlspecialchars($product_name) ?>
                                                     </p>
-                                                    <div class="text-dark" style="--bs-text-opacity: .5;">
-                                                        <p class="m-2">Acrilyc, Sand on Canvas</p>
-                                                        <p class="m-2">90x70cm</p>
-                                                    </div>
                                                 </div>
                                                 <div class="col-6 text-end">
                                                     <div class="text-dark" style="--bs-text-opacity: .5;">
 
                                                         <p class="m-2">Interesting?</p>
-                                                        <a href="#" class="btn bidbutton me-2">Bid
+                                                        <a href="bid_details.php?auction_id=<?php echo htmlspecialchars($auction_id) ?>"
+                                                            class="btn bidbutton me-2">Bid
                                                             now</a>
 
                                                     </div>
@@ -470,7 +484,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <?php
+                            <?php
                                 }
                             } else {
                                 echo "<p>No auction items available.</p>";
@@ -633,7 +647,6 @@
                 </div>
             </div>
         </div>
-
         <!-- Iconic Brand Section -->
         <div class="container mt-5">
             <div class="row justify-content-center">
@@ -670,7 +683,6 @@
             <div class="col-md-7 col-sm-12">
                 <img src="./images/bitspiriticon.jpg" class="img-fluid" alt="" />
             </div>
-
         </div>
     </main>
     <?php include 'Components/footer2.php'; ?>
