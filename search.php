@@ -42,6 +42,7 @@
                         <?php
                         if (!empty($search_data)) {
                             foreach ($search_data as $auction) {
+                                $auction_id = $auction['auction_id'];
                                 $product_id = $auction['product_id'];
                                 $image_url = $auction['image_url'];
                                 $current_bid = $auction['current_bid'] ? htmlspecialchars($auction['current_bid']) : htmlspecialchars($auction['buyout_price']);
@@ -102,7 +103,7 @@
                                         <div class="col-6 text-end">
                                             <div class="text-dark" style="--bs-text-opacity: .5;">
                                                 <p class="m-2">Interesting?</p>
-                                                <a href="#" class="btn bidbutton me-2">Bid now</a>
+                                                <a href="bid_details.php?auction_id=<?php echo $auction_id ?>" class="btn bidbutton me-2">Bid now</a>
                                             </div>
                                         </div>
                                     </div>
