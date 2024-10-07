@@ -25,6 +25,7 @@
 
     <!-- jQuery for handling JavaScript interactions -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="style/categories3.css">
 
     <!-- Bootstrap and FontAwesome for styling and icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
@@ -95,9 +96,8 @@
                                                 $bid_display = "Current Bid: ";
                                             }
                                             ?>
-                                            <!-- Product card for auction item -->
-                                            <div class="col-md-3 col-sm-6 mb-3">
-                                                <div class="card p-1"> <!-- Reduced padding -->
+                                            <div class="col-md-3 col-sm-6 mb-3"> 
+                                                <div class="card p-1">
                                                     <div class="card-body">
                                                         <div class="d-flex justify-content-between">
                                                             <div class="p-2"></div>
@@ -131,11 +131,7 @@
                                                     <div class="card-footer">
                                                         <div class="row">
                                                             <div class="col-6 text-start">
-                                                                <p class="m-1"><?php echo htmlspecialchars($product_name) ?></p> <!-- Reduced margin -->
-                                                                <div class="text-dark" style="--bs-text-opacity: .5;">
-                                                                    <p class="m-1">Acrylic, Sand on Canvas</p> <!-- Reduced margin -->
-                                                                    <p class="m-1">90x70cm</p> <!-- Reduced margin -->
-                                                                </div>
+                                                                <p class="m-1"><?php echo htmlspecialchars($product_name) ?></p>
                                                             </div>
                                                             <div class="col-6 text-end">
                                                                 <div class="text-dark" style="--bs-text-opacity: .5;">

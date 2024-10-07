@@ -108,7 +108,7 @@ function get_trendin_data($user_id)
 function get_product_data($product_id)
 {
     if ($product_id > 0) {
-        $sql = "SELECT p.*, a.start_time, a.end_time, c.collection_name
+        $sql = "SELECT p.*, a.start_time, a.end_time, a.auction_id, c.collection_name
             FROM products p
             LEFT JOIN auctions a ON p.product_id = a.product_id
             LEFT JOIN collections c ON p.collection_id = c.collection_id

@@ -69,7 +69,7 @@ $fav_count = count_fav_data($user_id);
                                                     <div class="row bg-f8f9fa">
                                                         <div class="col">
                                                             <input type="text" class="form-control no-border-input"
-                                                                id="searchQuery" name="searchQuery"
+                                                                id="search" name="search"
                                                                 placeholder="What are you looking for?">
                                                         </div>
                                                         <div class="col text-end">
