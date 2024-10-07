@@ -5,41 +5,44 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link rel="stylesheet" href="Components/footer2.css">
-
-    <!-- <link rel="stylesheet" href="style/categories3.css"> -->
+    <!-- Linking CSS files for header and footer components -->
+    <link rel="stylesheet" href="Components/footer.css">
+    <link rel="stylesheet" href="Components/header.css">
+    <!-- Linking Bootstrap Icons and Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="Components/header2.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Linking Popper.js and Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
         crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
         integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
         crossorigin="anonymous"></script>
-    <script src="javascript/index.js"></script>
+    <!-- jQuery library -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <title>About us</title>
 </head>
 
 <body>
+    <!-- Including the header component -->
     <?php include 'Components/header.php'; ?>
     <main>
 
-        <div id="carouselExampleIndicators" class="carousel slide">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <img src="images/about3.jpg" class="d-block img-fluid w-100 " alt="...">
-                </div>
-            </div>
-        </div>
+        <!-- Banner images -->
 
+                <div class="banner">
+                    <img src="images/about.jpg" class="d-block img-fluid w-100 " alt="...">
+                </div>
+
+
+        <!-- Main content container -->
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-11">
                     <div class="row mt-5">
+                        <!-- Text content about the company -->
                         <div class="col-md-6 col-sm-12 p-4">
                             <h2>ONLINE AUCTION AT: BIDSPIRIT ART AUCTION</h2>
 
@@ -68,6 +71,7 @@
                                 <li>0824010101</li>
                             </ul>
                         </div>
+                        <!-- Image section next to the text content -->
                         <div class="col-md-6 col-sm-12 p-4">
                             <img src="images/about-us.jpg" class="img-fluid" />
                         </div>
@@ -75,7 +79,7 @@
                     <div class="row">
                         <div class="col p-2 mb-5">
 
-
+                            <!-- Section about the company's mission -->
                             <h3>OUR MISSION</h3>
 
                             <p>Vietnamese Art</p>
@@ -90,6 +94,7 @@
                                 and ensuring their
                                 interests. This is BIDSPIRIT, our family home.</p>
 
+                            <!-- Section about the company's strengths -->
                             <h3>OUR STRENGTHS</h3>
 
                             <h4>Expertise</h4>
@@ -153,6 +158,7 @@
         </div>
 
     </main>
+    <!-- Including the footer component -->
     <?php include 'Components/footer2.php'; ?>
 
 </body>

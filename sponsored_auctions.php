@@ -56,12 +56,12 @@
                     <div class="row">
                         <div class="p-2">
                             <!-- Page title and navigation for auctions -->
-                            <p class="fs-3 ps-3">Incoming auctions</p>
+                            <p class="fs-3 ps-3">Sponsored auctions</p>
                             <nav class="nav">
                                 <!-- Navigation tabs for different auction types -->
                                 <a class="nav-link fw-bold" href="trending_auctions.php" style="color: #666666;">Trending Auctions</a>
-                                <a class="nav-link fw-bold" href="sponsored_auctions.php" style="color: #666666;">Sponsored auction</a>
-                                <a class="nav-link fw-bold active" aria-current="page" href="#">Incoming auction</a>
+                                <a class="nav-link fw-bold active" href="#" aria-current="page">Sponsored auction</a>
+                                <a class="nav-link fw-bold" href="incoming_auctions.php" style="color: #666666;">Incoming auction</a>
                                 <a class="nav-link fw-bold" href="completed_auctions.php" style="color: #666666;">Completed auction</a>
                             </nav>
                         </div>
@@ -124,6 +124,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <!-- Repeat the same block structure for additional auction items -->
                             <!-- Auction item 2 -->
                             <div class="col-md-3 col-sm-11">
@@ -153,8 +154,7 @@
                                 </div>
                             </div>
 
-                            <!-- Add more auction items as needed in the same structure -->
-
+                            <!-- Add more auction items in the same structure as needed -->
                         </div>
                     </div>
                 </div>

@@ -19,29 +19,26 @@
 
 .search-config {
     border: none !important;
-    background-color: transparent !important;
-    position: relative !important;
-    left: 14% !important;
-    border-top-left-radius: 50% !important;
-    border-bottom-left-radius: 50% !important;
 }
 
 .form-config {
     margin-top: 8px !important;
 }
 
-.sell-config {
-    margin-top: 8px !important;
-    border-radius: 2rem !important;
-    padding: 10px 20px auto  20px !important;
-    height: 2rem !important;
-    white-space: nowrap !important;
+.no-border-input {
+    border: none !important;
+    box-shadow: none !important;
+    background-color: #f8f9fa !important;
+    padding: 10px;
+    }
+
+.bg-f8f9fa {
+    background-color: #f8f9fa !important;
 }
 
-
-
-.search-config:hover {
-    background-color: #FFFFFF !important;
+.no-border-input:focus {
+    outline: none !important;
+    box-shadow: none !important;
 }
 
 .input-config {
@@ -52,23 +49,4 @@
 
 .countposition {
     position: relative !important;
-}
-
-@media (min-width: 376px)and (max-width: 990px) {
-    .search-config {
-        margin-left: -4.2rem !important;
-    }
-
-    .sell-config {
-        width: 150px;
-        margin-left: 1.3rem !important;
-        margin-right: 1rem !important;
-    }
-
-}
-
-@media(min-width: 991px) {
-    .margin-1rem {
-        margin-left: 2.3rem !important;
-    }
 }
