@@ -384,7 +384,7 @@
                             }
                             ?>
                             <div class="row mb-3">
-                                <div class="text-center">
+                                <div class="text-center mt-4">
                                     <?php
                                     // Hiển thị các nút phân trang
                                     if ($category_id > 0) {

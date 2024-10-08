@@ -118,14 +118,14 @@
                                     <div class="row border shadow-sm p-4 mb-5 bg-body-tertiary rounded">
                                         <p class="fs-5 fc-666666 text-uppercase"><?php echo htmlspecialchars($bid_display) ?></p>
                                         <p class="mb-0 fc-0053b8 fw-bolder" style="font-size: 4rem;">$ <?php echo htmlspecialchars($current_bid) ?></p>
-                                        <p class="fs-6 mb-1 fc-666666 text-uppercase fw-light">Step price</p>
-                                        <p class="fs-2 fw-light">$ 1000</p>
+
                                         <?php if (new DateTime() < new DateTime($start_time)): ?>
+
                                             <div class="row">
-                                            <div class="row">
-                                                <!-- No select or buttons for not started auction -->
-                                                <p class="fs-4 text-danger">This auction hasn't started.</p>
-                                            </div>
+                                                <div class="row">
+                                                    <!-- No select or buttons for not started auction -->
+                                                    <p class="fs-4 text-danger">This auction hasn't started.</p>
+                                                </div>
                                             </div>
                                         <?php elseif (new DateTime() > new DateTime($end_time)): ?>
                                             <div class="row">
@@ -133,6 +133,8 @@
                                                 <p class="fs-4 text-danger">This auction has ended.</p>
                                             </div>
                                         <?php else: ?>
+                                            <p class="fs-6 mb-1 fc-666666 text-uppercase fw-light">Step price</p>
+                                            <p class="fs-2 fw-light">$ 1000</p>
                                             <div class="row">
                                                 <!-- Dropdown to choose a bid amount -->
                                                 <select class="form-select" id="bid_amount" aria-label="Default select example">
