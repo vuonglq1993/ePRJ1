@@ -14,13 +14,13 @@
 
     // Retrieve auction_id from the URL, and ensure it's an integer
     $auction_id = isset($_GET['auction_id']) ? intval($_GET['auction_id']) : '';
-    
+
     // Fetch the bid data based on the auction_id
     $bid_data = get_bid_data($auction_id);
     ?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <!-- jQuery library for handling JavaScript interactions -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
@@ -28,7 +28,7 @@
     <link rel="stylesheet" href="Components/footer.css">
     <link rel="stylesheet" href="Components/header2.css">
     <link rel="stylesheet" href="style/bid_details.css">
-    
+
     <!-- Bootstrap icons and Bootstrap CSS for styling -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
@@ -83,6 +83,8 @@
                                     $bid_display = "Buyout Price ";
                                 } elseif (new DateTime() < new DateTime($start_time)) {
                                     $bid_display = "Starting Price: ";
+                                    $status = 'Starts in ' . date_diff(new DateTime(), new DateTime($start_time))->format('%d days, %h hours, %i minutes') . '.';
+                                    $status_end = 'Starts on ' . date('F j, Y g:i a', strtotime($start_time));
                                 } elseif (new DateTime() > new DateTime($end_time)) {
                                     $bid_display = "Winning price ";
                                     $status = 'Ended ' . date_diff(new DateTime($end_time), new DateTime())->format('%d days, %h hours, %i minutes') . ' ago.';
@@ -105,7 +107,7 @@
                                     <img src="<?php echo htmlspecialchars($product_image) ?>" alt="sanpham" class="img-fluid mt-3" />
                                     <p class="fs-4 fw-light fc-999999">Product detail:</p>
                                     <p class="fs-6 "><?php echo $product_description ?></p>
-                                    
+
                                 </div>
 
                                 <div class="col-md-6 col-sm-12">
@@ -115,32 +117,46 @@
                                         <p class="mb-0 fc-0053b8 fw-bolder" style="font-size: 4rem;">$ <?php echo htmlspecialchars($current_bid) ?></p>
                                         <p class="fs-6 mb-1 fc-666666 text-uppercase fw-light">Step price</p>
                                         <p class="fs-2 fw-light">$ 1000</p>
-                                        <div class="row">
-                                            <!-- Dropdown to choose a bid amount -->
-                                            <select class="form-select" id="bid_amount" aria-label="Default select example">
-                                                <option selected>Choose your bid</option>
-                                                <?php
-                                                $max_bid = 1000000;
-                                                for ($bid = $current_bid + 1000; $bid <= $max_bid; $bid += 1000) {
-                                                    echo '<option value="' . $bid . '">$' . htmlspecialchars($bid) . '</option>';
-                                                }
-                                                ?>
-                                            </select>
-                                            <!-- <p class="fs-6 fc-999999">Last bid placed by: <?php echo $bidder_username; ?></p>
+                                        <?php if (new DateTime() < new DateTime($start_time)): ?>
+                                            <div class="row">
+                                            <div class="row">
+                                                <!-- No select or buttons for not started auction -->
+                                                <p class="fs-4 text-danger">This auction hasn't started.</p>
+                                            </div>
+                                            </div>
+                                        <?php elseif (new DateTime() > new DateTime($end_time)): ?>
+                                            <div class="row">
+                                                <!-- No select or buttons for ended auction -->
+                                                <p class="fs-4 text-danger">This auction has ended.</p>
+                                            </div>
+                                        <?php else: ?>
+                                            <div class="row">
+                                                <!-- Dropdown to choose a bid amount -->
+                                                <select class="form-select" id="bid_amount" aria-label="Default select example">
+                                                    <option selected>Choose your bid</option>
+                                                    <?php
+                                                    $max_bid = 1000000;
+                                                    for ($bid = $current_bid + 1000; $bid <= $max_bid; $bid += 1000) {
+                                                        echo '<option value="' . $bid . '">$' . htmlspecialchars($bid) . '</option>';
+                                                    }
+                                                    ?>
+                                                </select>
+                                                <!-- <p class="fs-6 fc-999999">Last bid placed by: <?php echo $bidder_username; ?></p>
                                                     <p class="fs-6 fc-999999">Bid Time: <?php echo $bid_time ? date('F j, Y g:i a', strtotime($bid_time)) : 'No bids yet'; ?></p> -->
-                                        </div>
-                                        <div class="row mt-2">
-                                            <div class="col">
-                                                <a class="btn btn-outline-primary bid-size" id="place-bid">
-                                                    <p class="fs-4 mx-3 my-2">Place bid</p>
-                                                </a>
                                             </div>
-                                            <div class="col">
-                                                <a class="btn btn-primary bid-size">
-                                                    <p class="fs-4 mx-3 my-2">Buy out</p>
-                                                </a>
+                                            <div class="row mt-2">
+                                                <div class="col">
+                                                    <a class="btn btn-outline-primary bid-size" id="place-bid">
+                                                        <p class="fs-4 mx-3 my-2">Place bid</p>
+                                                    </a>
+                                                </div>
+                                                <div class="col">
+                                                    <a class="btn btn-primary bid-size">
+                                                        <p class="fs-4 mx-3 my-2">Buy out</p>
+                                                    </a>
+                                                </div>
                                             </div>
-                                        </div>
+                                        <?php endif; ?>
                                         <!-- Hidden input to store auction_id -->
                                         <input type="hidden" id="auction-id" value="<?php echo $auction_id; ?>">
                                         <div class="row mt-5 span">
@@ -185,11 +201,11 @@
                                     <img src="images/largeicon.jpg" class="img-fluid" />
                                 </div>
                             </div>
-                        </div>
+                                </div>
                     </div>
                     <div class="row mb-5">
-                    <p class="fs-4 fw-light">Shipping</p>
-                    <p class="fs-6">We offer various shipping methods including Standard (5-7 business days), Express (2-3 business days), and Overnight (next business day), with costs ranging from $5.99 to $19.99, and free shipping on orders over $50. International shipping is available to select countries with varying costs and delivery times. Orders are processed within 1-2 business days, and you’ll receive a tracking number via email once shipped. Note that we do not ship to P.O. Boxes or APO/FPO addresses, and some items may have restrictions. Returns or exchanges are accepted within 30 days of receipt, as per our Returns Policy.</p>
+                        <p class="fs-4 fw-light">Shipping</p>
+                        <p class="fs-6">We offer various shipping methods including Standard (5-7 business days), Express (2-3 business days), and Overnight (next business day), with costs ranging from $5.99 to $19.99, and free shipping on orders over $50. International shipping is available to select countries with varying costs and delivery times. Orders are processed within 1-2 business days, and you’ll receive a tracking number via email once shipped. Note that we do not ship to P.O. Boxes or APO/FPO addresses, and some items may have restrictions. Returns or exchanges are accepted within 30 days of receipt, as per our Returns Policy.</p>
                     </div>
                 </div>
             </div>

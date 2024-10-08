@@ -26,8 +26,8 @@
 
     <!-- Linking CSS files for styling the page and Bootstrap for responsiveness -->
     <link rel="stylesheet" href="Components/footer.css">
-    <link rel="stylesheet" href="style/header2.css">
-    <link rel="stylesheet" href="style/categories3.css">
+    <link rel="stylesheet" href="Components/header2.css">
+    <link rel="stylesheet" href="style/categories.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
 
