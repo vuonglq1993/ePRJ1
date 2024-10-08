@@ -110,7 +110,7 @@ $fav_count = count_fav_data($user_id);
                         <?php if (isset($_SESSION['username'])): ?>
                             <li class="nav-item wrap">
                                 <a class="nav-link mx-4  fc-ffffff ms-1" href="categories1.php"> Wellcome,
-                                    <?php echo htmlspecialchars($_SESSION['username']) ?></a>
+                                    <?php echo htmlspecialchars($_SESSION['username']) ?>!</a>
                             </li>
                         <?php else: ?>
                             <li class="nav-item">
