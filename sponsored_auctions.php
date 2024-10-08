@@ -63,7 +63,7 @@
                     <div class="row">
                         <div class="p-2">
                             <!-- Page title and navigation for auctions -->
-                            <p class="fs-3 ps-3">Sponsored auctions</p>
+                            <p class="fs-3 ps-3">Sponsored auctions by Rolex</p>
                             <nav class="nav">
                                 <!-- Navigation tabs for different auction types -->
                                 <a class="nav-link fw-bold" href="trending_auctions.php" style="color: #666666;">Trending Auctions</a>
@@ -122,15 +122,18 @@
                             ?>
                                     <div class="col-md-3 col-sm-11 me-4">
                                         <!-- Favorite heart icon for the single product -->
-                                        <!-- <div class="row">
-                                            <a href="#" class="text-end mb-3">
-                                                <i class="bi bi-heart-fill"></i>
+                                        <div class="row">
+                                            <a href="#" class="no-action"
+                                                data-product-id="<?php echo $product_id; ?>"
+                                                method="post" onclick="toggleLike(this)">
+                                                <i
+                                                    class="bi <?php echo $auction['liked'] ? 'bi-heart-fill' : 'bi-heart'; ?>"></i>
                                             </a>
-                                        </div> -->
+                                        </div>
 
                                         <!-- Product image and description -->
                                         <div class="row">
-                                        <div class="p-2 text-center"><?php echo $days_left ?></div>
+                                            <div class="p-2 text-center"><?php echo $days_left ?></div>
                                             <a href="categories3.php?product_id=<?php echo htmlspecialchars($product_id); ?>"><img src="<?php echo htmlspecialchars($image_url); ?>" alt="<?php echo htmlspecialchars($product_name); ?>" class="img-fluid" /></a>
                                             <div class="col-12 text-center text-dark">
                                                 <p style="font-size: 13px;">
