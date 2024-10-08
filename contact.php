@@ -85,7 +85,10 @@
 
                         <!-- Contact Form Section -->
                         <div class="col-8 mt-5">
-                            <p class="fs-6 fw-bold text-center mb-5">Contact us in the way most convenient for you. We are ready to answer all your questions.</p>
+                            <p class="fs-6 fw-bold text-center mb-5">Contact us in the way most convenient for you. We are ready to answer all your questions.
+                                <br />
+                                Or feel free to leave us a feedback.
+                            </p>
                             
                             <!-- Email Input -->
                             <div class="mb-3">

@@ -110,7 +110,7 @@
             <div class="row justify-content-center mt-5">
                 <div class="col-11">
                     <div class="trending">
-                        <div class="trending-list">
+                        <div class="trending-list row">
                             <?php
                             if ($trendin_data) {
                                 foreach ($trendin_data as $auction) {

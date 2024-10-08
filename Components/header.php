@@ -109,8 +109,8 @@ $fav_count = count_fav_data($user_id);
 
                         <?php if (isset($_SESSION['username'])): ?>
                             <li class="nav-item wrap">
-                                <a class="nav-link mx-4  fc-ffffff ms-1" href="categories1.php"> Wellcome,
-                                    <?php echo htmlspecialchars($_SESSION['username']) ?>!</a>
+                                <a class="nav-link mx-4  fc-ffffff mt-1" href="categories1.php"> Wellcome,
+                                    <?php echo htmlspecialchars($_SESSION['username']) ?>!!</a>
                             </li>
                         <?php else: ?>
                             <li class="nav-item">
@@ -139,7 +139,7 @@ $fav_count = count_fav_data($user_id);
                                                         <input type="password" id="password" class="form-control"
                                                             name="password" required />
                                                     </div>
-                                                    <div class="row my-4 mx-2">
+                                                    <div class="row my-4 ms-4">
                                                         <div class="col-6">
                                                             <button type="submit" name="login"
                                                                 class="btn btn-primary px-5">Log in</button>
@@ -192,7 +192,7 @@ $fav_count = count_fav_data($user_id);
                                                         <textarea id="address" name="address"
                                                             class="form-control"></textarea>
                                                     </div>
-                                                    <div class="row my-4 mx-2">
+                                                    <div class="row my-4 ms-4">
                                                         <div class="col-6">
                                                             <button type="submit" name="register"
                                                                 class="btn btn-primary px-5">Register</button>
