@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-<?php
+    <?php
     session_start();
     $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 0;
     include 'functions/db.php';
@@ -25,7 +25,7 @@
     <!-- Bootstrap CSS for responsive layout and design -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    
+
     <!-- Popper.js and Bootstrap JS for handling interactive elements -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
@@ -38,7 +38,7 @@
     <script src="javascript/index.js"></script>
     <script src="javascript/fav.js"></script>
 
-    <title>Incoming Auction</title>
+    <title>Sponsored Auction</title>
 </head>
 
 <body>
@@ -63,21 +63,21 @@
                     <div class="row">
                         <div class="p-2">
                             <!-- Page title and navigation for auctions -->
-                            <p class="fs-3 ps-3">Incoming auctions</p>
+                            <p class="fs-3 ps-3">Sponsored auctions by Rolex</p>
                             <nav class="nav">
                                 <!-- Navigation tabs for different auction types -->
                                 <a class="nav-link fw-bold" href="trending_auctions.php" style="color: #666666;">Trending Auctions</a>
-                                <a class="nav-link fw-bold" href="sponsored_auctions.php" style="color: #666666;">Sponsored auction</a>
-                                <a class="nav-link fw-bold active" aria-current="page" href="#">Incoming auction</a>
+                                <a class="nav-link fw-bold active" href="sponsored_auctions.php" style="color: #666666;">Sponsored auction</a>
+                                <a class="nav-link fw-bold" href="#" aria-current="page">Incoming auction</a>
                                 <a class="nav-link fw-bold" href="completed_auctions.php" style="color: #666666;">Completed auction</a>
                             </nav>
                         </div>
                     </div>
 
                     <!-- Information about the number of objects in the auction -->
-                    <!-- <div class="row">
+                    <div class="row">
                         <div class="ps-4 mt-5">
-                            <p class="fs-6 color0028BA"><strong>115 objects</strong></p>
+                            <!-- <p class="fs-6 color0028BA"><strong>115 objects</strong></p> -->
                         </div>
 
                         <!-- Dropdown to sort auctions by time remaining or other criteria -->
@@ -95,7 +95,7 @@
                                 </select> -->
                             </div>
                         </div>
-                    </div> -->
+                    </div>
 
                     <!-- Auction item display section -->
                     <div class="container">

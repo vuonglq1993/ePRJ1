@@ -51,7 +51,7 @@
     <script src="javascript/fav.js"></script>
     <script>
         // Ensure noActionLink runs after the DOM is fully loaded
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             noActionLink(); // Initialize noActionLink
         });
     </script>
@@ -66,7 +66,8 @@
             color: black;
             opacity: 0.5;
         }
-        .lineheight-0{
+
+        .lineheight-0 {
             line-height: 20px !important;
         }
     </style>
@@ -92,7 +93,7 @@
                         <div class="p-2">
                             <p class="fs-3">Trending auction</p>
                         </div>
-                        <div class="p-2 mt-3">
+                        <div class="p-3 mt-1">
                             <p><a href="#"
                                     class="link-body-emphasis link-offset-2 link-underline-opacity-25 link-opacity-25 link-underline-opacity-75-hover">See
                                     all trending</a></p>
@@ -109,223 +110,94 @@
             <div class="row justify-content-center mt-5">
                 <div class="col-11">
                     <div class="trending">
-                        <div id="carouselExample" class="carousel slide">
-                            <div class="carousel-inner trending-carousel-inner">
-                                <?php
-                                if ($trendin_data) {
-                                    $first_item = true;
-                                    foreach ($trendin_data as $auction) {
-                                        $auction_id = $auction['auction_id'];
-                                        $product_id = $auction['product_id'];
-                                        $product_name = $auction['product_name'];
-                                        $current_bid = $auction['current_bid'];
-                                        $end_time = $auction['end_time'];
-                                        $image_url = $auction['image_url'];
-                                        $start_time = $auction['start_time'];
-                                        $days_left = caculate_days_left($start_time, $end_time);
-                                        if (empty($start_time)) {
-                                            $bid_display = "Buyout Price: ";
-                                        } elseif (new DateTime() < new DateTime($start_time)) {
-                                            $bid_display = "Starting Price: ";
-                                        } elseif (new DateTime() > new DateTime($end_time)) {
-                                            $bid_display = "Winning price: ";
-                                        } else {
-                                            $bid_display = "Current Bid: ";
-                                        }
-                                        $active_class = $first_item ? 'active' : '';
-                                        $first_item = false;
-                                ?>
-                                        <div class="trending-carousel-item carousel-item <?php echo $active_class ?>">
-                                            <div class="row">
-                                                <div class="col">
-                                                    <div class="card p-2">
-                                                        <div class="card-body">
-                                                            <div class="d-flex justify-content-between">
-                                                                <div class="p-2"></div>
-                                                                <div class="p-2"><?php echo $days_left ?>
-                                                                </div>
-                                                                <div class="p-2">
-                                                                    <a href="#" class="no-action"
-                                                                        data-product-id="<?php echo $product_id; ?>"
-                                                                        method="post" onclick="toggleLike(this)">
-                                                                        <i
-                                                                            class="bi <?php echo $auction['liked'] ? 'bi-heart-fill' : 'bi-heart'; ?>"></i>
-                                                                    </a>
-                                                                </div>
+                        <div class="trending-list">
+                            <?php
+                            if ($trendin_data) {
+                                foreach ($trendin_data as $auction) {
+                                    $auction_id = $auction['auction_id'];
+                                    $product_id = $auction['product_id'];
+                                    $product_name = $auction['product_name'];
+                                    $current_bid = $auction['current_bid'];
+                                    $end_time = $auction['end_time'];
+                                    $image_url = $auction['image_url'];
+                                    $start_time = $auction['start_time'];
+                                    $days_left = caculate_days_left($start_time, $end_time);
+                                    if (empty($start_time)) {
+                                        $bid_display = "Buyout Price: ";
+                                    } elseif (new DateTime() < new DateTime($start_time)) {
+                                        $bid_display = "Starting Price: ";
+                                    } elseif (new DateTime() > new DateTime($end_time)) {
+                                        $bid_display = "Winning price: ";
+                                    } else {
+                                        $bid_display = "Current Bid: ";
+                                    }
+                                    ?>
+                                    <div class="trending-item col-3 mb-4">
+                                        <div class="row">
+                                            <div class="col">
+                                                <div class="card p-2">
+                                                    <div class="card-body">
+                                                        <div class="d-flex justify-content-between">
+                                                            <div class="p-2"></div>
+                                                            <div class="p-2"><?php echo $days_left ?>
                                                             </div>
-                                                            <div>
-                                                                <a
-                                                                    href="categories3.php?product_id=<?php echo htmlspecialchars($product_id) ?>"><img
-                                                                        src="<?php echo $image_url ?>"
-                                                                        alt="<?php echo htmlspecialchars($product_name) ?>"
-                                                                        class="img-fluid"></a>
-                                                                <div class="row">
-                                                                    <div class="col-5 text-start text-dark"
-                                                                        style="--bs-text-opacity: .5; font-size: 14px; margin: 4px;">
-                                                                        <?php echo $bid_display ?>
-                                                                    </div>
-                                                                    <div class="col-4 text-start"
-                                                                        style="font-size: 16px; margin: 2px;">
-                                                                        <?php echo format_price($current_bid) ?>
-                                                                    </div>
-
+                                                            <div class="p-2">
+                                                                <a href="#" class="no-action"
+                                                                    data-product-id="<?php echo $product_id; ?>" method="post"
+                                                                    onclick="toggleLike(this)">
+                                                                    <i
+                                                                        class="bi <?php echo $auction['liked'] ? 'bi-heart-fill' : 'bi-heart'; ?>"></i>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                        <div>
+                                                            <a
+                                                                href="categories3.php?product_id=<?php echo htmlspecialchars($product_id) ?>"><img
+                                                                    src="<?php echo $image_url ?>"
+                                                                    alt="<?php echo htmlspecialchars($product_name) ?>"
+                                                                    class="img-fluid"></a>
+                                                            <div class="row">
+                                                                <div class="col-5 text-start text-dark"
+                                                                    style="--bs-text-opacity: .5; font-size: 14px; margin: 4px;">
+                                                                    <?php echo $bid_display ?>
+                                                                </div>
+                                                                <div class="col-4 text-start"
+                                                                    style="font-size: 16px; margin: 2px;">
+                                                                    <?php echo format_price($current_bid) ?>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="row">
-                                                <div class="col-6 text-start">
-                                                    <p class="m-2">
-                                                        <?php echo htmlspecialchars($product_name) ?>
-                                                    </p>
-                                                </div>
-                                                <div class="col-6 text-end">
-                                                    <div class="text-dark" style="--bs-text-opacity: .5;">
-                                                        <p class="m-2">Interesting?</p>
-                                                        <a href="bid_details.php?auction_id=<?php echo htmlspecialchars($auction_id) ?>"
-                                                            class="btn bidbutton me-2">Bid
-                                                            now</a>
-                                                    </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-6 text-start">
+                                                <p class="m-2">
+                                                    <?php echo htmlspecialchars($product_name) ?>
+                                                </p>
+                                            </div>
+                                            <div class="col-6 text-end">
+                                                <div class="text-dark" style="--bs-text-opacity: .5;">
+                                                    <p class="m-2">Interesting?</p>
+                                                    <a href="bid_details.php?auction_id=<?php echo htmlspecialchars($auction_id) ?>"
+                                                        class="btn bidbutton me-2">Bid now</a>
                                                 </div>
                                             </div>
                                         </div>
-                                <?php
-                                    }
-                                } else {
-                                    echo "<p>No trending items available.</p>";
+                                    </div>
+                                    <?php
                                 }
-                                ?>
-                            </div>
-                            <button class="carousel-control-prev trending-carousel-control-prev" type="button"
-                                data-bs-target="#testimonialCarousel" data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Previous</span>
-                            </button>
-                            <button class="carousel-control-next trending-carousel-control-next" type="button"
-                                data-bs-target="#testimonialCarousel" data-bs-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Next</span>
-                            </button>
+                            } else {
+                                echo "<p>No trending items available.</p>";
+                            }
+                            ?>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- Collections -->
-        <!-- <div class="container mt-5">
-                <div class="row justify-content-center">
-                    <div class="col-11">
-                        <div class="row justify-content-center">
-                            <div class="d-flex flex-row">
-                                <div class="p-2">
-                                    <p class="fs-3">Buy anything that matches your style</p>
-                                </div>
-                                <div class="p-2 mt-3">
-                                    <p><a href="#"
-                                            class="link-body-emphasis link-offset-2 link-underline-opacity-25 link-opacity-25 link-underline-opacity-75-hover">See
-                                            all collections</a></p>
-                                </div>
-                            </div>
-                            <div class="p-2 mt-3">
-                                <p><a href="#"
-                                        class="link-body-emphasis link-offset-2 link-underline-opacity-25 link-opacity-25 link-underline-opacity-75-hover">See
-                                        all collections</a></p>
-                            </div>
-                        </div>
-                        <div class="text-dark ps-4" style="--bs-text-opacity: .5;">
-                            <p class="fs-6 ">Discover our curation for sale
-                            </p>
-                        </div>
-                    </div>
-                    <div class="row mt-5">
-                        <div class="collections">
-                            <div id="carouselExampleIndicators" class="carousel">
-                                <div class="carousel-inner collection-carousel-inner">
-                                    <?php
-                                    if ($collection_data) {
-                                        $first_item = true;
-                                        foreach ($collection_data as $collection) {
-                                            $image_url = $collection['images'];
-                                            $collection_name = $collection['collection_name'];
-                                            $collection_desc = $collection['collection_desc'];
-                                            $product_count = $collection['product_count'];
-                                            $active_class = $first_item ? 'active' : '';
-                                            $first_item = false;
-                                    ?>
-                                            <div
-                                                class="carousel-item collection-carousel-item ms-1 <?php echo $active_class; ?>">
-                                                <div class="row">
-                                                    <img src="images/1.jpg" alt="" class="img-fluid" class="img-fluid" />
-                                                    <div class="col-6 text-start text-dark">
-                                                        <p style="font-size: 13px;">
-                                                            <strong><?php echo strtoupper(htmlspecialchars($collection_name)) ?></strong><br><?php echo htmlspecialchars($product_count) ?>
-                                                            Objects
-                                                        </p>
-                                                    </div>
-                                                    <div class="row text-center">
-                                                        <a href="#"
-                                                            class="text-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
-                                                            style="font-size: 14px;" href="#">
-                                                            <i class="bi bi-caret-right-fill"></i>
-                                                            Discover all
-                                                            <i class="bi bi-caret-left-fill"></i>
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <?php
-                                        }
-                                    } else {
-                                        echo "<p>No collections available.</p>";
-                                    }
-                                            ?>
-                                    <div class="carousel-item collection-carousel-item ms-1">
-                                        <div class="row">
-                                            <img src="images/1.jpg" alt="" class="img-fluid" class="img-fluid" />
-                                            <div class="col-6 text-start text-dark">
-                                                <p style="font-size: 13px;"><strong>ARTWORKS NEW
-                                                        COLLECTIONS
-                                                        2024</strong><br>35 Objects</p>
-                                            </div>
-                                            <div class="row text-center">
-                                                <a class="text-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
-                                                    style="font-size: 14px;" href="#">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                        fill="currentColor" class="bi bi-caret-right-fill"
-                                                        viewBox="0 0 16 16">
-                                                        <path
-                                                            d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
-                                                    </svg> Discover all <svg xmlns="http://www.w3.org/2000/svg"
-                                                        width="16" height="16" fill="currentColor"
-                                                        class="bi bi-caret-left-fill" viewBox="0 0 16 16">
-                                                        <path
-                                                            d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />
-                                                    </svg>
-                                                </a>
 
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <button class="carousel-control-prev collection-carousel-control-prev" type="button"
-                                    data-bs-target="#testimonialCarousel" data-bs-slide="prev">
-                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                    <span class="visually-hidden">Previous</span>
-                                </button>
-                                <button class="carousel-control-next collection-carousel-control-next" type="button"
-                                    data-bs-target="#testimonialCarousel" data-bs-slide="next">
-                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                    <span class="visually-hidden">Next</span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> -->
         <!-- Navigate -->
         <div class="container mt-5">
             <div class="navigating">
@@ -384,14 +256,14 @@
 
                         </script> -->
                         <script>
-                            document.addEventListener('DOMContentLoaded', function() {
+                            document.addEventListener('DOMContentLoaded', function () {
                                 const seeMoreBtn = document.getElementById('seeMoreBtn');
                                 const seeLessBtn = document.getElementById('seeLessBtn');
 
                                 // Sự kiện khi nhấn nút See More
-                                seeMoreBtn.addEventListener('click', function() {
+                                seeMoreBtn.addEventListener('click', function () {
                                     const hiddenItems = document.querySelectorAll('.category-item.hidden');
-                                    hiddenItems.forEach(function(item) {
+                                    hiddenItems.forEach(function (item) {
                                         item.classList.remove('hidden');
                                     });
                                     seeMoreBtn.style.display = 'none';
@@ -399,9 +271,9 @@
                                 });
 
                                 // Sự kiện khi nhấn nút See Less
-                                seeLessBtn.addEventListener('click', function() {
+                                seeLessBtn.addEventListener('click', function () {
                                     const allItems = document.querySelectorAll('.category-item');
-                                    allItems.forEach(function(item, index) {
+                                    allItems.forEach(function (item, index) {
                                         if (index >= <?php echo $limit; ?>) {
                                             item.classList.add('hidden');
                                         }
@@ -435,7 +307,7 @@
                                     } else {
                                         $bid_display = "Current Bid: ";
                                     }
-                            ?>
+                                    ?>
                                     <div class="col-sm-12 col-md-6 col-lg-4">
                                         <div class="row">
                                             <div class="col">
@@ -491,7 +363,7 @@
                                             </div>
                                         </div>
                                     </div>
-                            <?php
+                                    <?php
                                 }
                             } else {
                                 echo "<p>No auction items available.</p>";
@@ -569,41 +441,49 @@
         </div>
 
         <!-- Visitor  -->
-<div class="container my-5">
-    <div class="row justify-content-center ">
-        <div class="col-11 bg-f5f5f5 ">
-            <div class="row pt-4">
-                <div class="col-3 pt-4">
-                    <p class="fs-2 fw-lighter text-center lineheight-0">
-                        305
-                    </p>
+        <div class="container my-5">
+            <div class="row justify-content-center ">
+                <div class="col-11 bg-f5f5f5 ">
+                    <div class="row pt-4">
+                        <div class="col-3 pt-4">
+                            <p class="fs-2 fw-lighter text-center lineheight-0">
+                                305
+                            </p>
+                        </div>
+                        <div class="col-3 pt-4">
+                            <p class="fs-2 fw-lighter text-center lineheight-0">
+                                290
+                            </p>
+                        </div>
+                        <div class="col-3 text-center pt-4">
+                            <p class="fs-2 fw-lighter lineheight-0">
+                                1800
+                            </p>
+                        </div>
+                        <div class="col-3 text-center pt-4">
+                            <p class="fs-2 fw-lighter lineheight-0">
+                                157232
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row pb-4 pt-0">
+                        <div class="col-3">
+                            <p class="fs-3 text-center lineheight0">Online visitors</p>
+                        </div>
+                        <div class="col-3">
+                            <p class="fs-3 text-center">Yesterday</p>
+                        </div>
+                        <div class="col-3">
+                            <p class="fs-3 text-center">Last Week</p>
+                        </div>
+                        <div class="col-3">
+                            <p class="fs-3 text-center">Overall</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-3 pt-4">
-                <p class="fs-2 fw-lighter text-center lineheight-0">
-                        290
-                    </p>
-                </div>
-                <div class="col-3 text-center pt-4">
-                <p class="fs-2 fw-lighter lineheight-0">
-                        1800
-                    </p>
-                </div>
-                <div class="col-3 text-center pt-4">
-                <p class="fs-2 fw-lighter lineheight-0">
-                        157232
-                    </p>
-                </div>
-            </div>
-            <div class="row pb-4 pt-0">
-                <div class="col-3"><p class="fs-3 text-center lineheight0">Online visitors</p></div>
-                <div class="col-3"><p class="fs-3 text-center">Yesterday</p></div>
-                <div class="col-3"><p class="fs-3 text-center">Last Week</p></div>
-                <div class="col-3"><p class="fs-3 text-center">Overall</p></div>
             </div>
         </div>
-    </div>
-</div>
-</div>
+        </div>
         <!-- Popular Categories section -->
         <!-- <div class="container mt-5">
                 <div class="row justify-content-center">
