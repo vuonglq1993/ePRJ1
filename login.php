@@ -19,24 +19,33 @@
     <script src="js/index.js"></script>
     <title>Login</title>
 </head>
-
+<style>
+    .bg-000022{
+        background-color: #c5c5c5;
+    }
+</style>
 <body>
     <main>
         <div class="container">
-            <div class="row">
+            <div class="row justify-content-center">
                 <div class="col-4">
-                    <h1>Login</h1>
+                    <h1 class="text-center mt-5">Login</h1>
                     <form action="post_login.php" method="post">
-                        <div class="mb-3">
-                            <label for="email" class="form-label">Email</label>
+                        <div class="my-4">
+                            <label for="email" class="form-label text-center">Email</label>
                             <input type="email" id="email" class="form-control" name="email" required/>
                         </div>
-                        <div class="mb-3">
-                            <label for="password" class="form-label">Password</label>
+                        <div class="my-4">
+                            <label for="password" class="form-label text-center">Password</label>
                             <input type="password" id="password" class="form-control" name="password" required />
                         </div>
-                        <div class="mb-3">
-                            <button type="submit" name="login" class="btn btn-primary">Log in</button>
+                        <div class="row my-4 mx-2">
+                            <div class="col-6">
+                            <button type="submit" name="login" class="btn btn-primary px-5">Log in</button>
+                            </div>
+                            <div class="col-6">
+                            <a href="register.php" class="btn btn-secondary px-5">Register</a>
+                            </div>
                         </div>
                     </form>
                 </div>

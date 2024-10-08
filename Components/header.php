@@ -114,8 +114,101 @@ $fav_count = count_fav_data($user_id);
                             </li>
                         <?php else: ?>
                             <li class="nav-item">
-                                <a class="nav-link mx-4  fc-ffffff m-1" href="login.php">Wellcome, Guest(Log
-                                    in)</a>
+                                <a class="nav-link mx-4 fc-ffffff m-1" href="#" data-bs-toggle="modal"
+                                    data-bs-target="#loginModal">Wellcome, Guest (Log in)</a>
+
+                                <!-- Login Modal -->
+                                <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel"
+                                    aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content text-black">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="loginModalLabel">Login</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form action="post_login.php" method="post">
+                                                    <div class="my-4">
+                                                        <label for="email" class="form-label">Email</label>
+                                                        <input type="email" id="email" class="form-control" name="email"
+                                                            required />
+                                                    </div>
+                                                    <div class="my-4">
+                                                        <label for="password" class="form-label">Password</label>
+                                                        <input type="password" id="password" class="form-control"
+                                                            name="password" required />
+                                                    </div>
+                                                    <div class="row my-4 mx-2">
+                                                        <div class="col-6">
+                                                            <button type="submit" name="login"
+                                                                class="btn btn-primary px-5">Log in</button>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <button type="button" class="btn btn-secondary px-5"
+                                                                data-bs-toggle="modal" data-bs-target="#registerModal"
+                                                                data-bs-dismiss="modal">Register</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Register Modal -->
+                                <div class="modal fade" id="registerModal" tabindex="-1"
+                                    aria-labelledby="registerModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content text-black">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="registerModalLabel">Register</h1>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form action="./post_register.php" method="post">
+                                                    <div class="my-4">
+                                                        <label for="username" class="form-label">Username</label>
+                                                        <input type="text" id="username" class="form-control"
+                                                            name="username" required />
+                                                    </div>
+                                                    <div class="my-4">
+                                                        <label for="email" class="form-label">Email</label>
+                                                        <input type="email" id="email" class="form-control" name="email"
+                                                            required />
+                                                    </div>
+                                                    <div class="my-4">
+                                                        <label for="password" class="form-label">Password</label>
+                                                        <input type="password" id="password" class="form-control"
+                                                            name="password" required />
+                                                    </div>
+                                                    <div class="my-4">
+                                                        <label for="phone" class="form-label">Phone</label>
+                                                        <input type="text" id="phone" class="form-control" name="phone" />
+                                                    </div>
+                                                    <div class="my-4">
+                                                        <label for="address" class="form-label">Address</label>
+                                                        <textarea id="address" name="address"
+                                                            class="form-control"></textarea>
+                                                    </div>
+                                                    <div class="row my-4 mx-2">
+                                                        <div class="col-6">
+                                                            <button type="submit" name="register"
+                                                                class="btn btn-primary px-5">Register</button>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <button type="button" class="btn btn-secondary px-5"
+                                                                data-bs-toggle="modal" data-bs-target="#loginModal"
+                                                                data-bs-dismiss="modal">Log in</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </li>
                         <?php endif; ?>
                     </div>
