@@ -8,10 +8,10 @@ function get_fav_data($user_id, $sort_by = 'start_time')
         if (!in_array($sort_by, $valid_sort_options)) {
             $sort_by = 'start_time';
         }
-        $sql = "SELECT ul.user_id, ul.product_id, p.product_id, p.product_name, p.image_url, a.product_id, a.auction_id, a.start_time, a.end_time, a.current_bid
+        $sql = "SELECT ul.user_id, ul.product_id, p.product_name, p.starting_price, p.buyout_price, p.image_url, a.auction_id, a.start_time, a.end_time, a.current_bid
                 FROM user_likes ul
-                JOIN products p ON ul.product_id = p.product_id
-                JOIN auctions a ON a.product_id = p.product_id
+                LEFT JOIN products p ON ul.product_id = p.product_id
+                LEFT JOIN auctions a ON a.product_id = p.product_id
                 WHERE ul.user_id = ?
                 ORDER BY $sort_by ASC ";
         $conn = connect();
@@ -46,7 +46,7 @@ function caculate_days_left1($start_time, $end_time)
         $time_left = $start_date_time->diff($now);
         $days = $time_left->days;
         if ($days > 0) {
-            return 'Auction start in' . $days . 'days';
+            return 'Auction start in  ' . $days . ' days';
         } else {
             return "Auction starts in " . $time_left->h . " hours.";
         }
@@ -54,7 +54,7 @@ function caculate_days_left1($start_time, $end_time)
         $time_left = $now->diff($end_date_time);
         $days = $time_left->days;
         if ($days > 0) {
-            return 'Auction ended' . $days . 'days ago';
+            return 'Auction ended ' . $days . ' days ago';
         } else {
             return "Auction ended " . $time_left->h . " hours ago.";
         }
@@ -62,7 +62,7 @@ function caculate_days_left1($start_time, $end_time)
         $time_left = $now ->diff($end_date_time);
         $days = $time_left->days;
         if ($days > 0) {
-            return 'Auction ends in' . $days . 'days';
+            return 'Auction ends in ' . $days . ' days';
         } elseif ($time_left->h > 0) {
             return "Auction ends in " . $time_left->h . " hours.";
         } else {

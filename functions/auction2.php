@@ -3,7 +3,7 @@ include_once 'db.php';
 
 function get_completed_auctions_data($user_id)
 {
-    $sql = "SELECT a.*, p.product_name, p.starting_price, p.image_url, ul.id AS liked
+    $sql = "SELECT a.*, p.product_name, p.starting_price, p.buyout_price, p.image_url, ul.id AS liked
             FROM auctions a
             JOIN products p ON a.product_id = p.product_id
             LEFT JOIN user_likes ul ON a.product_id = ul.product_id AND ul.user_id = ?
@@ -14,7 +14,7 @@ function get_completed_auctions_data($user_id)
 }
 function get_ongoing_auctions_data($user_id)
 {
-    $sql = "SELECT a.*, p.product_name, p.starting_price, p.image_url, ul.id AS liked
+    $sql = "SELECT a.*, p.product_name, p.starting_price, p.buyout_price, p.image_url, ul.id AS liked
             FROM auctions a
             JOIN products p ON a.product_id = p.product_id
             LEFT JOIN user_likes ul ON a.product_id = ul.product_id AND ul.user_id = ?
@@ -25,7 +25,7 @@ function get_ongoing_auctions_data($user_id)
 }
 function get_incoming_auctions_data($user_id)
 {
-    $sql = "SELECT a.*, p.product_name, p.starting_price, p.image_url, ul.id AS liked
+    $sql = "SELECT a.*, p.product_name, p.starting_price, p.buyout_price, p.image_url, ul.id AS liked
             FROM auctions a
             JOIN products p ON a.product_id = p.product_id
             LEFT JOIN user_likes ul ON a.product_id = ul.product_id AND ul.user_id = ?
@@ -37,7 +37,7 @@ function get_incoming_auctions_data($user_id)
 
 function get_sponsored_auctions_data($user_id)
 {
-    $sql = "SELECT a.*, p.product_name, p.starting_price, p.image_url, ul.id AS liked
+    $sql = "SELECT a.*, p.product_name, p.starting_price, p.buyout_price, p.image_url, ul.id AS liked
             FROM auctions a
             JOIN products p ON a.product_id = p.product_id
             LEFT JOIN user_likes ul ON a.product_id = ul.product_id AND ul.user_id = ?

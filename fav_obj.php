@@ -99,9 +99,9 @@
                         // Check if there are favorite items to display.
                         if ($fav_data) { 
                             foreach ($fav_data as $fav) { 
+                                $auction_id = $fav['auction_id'];
                                 $product_id = $fav['product_id']; // Get product ID.
                                 $product_name = $fav['product_name']; // Get product name.
-                                $current_bid = $fav['current_bid']; // Get current bid.
                                 $end_time = $fav['end_time']; // Get auction end time.
                                 $start_time = $fav['start_time']; // Get auction start time.
                                 $image_url = $fav['image_url']; // Get product image URL.
@@ -110,12 +110,16 @@
                                 // Determine the bid display message based on auction status.
                                 if (empty($start_time)) { 
                                     $bid_display = "Buyout Price: ";
+                                    $current_bid = $fav['buyout_price'];
                                 } elseif (new DateTime() < new DateTime($start_time)) { 
                                     $bid_display = "Starting Price: ";
+                                    $current_bid = $fav['starting_price'];
                                 } elseif (new DateTime() > new DateTime($end_time)) { 
                                     $bid_display = "Winning price: ";
+                                    $current_bid = $fav['current_bid'];
                                 } else { 
                                     $bid_display = "Current Bid: ";
+                                    $current_bid = $fav['current_bid'];
                                 }
                         ?>
                                 <!-- Display individual favorite item -->
@@ -130,7 +134,7 @@
                                                         <div class="p-2"><?php echo $days_left ?></div>
                                                         <div class="p-2">
                                                             <!-- Favorite icon with toggle functionality -->
-                                                            <a href="#" class="no-action" data-product-id="<?php echo $product_id; ?>"
+                                                            <a href="#" class="no-action" data-product-id="<?php echo htmlspecialchars($product_id); ?>"
                                                                 method="post"
                                                                 onclick="toggleLike(this)">
                                                                 <i class="bi bi-heart-fill"></i>
@@ -138,13 +142,13 @@
                                                         </div>
                                                     </div>
                                                     <div>
+                                                        <!-- Product image and bid information -->
                                                         <a
                                                             href="categories3.php?product_id=<?php echo htmlspecialchars($product_id) ?>"><img
                                                                 src="<?php echo $image_url ?>"
                                                                 alt="<?php echo htmlspecialchars($product_name) ?>"
                                                                 class="img-fluid"></a>
                                                         <!-- Product image and bid information -->
-                                                        <img src="<?php echo $image_url ?>" alt="" class="img-fluid">
                                                         <div class="row">
                                                             <div class="col-5 text-start text-dark"
                                                                 style="--bs-text-opacity: .5; font-size: 14px; margin: 4px;">

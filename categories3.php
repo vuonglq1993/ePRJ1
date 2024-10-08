@@ -83,11 +83,11 @@
                     $status = 'Ended ' . date_diff(new DateTime($end_time), new DateTime())->format('%d days, %h hours, %i minutes') . ' ago.';
                     $status_end = 'Ended on ' . date('F j, Y g:i a', strtotime($end_time));
                 }
-                ?>
+            ?>
                 <!-- Display product details if it has an auction -->
                 <?php if ($has_auction): ?>
                     <div class="col-md-6 col-sm-11" style="padding-left: 3rem">
-                        <p class="fs-1 fw-light"><?php echo htmlspecialchars($product_name); ?></p>
+                        <p class="fs-1 fw-bold"><?php echo htmlspecialchars($product_name); ?></p>
                         <div class="row mt-3">
                             <p class="fw-light color666 fs-6">Start from <?php echo htmlspecialchars($formatted_start_time); ?>
                             </p>
@@ -106,7 +106,7 @@
                     <!-- Display if there is no auction available -->
                 <?php else: ?>
                     <div class="col-md-6 col-sm-11" style="padding-left: 3rem">
-                        <p class="fs-1 fw-light"><?php echo htmlspecialchars($product_name); ?></p>
+                        <p class="fs-1 fw-bold"><?php echo htmlspecialchars($product_name); ?></p>
                         <div class="row mt-3">
                             <p class="fw-light color666 fs-6">No auction available</p>
                         </div>
@@ -131,7 +131,7 @@
                         </div>
                     </div>
                 </div>
-                <?php
+            <?php
             } else {
                 // Display message if no product data is found
                 echo "<p>No product found.</p>";

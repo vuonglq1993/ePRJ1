@@ -21,7 +21,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="Components/header2.css">
     <link rel="stylesheet" href="Components/footer.css">
-
+    <link rel="stylesheet" href="style/categories.css">
     <!-- Bootstrap CSS for responsive layout and design -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -63,7 +63,7 @@
                     <div class="row">
                         <div class="p-2">
                             <!-- Page title and navigation for auctions -->
-                            <p class="fs-3 ps-3">Sponsored auctions by Rolex</p>
+                            <p class="fs-3 ps-3">Incoming auctions </p>
                             <nav class="nav">
                                 <!-- Navigation tabs for different auction types -->
                                 <a class="nav-link fw-bold" href="trending_auctions.php" style="color: #666666;">Trending Auctions</a>
@@ -100,65 +100,86 @@
                     <!-- Auction item display section -->
                     <div class="container">
                         <div class="row">
-                            <?php
+                        <?php
                             if ($incoming_auctions) {
                                 foreach ($incoming_auctions as $auction) {
                                     $auction_id = $auction['auction_id'];
                                     $product_id = $auction['product_id'];
-                                    $product_name = $auction['product_name'];
-                                    $current_bid = $auction['current_bid'] ? htmlspecialchars($auction['current_bid']) : htmlspecialchars($auction['buyout_price']);
+                                    $product_name = $auction['product_name'];                                    
                                     $end_time = $auction['end_time'];
                                     $image_url = $auction['image_url'];
                                     $start_time = $auction['start_time'];
                                     $days_left = caculate_days_left2($start_time, $end_time);
                                     if (empty($start_time)) {
                                         $bid_display = "Buyout Price: ";
+                                        $current_bid = $auction['buyout_price'];
                                     } elseif (new DateTime() < new DateTime($start_time)) {
                                         $bid_display = "Starting Price: ";
+                                        $current_bid = $auction['starting_price'];
                                     } elseif (new DateTime() > new DateTime($end_time)) {
                                         $bid_display = "Winning price: ";
+                                        $current_bid = $auction['current_bid'];
                                     } else {
                                         $bid_display = "Current Bid: ";
+                                        $current_bid = $auction['current_bid'];
                                     }
                             ?>
-                                    <div class="col-md-3 col-sm-11 me-4">
-                                        <!-- Favorite heart icon for the single product -->
-                                        <div class="row">
-                                            <a href="#" class="no-action"
-                                                data-product-id="<?php echo $product_id; ?>"
-                                                method="post" onclick="toggleLike(this)">
-                                                <i
-                                                    class="bi <?php echo $auction['liked'] ? 'bi-heart-fill' : 'bi-heart'; ?>"></i>
-                                            </a>
-                                        </div>
-
-                                        <!-- Product image and description -->
-                                        <div class="row">
-                                            <div class="p-2 text-center"><?php echo $days_left ?></div>
-                                            <a href="categories3.php?product_id=<?php echo htmlspecialchars($product_id); ?>"><img src="<?php echo htmlspecialchars($image_url); ?>" alt="<?php echo htmlspecialchars($product_name); ?>" class="img-fluid" /></a>
-                                            <div class="col-12 text-center text-dark">
-                                                <p style="font-size: 13px;">
-                                                    <strong><?php echo htmlspecialchars($product_name); ?></strong>
-                                                </p>
-                                            </div>
-
-                                            <!-- Call to action link for more details about the product -->
-                                            <div class="row text-center">
-                                                <a href="bid_details.php?auction_id=<?php echo htmlspecialchars($auction_id) ?>" class="text-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
-                                                    style="font-size: 14px;" href="#">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                        fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
-                                                        <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
-                                                    </svg>
-                                                    <?php echo htmlspecialchars($bid_display); ?> <?php echo format_price2($current_bid); ?>
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                        fill="currentColor" class="bi bi-caret-left-fill" viewBox="0 0 16 16">
-                                                        <path d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />
-                                                    </svg>
-                                                </a>
+                                    <div class="col-md-4 col-sm-12 mt-5">
+                                    <div class="row">
+                                        <div class="col">
+                                            <div class="card p-2">
+                                                <div class="card-body">
+                                                    <!-- Display days left and favorite icon -->
+                                                    <div class="d-flex justify-content-between">
+                                                        <div class="p-2"></div>
+                                                        <div class="p-2"><?php echo $days_left ?></div>
+                                                        <div class="p-2">
+                                                            <!-- Favorite icon with toggle functionality -->
+                                                            <a href="#" class="no-action" data-product-id="<?php echo htmlspecialchars($product_id); ?>"
+                                                                method="post"
+                                                                onclick="toggleLike(this)">
+                                                                <i class="bi bi-heart-fill"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <!-- Product image and bid information -->
+                                                        <a
+                                                            href="categories3.php?product_id=<?php echo htmlspecialchars($product_id) ?>"><img
+                                                                src="<?php echo $image_url ?>"
+                                                                alt="<?php echo htmlspecialchars($product_name) ?>"
+                                                                class="img-fluid"></a>
+                                                        <!-- Product image and bid information -->
+                                                        <div class="row">
+                                                            <div class="col-5 text-start text-dark"
+                                                                style="--bs-text-opacity: .5; font-size: 14px; margin: 4px;">
+                                                                <?php echo $bid_display ?>
+                                                            </div>
+                                                            <div class="col-4 text-start" style="font-size: 16px; margin: 2px;">
+                                                                <?php echo format_price1($current_bid) ?>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
+
+                                    <!-- Display additional product details -->
+                                    <div class="row">
+                                        <div class="col-6 text-start">
+                                            <p class="m-2"><?php echo $product_name ?></p>
+                                        </div>
+                                        <div class="col-6 text-end">
+                                            <div class="text-dark" style="--bs-text-opacity: .5;">
+                                                <p class="m-2">Interesting?</p>
+                                                <a href="bid_details.php?auction_id=<?php echo htmlspecialchars($auction_id) ?>"
+                                                    class="btn bidbutton me-2">Bid
+                                                    now</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             <?php
                                 }
                             } else {

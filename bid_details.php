@@ -73,7 +73,6 @@
                                 //     $current_bid = $bid['starting_price']; // Sử dụng giá khởi điểm từ bảng products
                                 //     $bidder_username = 'No bids yet'; // Hoặc bạn có thể để lại thông báo thích hợp
                                 // }
-                                $current_bid = $bid['current_bid'];
                                 $bid_time = $bid['bid_time'];
                                 $end_time = $bid['end_time'];
                                 $start_time = $bid['start_time'];
@@ -81,16 +80,20 @@
                                 $days_left = caculate_days_left_bid($start_time, $end_time);
                                 if (empty($start_time)) {
                                     $bid_display = "Buyout Price ";
+                                    $current_bid = $bid['buyout_price'];
                                 } elseif (new DateTime() < new DateTime($start_time)) {
                                     $bid_display = "Starting Price: ";
+                                    $current_bid = $bid['starting_price'];
                                     $status = 'Starts in ' . date_diff(new DateTime(), new DateTime($start_time))->format('%d days, %h hours, %i minutes') . '.';
                                     $status_end = 'Starts on ' . date('F j, Y g:i a', strtotime($start_time));
                                 } elseif (new DateTime() > new DateTime($end_time)) {
                                     $bid_display = "Winning price ";
+                                    $current_bid = $bid['current_bid'];
                                     $status = 'Ended ' . date_diff(new DateTime($end_time), new DateTime())->format('%d days, %h hours, %i minutes') . ' ago.';
                                     $status_end = 'Ended on ' . date('F j, Y g:i a', strtotime($end_time));
                                 } else {
                                     $bid_display = "Current Bid ";
+                                    $current_bid = $bid['current_bid'];
                                     $status = 'Ends in ' . date_diff(new DateTime(), new DateTime($end_time))->format('%d days, %h hours, %i minutes') . '.';
                                     $status_end = 'Close on ' . date('F j, Y g:i a', strtotime($end_time));
                                 }

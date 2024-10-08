@@ -19,6 +19,8 @@ if (isset($_POST['login'])) {
     if ($user && password_verify($password, $user['password'])) {
         $_SESSION['user_id'] = $user['user_id'];
         $_SESSION['username'] = $user['username'];
+        $_SESSION['email'] = $user['email'];
+        $_SESSION['phone'] = $user['phone'];
         $sql_update_login = "UPDATE users SET loggedIn = 1, lastLoggedIn = NOW() WHERE user_id = ?";
         $stmt_update = $conn->prepare($sql_update_login);
         $stmt_update->bind_param("i", $user['user_id']);

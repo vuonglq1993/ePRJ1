@@ -51,7 +51,7 @@
     <script src="javascript/fav.js"></script>
     <script>
         // Ensure noActionLink runs after the DOM is fully loaded
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             noActionLink(); // Initialize noActionLink
         });
     </script>
@@ -94,14 +94,14 @@
                             <p class="fs-3">Trending auction</p>
                         </div>
                         <div class="p-3 mt-1">
-                            <p><a href="#"
+                            <p><a href="trending_auctions.php"
                                     class="link-body-emphasis link-offset-2 link-underline-opacity-25 link-opacity-25 link-underline-opacity-75-hover">See
                                     all trending</a></p>
                         </div>
                     </div>
                     <div class="ps-2">
                         <p class="fc-c7c7c7 fs-6">Our online gallery favorites. Don't miss your chance -
-                            <strong>Shop
+                            <strong class="text-uppercase">bid
                                 now!</strong>
                         </p>
                     </div>
@@ -112,27 +112,36 @@
                     <div class="trending">
                         <div class="trending-list row">
                             <?php
+                            $limit_trending = 3;
+                            $trending_count = count($trendin_data);
+                            ?>
+                            <?php $trendin = 0; // Biến đếm 
+                            ?>
+                            <?php
                             if ($trendin_data) {
                                 foreach ($trendin_data as $auction) {
                                     $auction_id = $auction['auction_id'];
                                     $product_id = $auction['product_id'];
                                     $product_name = $auction['product_name'];
-                                    $current_bid = $auction['current_bid'];
                                     $end_time = $auction['end_time'];
                                     $image_url = $auction['image_url'];
                                     $start_time = $auction['start_time'];
                                     $days_left = caculate_days_left($start_time, $end_time);
                                     if (empty($start_time)) {
                                         $bid_display = "Buyout Price: ";
+                                        $current_bid = $auction['buyout_price'];
                                     } elseif (new DateTime() < new DateTime($start_time)) {
                                         $bid_display = "Starting Price: ";
+                                        $current_bid = $auction['starting_price'];
                                     } elseif (new DateTime() > new DateTime($end_time)) {
                                         $bid_display = "Winning price: ";
+                                        $current_bid = $auction['current_bid'];
                                     } else {
                                         $bid_display = "Current Bid: ";
+                                        $current_bid = $auction['current_bid'];
                                     }
-                                    ?>
-                                    <div class="trending-item col-3 mb-4">
+                            ?>
+                                    <div class="trending-item col-xl-4 col-md-6 col-lg-4 col-sm-12 mb-4 <?php echo $trendin >= $limit_trending ? 'hidden' : ''; ?>">
                                         <div class="row">
                                             <div class="col">
                                                 <div class="card p-2">
@@ -157,11 +166,11 @@
                                                                     alt="<?php echo htmlspecialchars($product_name) ?>"
                                                                     class="img-fluid"></a>
                                                             <div class="row">
-                                                                <div class="col-5 text-start text-dark"
+                                                                <div class="col-5 text-start text-dark text-nowrap"
                                                                     style="--bs-text-opacity: .5; font-size: 14px; margin: 4px;">
                                                                     <?php echo $bid_display ?>
                                                                 </div>
-                                                                <div class="col-4 text-start"
+                                                                <div class="col-4 text-start text-nowrap"
                                                                     style="font-size: 16px; margin: 2px;">
                                                                     <?php echo format_price($current_bid) ?>
                                                                 </div>
@@ -186,12 +195,17 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <?php
+                                    <?php $trendin++ ?>
+
+                            <?php
                                 }
                             } else {
                                 echo "<p>No trending items available.</p>";
                             }
                             ?>
+                            <?php if ($trending_count > $limit_trending): ?>
+                                <a href="trending_auctions.php" class="ms-2 mb-3 seemlbtn text-center text-decoration-none">See more</a>
+                            <?php endif; ?>
                         </div>
                     </div>
                 </div>
@@ -256,14 +270,14 @@
 
                         </script> -->
                         <script>
-                            document.addEventListener('DOMContentLoaded', function () {
+                            document.addEventListener('DOMContentLoaded', function() {
                                 const seeMoreBtn = document.getElementById('seeMoreBtn');
                                 const seeLessBtn = document.getElementById('seeLessBtn');
 
                                 // Sự kiện khi nhấn nút See More
-                                seeMoreBtn.addEventListener('click', function () {
+                                seeMoreBtn.addEventListener('click', function() {
                                     const hiddenItems = document.querySelectorAll('.category-item.hidden');
-                                    hiddenItems.forEach(function (item) {
+                                    hiddenItems.forEach(function(item) {
                                         item.classList.remove('hidden');
                                     });
                                     seeMoreBtn.style.display = 'none';
@@ -271,9 +285,9 @@
                                 });
 
                                 // Sự kiện khi nhấn nút See Less
-                                seeLessBtn.addEventListener('click', function () {
+                                seeLessBtn.addEventListener('click', function() {
                                     const allItems = document.querySelectorAll('.category-item');
-                                    allItems.forEach(function (item, index) {
+                                    allItems.forEach(function(item, index) {
                                         if (index >= <?php echo $limit; ?>) {
                                             item.classList.add('hidden');
                                         }
@@ -307,7 +321,7 @@
                                     } else {
                                         $bid_display = "Current Bid: ";
                                     }
-                                    ?>
+                            ?>
                                     <div class="col-sm-12 col-md-6 col-lg-4">
                                         <div class="row">
                                             <div class="col">
@@ -363,7 +377,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <?php
+                            <?php
                                 }
                             } else {
                                 echo "<p>No auction items available.</p>";
