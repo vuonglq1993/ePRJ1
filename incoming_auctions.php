@@ -2,6 +2,13 @@
 <html lang="en">
 
 <head>
+<?php
+    session_start();
+    $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 0;
+    include 'functions/db.php';
+    include 'functions/auction2.php';
+    $incoming_auctions = get_incoming_auctions_data($user_id);
+    ?>
     <!-- Meta tags for responsive design and character encoding -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,7 +38,7 @@
     <script src="javascript/index.js"></script>
     <script src="javascript/fav.js"></script>
 
-    <title>Sponsored Auction</title>
+    <title>Incoming Auction</title>
 </head>
 
 <body>
@@ -50,7 +57,7 @@
         </div>
 
         <!-- Main content container -->
-        <div class="container mt-5">
+        <div class="container my-5">
             <div class="row justify-content-center">
                 <div class="col-11">
                     <div class="row">
@@ -68,93 +75,91 @@
                     </div>
 
                     <!-- Information about the number of objects in the auction -->
-                    <div class="row">
+                    <!-- <div class="row">
                         <div class="ps-4 mt-5">
                             <p class="fs-6 color0028BA"><strong>115 objects</strong></p>
                         </div>
 
                         <!-- Dropdown to sort auctions by time remaining or other criteria -->
                         <div class="d-flex flex-row ps-4">
-                            <div>
+                            <!-- <div>
                                 <p class="fs-6 color666">Sort by</p>
-                            </div>
+                            </div> -->
                             <div class="hidden">
                                 <!-- Sorting options -->
-                                <select class="no-border form-select color0028BA" aria-label="Default select example">
+                                <!-- <select class="no-border form-select color0028BA" aria-label="Default select example">
                                     <option selected>Time remaining</option>
                                     <option value="1">One</option>
                                     <option value="2">Two</option>
                                     <option value="3">Three</option>
-                                </select>
+                                </select> -->
                             </div>
                         </div>
-                    </div>
+                    </div> -->
 
                     <!-- Auction item display section -->
                     <div class="container">
                         <div class="row">
-                            <!-- Auction item block -->
-                            <div class="col-md-3 col-sm-11">
-                                <div class="row">
-                                    <!-- Heart icon for favoriting the item -->
-                                    <a href="#" class="text-end mb-3"><i class="bi bi-heart-fill"></i></a>
-                                </div>
-                                <div class="row">
-                                    <!-- Auction item image and description -->
-                                    <img src="images/1.jpg" alt="" class="img-fluid" />
-                                    <div class="col-6 text-start text-dark">
-                                        <p style="font-size: 13px;">
-                                            <strong>ARTWORKS NEW COLLECTIONS 2024</strong><br>
-                                            35 Objects
-                                        </p>
-                                    </div>
+                            <?php
+                            if ($incoming_auctions) {
+                                foreach ($incoming_auctions as $auction) {
+                                    $product_id = $auction['product_id'];
+                                    $product_name = $auction['product_name'];
+                                    $current_bid = $auction['current_bid'] ? htmlspecialchars($auction['current_bid']) : htmlspecialchars($auction['buyout_price']);
+                                    $end_time = $auction['end_time'];
+                                    $image_url = $auction['image_url'];
+                                    $start_time = $auction['start_time'];
+                                    $days_left = caculate_days_left2($start_time, $end_time);
+                                    if (empty($start_time)) {
+                                        $bid_display = "Buyout Price: ";
+                                    } elseif (new DateTime() < new DateTime($start_time)) {
+                                        $bid_display = "Starting Price: ";
+                                    } elseif (new DateTime() > new DateTime($end_time)) {
+                                        $bid_display = "Winning price: ";
+                                    } else {
+                                        $bid_display = "Current Bid: ";
+                                    }
+                            ?>
+                                    <div class="col-md-3 col-sm-11 me-4">
+                                        <!-- Favorite heart icon for the single product -->
+                                        <!-- <div class="row">
+                                            <a href="#" class="text-end mb-3">
+                                                <i class="bi bi-heart-fill"></i>
+                                            </a>
+                                        </div> -->
 
-                                    <!-- "Discover all" button with SVG icons -->
-                                    <div class="row text-center">
-                                        <a class="text-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" style="font-size: 14px;" href="#">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
-                                                <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
-                                            </svg> Discover all 
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                fill="currentColor" class="bi bi-caret-left-fill" viewBox="0 0 16 16">
-                                                <path d="m3.86 8.753 5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />
-                                            </svg>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Repeat the same block structure for additional auction items -->
-                            <!-- Auction item 2 -->
-                            <div class="col-md-3 col-sm-11">
-                                <div class="row">
-                                    <a href="#" class="text-end mb-3"><i class="bi bi-heart-fill"></i></a>
-                                </div>
-                                <div class="row">
-                                    <img src="images/1.jpg" alt="" class="img-fluid" />
-                                    <div class="col-6 text-start text-dark">
-                                        <p style="font-size: 13px;">
-                                            <strong>ARTWORKS NEW COLLECTIONS 2024</strong><br>
-                                            35 Objects
-                                        </p>
-                                    </div>
-                                    <div class="row text-center">
-                                        <a class="text-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover" style="font-size: 14px;" href="#">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
-                                                <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
-                                            </svg> Discover all 
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                                                fill="currentColor" class="bi bi-caret-left-fill" viewBox="0 0 16 16">
-                                                <path d="m3.86 8.753 5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />
-                                            </svg>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
+                                        <!-- Product image and description -->
+                                        <div class="row">
+                                            <a href="categories3.php?product_id=<?php echo htmlspecialchars($product_id); ?>"><img src="<?php echo htmlspecialchars($image_url); ?>" alt="<?php echo htmlspecialchars($product_name); ?>" class="img-fluid" /></a>
+                                            <div class="col-12 text-center text-dark">
+                                                <p style="font-size: 13px;">
+                                                    <strong><?php echo htmlspecialchars($product_name); ?></strong>
+                                                </p>
+                                            </div>
 
-                            <!-- Add more auction items as needed in the same structure -->
-
+                                            <!-- Call to action link for more details about the product -->
+                                            <div class="row text-center">
+                                                <a class="text-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
+                                                    style="font-size: 14px;" href="#">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                        fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
+                                                        <path d="m12.14 8.753-5.482 4.796c-.646.566-1.658.106-1.658-.753V3.204a1 1 0 0 1 1.659-.753l5.48 4.796a1 1 0 0 1 0 1.506z" />
+                                                    </svg>
+                                                    <?php echo htmlspecialchars($bid_display); ?> <?php echo format_price2($current_bid); ?>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                        fill="currentColor" class="bi bi-caret-left-fill" viewBox="0 0 16 16">
+                                                        <path d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />
+                                                    </svg>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                            <?php
+                                }
+                            } else {
+                                echo "<p>No completed auctions found.</p>";
+                            }
+                            ?>
                         </div>
                     </div>
                 </div>
