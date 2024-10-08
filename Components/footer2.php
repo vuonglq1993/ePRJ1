@@ -5,10 +5,10 @@
     <div class="row bg-000022">
         <div class="col-md-3 col-sm-6">
             <img src="./images/header/logo.png" class="img-fluid mt-1 mb-5" />
-            <i class="bi text-white bisize ms-5 me-3 bi-facebook"></i>
-            <i class="bi text-white bisize m-3 bi-instagram"></i>
-            <i class="bi text-white bisize m-3 bi-threads"></i>
-            <i class="bi text-white bisize m-3 bi-tiktok"></i>
+            <a href="https://www.facebook.com"><i class="bi text-white bisize ms-5 me-3 bi-facebook"></i></a>
+            <a href="https://www.instagram.com"><i class="bi text-white bisize m-3 bi-instagram"></i></a>
+            <a href="https://www.threads.net"><i class="bi text-white bisize m-3 bi-threads"></i></a>
+            <a href="https://www.tiktok.com"><i class="bi text-white bisize m-3 bi-tiktok"></i></a>
         </div>
         <div class="col-md-3 col-sm-6">
             <ul>
@@ -61,7 +61,7 @@
     </div> -->
     <div class="row bg-000022">
         <div class="col">
-            <p id="current-time" class="fs-5 text-center text-white"></p>
+            <p id="current-time" class="fs-6 pe-3 text-end text-white"></p>
         </div>
     </div>
 </footer>
@@ -85,26 +85,24 @@
         const latitude = position.coords.latitude;
         const longitude = position.coords.longitude;
 
-        // Sử dụng API để lấy múi giờ dựa trên tọa độ
         fetch(`https://api.bigdatacloud.net/data/timezone-by-location?latitude=${latitude}&longitude=${longitude}&key=YOUR_API_KEY`)
             .then(response => response.json())
             .then(data => {
-                const timezone = data.timezone || 'Asia/Bangkok';  // Nếu không tìm được múi giờ thì mặc định là GMT+7
+                const timezone = data.timezone || 'Asia/Bangkok';  
                 updateTime(timezone);
-                setInterval(() => updateTime(timezone), 1000); // Cập nhật mỗi giây
+                setInterval(() => updateTime(timezone), 1000);
             })
             .catch(() => {
-                updateTime('Asia/Bangkok'); // Nếu không gọi được API thì dùng GMT+7 mặc định
+                updateTime('Asia/Bangkok'); 
             });
     }
 
     function error() {
         alert("Unable to retrieve your location. Defaulting to GMT+7.");
-        updateTime('Asia/Bangkok'); // Nếu lỗi thì đặt mặc định múi giờ GMT+7
+        updateTime('Asia/Bangkok'); 
         setInterval(() => updateTime('Asia/Bangkok'), 1000);
     }
 
-    // Gọi hàm để lấy vị trí và cập nhật thời gian
     getUserLocation();
 </script>
 </footer>

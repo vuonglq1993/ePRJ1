@@ -7,7 +7,7 @@ $fav_count = count_fav_data($user_id);
 <header>
     <nav class="navbar navheigh navbar-expand-lg bg-000022">
         <div class="container-fluid">
-            <a class="ms-3" href="index.php"><img src="./images/header/logo.png" alt="" style="width: 220px;"
+            <a class="mx-4" href="index.php"><img src="./images/header/logo.png" alt="" style="width: 220px;"
                     class="img-fluid logo"></a>
             <button class="navbar-toggler bg-white" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
