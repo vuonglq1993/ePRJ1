@@ -102,6 +102,7 @@
                             <?php
                             if ($trending_auctions) {
                                 foreach ($trending_auctions as $auction) {
+                                    $auction_id = $auction['auction_id'];
                                     $product_id = $auction['product_id'];
                                     $product_name = $auction['product_name'];
                                     $current_bid = $auction['current_bid'] ? htmlspecialchars($auction['current_bid']) : htmlspecialchars($auction['buyout_price']);
@@ -142,7 +143,7 @@
 
                                             <!-- Call to action link for more details about the product -->
                                             <div class="row text-center">
-                                                <a class="text-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
+                                                <a href="bid_details.php?auction_id=<?php echo htmlspecialchars($auction_id) ?>" class="text-dark link-offset-2 link-offset-3-hover link-underline link-underline-opacity-0 link-underline-opacity-75-hover"
                                                     style="font-size: 14px;" href="#">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                         fill="currentColor" class="bi bi-caret-right-fill" viewBox="0 0 16 16">
