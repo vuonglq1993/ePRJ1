@@ -11,7 +11,7 @@
     <!-- Linking external CSS files for styling -->
     <link rel="stylesheet" href="style/index.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="Components/header.css">
+    <link rel="stylesheet" href="Components/header2.css">
     <link rel="stylesheet" href="Components/footer.css">
     
     <!-- Bootstrap CSS for responsive layout and design -->

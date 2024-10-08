@@ -1,0 +1,87 @@
+/* Background color of the navbar */
+.bg-000022 {
+    background-color: #000022 !important;
+}
+
+/* Text color in the navbar */
+.fc-ffffff {
+    color: #FFFFFF !important;
+    transition: color 0.3s ease;
+}
+
+/* Background color on hover */
+.fc-ffffff:hover {
+    color: #31D3FF !important;
+}
+
+/* Dropdown items background and text color */
+.bg-000022 .dropdown-item {
+    background-color: #000022 !important;
+    color: #FFFFFF !important;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Change color when hovering over dropdown items */
+.bg-000022 .dropdown-item:hover {
+    background-color: #31D3FF !important;
+    color: #000022 !important;
+}
+
+/* Background color of the badge */
+.bg-31D3FF {
+    background-color: #31D3FF !important;
+}
+
+/* Remove button border */
+.search-config {
+    border: none !important;
+    background: none; /* Ensure the button has no background */
+    padding: 0; /* Remove any padding if present */
+}
+
+/* Hover effect only for the magnifying glass icon */
+.search-icon:hover {
+    fill: #31D3FF; /* Change icon color on hover */
+    transition: fill 0.3s ease; /* Smooth color transition */
+}
+
+/* Remove border and shadow for input form */
+.no-border-input {
+    border: none !important;
+    box-shadow: none !important;
+    background-color: #f8f9fa !important;
+    padding: 10px;
+}
+
+/* Hover effect for input */
+.no-border-input:hover {
+    background-color: #e9ecef !important;
+}
+
+/* Focus effect for input */
+.no-border-input:focus {
+    outline: none !important;
+    box-shadow: none !important;
+    background-color: #e9ecef !important;
+}
+
+/* Background color when hovering over the logo */
+.logo {
+    margin-top: -20px !important;
+    margin-bottom: -20px !important;
+    transition: opacity 0.3s ease;
+}
+
+.logo:hover {
+    opacity: 0.8;
+}
+
+/* Badge count positioning */
+.countposition {
+    position: relative !important;
+}
+
+/* Dropdown menu hover effect */
+.navbar .dropdown-toggle:hover {
+    color: #31D3FF !important;
+}

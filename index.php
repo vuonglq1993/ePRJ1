@@ -37,7 +37,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="style/index.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="Components/header.css">
+    <link rel="stylesheet" href="Components/header2.css">
     <link rel="stylesheet" href="Components/footer.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -65,6 +65,9 @@
             background-color: transparent !important;
             color: black;
             opacity: 0.5;
+        }
+        .lineheight-0{
+            line-height: 20px !important;
         }
     </style>
     <title>Home</title>
@@ -565,6 +568,42 @@
             </div>
         </div>
 
+        <!-- Visitor  -->
+<div class="container my-5">
+    <div class="row justify-content-center ">
+        <div class="col-11 bg-f5f5f5 ">
+            <div class="row pt-4">
+                <div class="col-3 pt-4">
+                    <p class="fs-2 fw-lighter text-center lineheight-0">
+                        305
+                    </p>
+                </div>
+                <div class="col-3 pt-4">
+                <p class="fs-2 fw-lighter text-center lineheight-0">
+                        290
+                    </p>
+                </div>
+                <div class="col-3 text-center pt-4">
+                <p class="fs-2 fw-lighter lineheight-0">
+                        1800
+                    </p>
+                </div>
+                <div class="col-3 text-center pt-4">
+                <p class="fs-2 fw-lighter lineheight-0">
+                        157232
+                    </p>
+                </div>
+            </div>
+            <div class="row pb-4 pt-0">
+                <div class="col-3"><p class="fs-3 text-center lineheight0">Online visitors</p></div>
+                <div class="col-3"><p class="fs-3 text-center">Yesterday</p></div>
+                <div class="col-3"><p class="fs-3 text-center">Last Week</p></div>
+                <div class="col-3"><p class="fs-3 text-center">Overall</p></div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
         <!-- Popular Categories section -->
         <!-- <div class="container mt-5">
                 <div class="row justify-content-center">

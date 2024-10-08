@@ -26,7 +26,7 @@
 
     <!-- Linking CSS files for styling the header, footer, and bid details -->
     <link rel="stylesheet" href="Components/footer.css">
-    <link rel="stylesheet" href="Components/header.css">
+    <link rel="stylesheet" href="Components/header2.css">
     <link rel="stylesheet" href="style/bid_details.css">
     
     <!-- Bootstrap icons and Bootstrap CSS for styling -->

@@ -17,7 +17,7 @@
     <!-- Linking CSS files for page styling and Bootstrap -->
     <link rel="stylesheet" href="style/index.css">
     <link rel="stylesheet" href="Components/footer.css">
-    <link rel="stylesheet" href="Components/header.css">
+    <link rel="stylesheet" href="Components/header2.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     

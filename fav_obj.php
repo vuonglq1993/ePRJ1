@@ -24,9 +24,8 @@
     
     <!-- External CSS and Bootstrap for styling -->
     <link rel="stylesheet" href="style/fav.css">
-    <link rel="stylesheet" href="Components/footer2.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="Components/header.css">
+    <link rel="stylesheet" href="Components/header2.css">
     <link rel="stylesheet" href="Components/footer.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"

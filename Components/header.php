@@ -6,15 +6,8 @@ $fav_count = count_fav_data($user_id);
 ?>
 <header>
     <nav class="navbar navheigh navbar-expand-lg bg-000022">
-        <div class="container-fluid mt-1">
-            <div class="mb-3">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                    class="bi bi-eye-fill mb-3" viewBox="0 0 16 16">
-                    <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0" />
-                    <path
-                        d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8m8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7" />
-                </svg> 1234
-            </div> <a class="ms-3" href="index.php"><img src="./images/header/logo.png" alt="" style="width: 220px;"
+        <div class="container-fluid">
+                     <a class="ms-3" href="index.php"><img src="./images/header/logo.png" alt="" style="width: 220px;"
                     class="img-fluid logo"></a>
             <button class="navbar-toggler bg-white" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -54,13 +47,14 @@ $fav_count = count_fav_data($user_id);
 
                     <div class="d-flex">
                         <li class="nav-item mx-4">
-                            <button class="btn search-config mt-2" type="submit" data-bs-toggle="modal"
-                                data-bs-target="#searchModal"><svg xmlns="http://www.w3.org/2000/svg" width="18"
-                                    height="18" fill="white" class="bi bi-search mb-2" viewBox="0 0 16 16">
-                                    <path
-                                        d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
-                                </svg>
-                            </button>
+<!-- Button to open the search modal -->
+<button class="btn search-config mt-2" type="submit" data-bs-toggle="modal" data-bs-target="#searchModal">
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="white" class="bi bi-search mb-2 search-icon"
+        viewBox="0 0 16 16">
+        <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
+    </svg>
+</button>
+
                             <div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="searchModalLabel"
                                 aria-hidden="true">
                                 <div class="modal-dialog">
