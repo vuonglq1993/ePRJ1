@@ -109,7 +109,7 @@ $fav_count = count_fav_data($user_id);
 
                         <?php if (isset($_SESSION['username'])): ?>
                             <li class="nav-item wrap">
-                                <a class="nav-link mx-4  fc-ffffff mt-1" href="categories1.php"> Wellcome,
+                                <a class="nav-link mx-4  fc-ffffff mt-1" href=""> Welcome,
                                     <?php echo htmlspecialchars($_SESSION['username']) ?>!!</a>
                             </li>
                         <?php else: ?>
@@ -167,7 +167,8 @@ $fav_count = count_fav_data($user_id);
                                                     aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                <form action="./post_register.php" method="post">
+                                                
+                                                <form action="post_register.php" method="post">
                                                     <div class="my-4">
                                                         <label for="username" class="form-label">Username</label>
                                                         <input type="text" id="username" class="form-control"

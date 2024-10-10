@@ -118,9 +118,7 @@
                                     <div class="row border shadow-sm p-4 mb-5 bg-body-tertiary rounded">
                                         <p class="fs-5 fc-666666 text-uppercase"><?php echo htmlspecialchars($bid_display) ?></p>
                                         <p class="mb-0 fc-0053b8 fw-bolder" style="font-size: 4rem;">$ <?php echo htmlspecialchars($current_bid) ?></p>
-
                                         <?php if (new DateTime() < new DateTime($start_time)): ?>
-
                                             <div class="row">
                                                 <div class="row">
                                                     <!-- No select or buttons for not started auction -->

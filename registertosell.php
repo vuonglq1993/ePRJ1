@@ -2,6 +2,14 @@
 <html lang="en">
 
 <head>
+    <?php 
+    session_start();
+    $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : 0;
+    $username = isset($_SESSION['username']) ? $_SESSION['username'] : '';
+    $email = isset($_SESSION['email']) ? $_SESSION['email'] : '';
+    $phone = isset($_SESSION['phone']) ? $_SESSION['phone'] : '';
+    ?>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -38,7 +46,7 @@
                             <div class="col-6">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput1" class="form-label">Your name(*)</label>
-                                    <input type="email" class="form-control" id="exampleFormControlInput1"
+                                    <input type="email" class="form-control" id="exampleFormControlInput1" value="<?php echo isset($username) ? htmlspecialchars($username) : ''; ?>"
                                         placeholder="">
                                 </div>
                             </div>
@@ -47,7 +55,7 @@
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput2" class="form-label">Your email
                                         address(*)</label>
-                                    <input type="email" class="form-control" id="exampleFormControlInput2"
+                                    <input type="email" class="form-control" id="exampleFormControlInput2" value="<?php echo isset($email) ? htmlspecialchars($email) : ''; ?>"
                                         placeholder="">
                                 </div>
                             </div>
@@ -58,7 +66,7 @@
                             <div class="col-6">
                                 <div class="mb-3">
                                     <label for="exampleFormControlInput3" class="form-label">Phone number(*)</label>
-                                    <input type="email" class="form-control" id="exampleFormControlInput3"
+                                    <input type="email" class="form-control" id="exampleFormControlInput3" value="<?php echo isset($phone) ? htmlspecialchars($phone) : ''; ?>"
                                         placeholder="">
                                 </div>
                             </div>

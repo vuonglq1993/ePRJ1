@@ -305,6 +305,7 @@
                             <?php
                             if ($current_auction_data) {
                                 foreach ($current_auction_data as $auction) {
+                                    $auction_id = $auction['auction_id'];
                                     $product_id = $auction['product_id'];
                                     $product_name = $auction['product_name'];
                                     $current_bid = $auction['current_bid'] ? htmlspecialchars($auction['current_bid']) : htmlspecialchars($auction['buyout_price']);
@@ -341,8 +342,11 @@
                                                             </div>
                                                         </div>
                                                         <div>
-                                                            <img src="<?php echo htmlspecialchars($image_url) ?>" alt=""
-                                                                class="img-fluid">
+                                                            <a
+                                                                href="categories3.php?product_id=<?php echo htmlspecialchars($product_id) ?>"><img
+                                                                    src="<?php echo $image_url ?>"
+                                                                    alt="<?php echo htmlspecialchars($product_name) ?>"
+                                                                    class="img-fluid"></a>
                                                             <div class="row">
                                                                 <div class="col-5 text-start text-dark"
                                                                     style="--bs-text-opacity: .5; font-size: 14px; margin: 4px;">

@@ -4,7 +4,7 @@ include_once 'functions/db.php';
 function get_auction_data($user_id, $category_id = 0)
 {
     if ($category_id > 0) {
-        $sql = "SELECT a.product_id, a.current_bid, a.start_time, a.end_time, p.product_id, p.product_name, p.buyout_price, p.image_url, ul.id AS liked
+        $sql = "SELECT a.*, p.product_id, p.product_name, p.buyout_price, p.image_url, ul.id AS liked
                 FROM auctions a
                 RIGHT JOIN products p ON a.product_id = p.product_id
                 LEFT JOIN user_likes ul ON a.product_id = ul.product_id AND ul.user_id = ?
@@ -23,7 +23,7 @@ function get_auction_data($user_id, $category_id = 0)
                 END ASC,
                 a.start_time ASC"; //Sắp xếp theo thời gian bắt đầu
     } else {
-        $sql = "SELECT a.product_id, a.current_bid, a.start_time, a.end_time, p.product_id, p.product_name, p.buyout_price, p.image_url, ul.id AS liked
+        $sql = "SELECT a.*, p.product_id, p.product_name, p.buyout_price, p.image_url, ul.id AS liked
                 FROM auctions a
                 RIGHT JOIN products p ON a.product_id = p.product_id
                 LEFT JOIN user_likes ul ON a.product_id = ul.product_id AND ul.user_id = ?

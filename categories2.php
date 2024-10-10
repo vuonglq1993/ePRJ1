@@ -25,7 +25,7 @@
 
     <!-- jQuery for handling JavaScript interactions -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link rel="stylesheet" href="style/categories3.css">
+    <link rel="stylesheet" href="style/categories.css">
 
     <!-- Bootstrap and FontAwesome for styling and icons -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
@@ -75,6 +75,7 @@
                                         <!-- Loop through each auction item and display its details -->
                                         <?php foreach ($auction_data as $auction): ?>
                                             <?php
+                                            $auction_id = $auction['auction_id'];
                                             $product_id = $auction['product_id'];
                                             $product_name = $auction['product_name'];
                                             $current_bid = $auction['current_bid'] ? htmlspecialchars($auction['current_bid']) : htmlspecialchars($auction['buyout_price']);
@@ -96,7 +97,7 @@
                                                 $bid_display = "Current Bid: ";
                                             }
                                             ?>
-                                            <div class="col-md-3 col-sm-6 mb-3"> 
+                                            <div class="col-md-3 col-sm-6 mb-3">
                                                 <div class="card p-1">
                                                     <div class="card-body">
                                                         <div class="d-flex justify-content-between">
@@ -136,7 +137,9 @@
                                                             <div class="col-6 text-end">
                                                                 <div class="text-dark" style="--bs-text-opacity: .5;">
                                                                     <p class="m-1">Interesting?</p> <!-- Reduced margin -->
-                                                                    <a href="#" class="btn bidbutton me-2">Bid now</a>
+                                                                    <a href="bid_details.php?auction_id=<?php echo htmlspecialchars($auction_id) ?>"
+                                                                        class="btn bidbutton me-2">Bid
+                                                                        now</a>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -155,7 +158,7 @@
             </div>
         </div>
     </main>
-    
+
     <!-- Footer section -->
     <?php include 'Components/footer2.php'; ?>
 

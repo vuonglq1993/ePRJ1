@@ -22,7 +22,8 @@ if (isset($_POST['register'])){
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("sssss", $username, $email, $hashed_password, $phone, $address);
     if ($stmt->execute()){
-        header("Location: login.php");
+        $_SESSION['registration_success'] = "Registration successful! You can now log in."; // Set session variable
+        header("Location: index.php");
         exit();
     } else {
         echo "Registration failed" . $stmt->error;
