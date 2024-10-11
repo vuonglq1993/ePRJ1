@@ -85,6 +85,7 @@
 
                         <!-- Contact Form Section -->
                         <div class="col-8 mt-5">
+                            <form id="requestform">
                             <p class="fs-6 fw-bold text-center mb-5">Contact us in the way most convenient for you. We are ready to answer all your questions.
                                 <br />
                                 Or feel free to leave us a feedback.
@@ -93,7 +94,7 @@
                             <!-- Email Input -->
                             <div class="mb-3">
                                 <label for="emailInput" class="form-label">Email address</label>
-                                <input type="email" class="form-control" id="emailInput" placeholder="YourEmail@gmail.com">
+                                <input type="email" class="form-control" id="emailInput" placeholder="YourEmail@gmail.com" required>
                             </div>
                             
                             <!-- Message Textarea -->
@@ -103,7 +104,8 @@
                             </div>
                             
                             <!-- Submit Button -->
-                            <button type="button" class="btn-dark btn px-5">Contact us</button>
+                            <button type="submit" class="btn-dark btn px-5">Contact us</button>
+                            </form>
                         </div>
                     </div>
 
@@ -115,7 +117,35 @@
             </div>
         </div>
     </main>
+    <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="successModalLabel">Notification</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Your message has been sent
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+        <script>
+            document.getElementById('requestform').addEventListener('submit', function (event) {
+                event.preventDefault(); // Ngăn form submit thực tế nếu không cần thiết
+                // Thực hiện các hành động như gửi request ở đây
+
+                // Hiển thị modal sau khi request thành công
+                var successModal = new bootstrap.Modal(document.getElementById('successModal'));
+                successModal.show();
+            });
+        </script>
     <!-- Footer section -->
     <?php include 'Components/footer2.php'; ?>
 </body>
