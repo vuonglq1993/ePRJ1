@@ -149,13 +149,13 @@
                                             </div>
                                             <div class="row mt-2">
                                                 <div class="col">
-                                                    <a class="btn btn-outline-primary bid-size px-5" id="place-bid">
+                                                    <a class="btn btn-outline-primary bid-size px-5 mx-1" id="place-bid">
                                                         <p class="fs-4 mx-3 my-2 ">Place bid</p>
                                                     </a>
                                                 </div>
                                                 <div class="col">
-                                                    <a class="btn btn-primary bid-size px-5">
-                                                        <p class="fs-4 mx-3 my-2 ">Buy out</p>
+                                                    <a class="btn btn-primary bid-size px-5 mx-1">
+                                                        <p class="fs-4 mx-4 my-2 ">Buy out</p>
                                                     </a>
                                                 </div>
                                             </div>
