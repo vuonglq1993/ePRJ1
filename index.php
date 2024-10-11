@@ -572,13 +572,13 @@
                                 <div class="d-flex mt-1">
                                     <div class="">
                                         <div class="mb-3">
-                                            <input type="email" class="form-control email-config"
-                                                id="exampleFormControlInput1" placeholder="Your email">
+                                            <input type="email" class="form-control mx-md-4 mx-sm-0 pe-5"
+                                                id="exampleFormControlInput1" placeholder="Your Email">
                                         </div>
                                     </div>
                                     <div>
                                         <button type="button"
-                                            class="btn btn-dark ms-2 text-uppercase px-5">Subscribe</button>
+                                            class="btn btn-dark ms-md-4 ms-sm-0 text-uppercase px-md-5 px-sm-2">Subscribe</button>
 
                                     </div>
                                 </div>
@@ -597,7 +597,7 @@
                     </div>
                     <div class="row">
                         <?php foreach ($brands as $brand): ?>
-                            <div class="col-md-2 mt-3 sm-4">
+                            <div class="col-md-2 col-sm-6 mt-3">
                                 <img src="<?php echo htmlspecialchars($brand["brand_image"]); ?>" class="img-fluid"
                                     alt="" />
                             </div>
@@ -616,7 +616,7 @@
                     <div class="col-md-6 col-sm-12 mb-3">
                         <a href="#"><img src="./images/Appstore.png" class="img-fluid" alt="" /></a>
                     </div>
-                    <div class="col-md-6 col-sm-12  mb-3">
+                    <div class="col-md-6 col-sm-12 mb-3">
                         <a href="#"><img src="./images/CHplay.png" class="img-fluid" alt="" /></a>
                     </div>
                 </div>
